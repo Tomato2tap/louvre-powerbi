@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "LoBP_Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2ef6adea-410e-4602-a2f8-7c8a9e8c01f4"
+  }
+}

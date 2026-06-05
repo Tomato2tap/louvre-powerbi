@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "artifacts": [
+    {
+      "report": {
+        "path": "LoBP_Dashboard.Report"
+      }
+    }
+  ],
+  "settings": {
+    "enableTmdlSave": false,
+    "enableTmdlLoad": false
+  }
+}

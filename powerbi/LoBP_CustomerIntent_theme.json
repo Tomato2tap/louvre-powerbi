@@ -1,0 +1,53 @@
+{
+  "name": "Customer Intent Blue",
+  "dataColors": [
+    "#2F3185",
+    "#4049A9",
+    "#4D8DFF",
+    "#56C7D9",
+    "#F2B1D7"
+  ],
+  "background": "#F5F7FB",
+  "foreground": "#1E2455",
+  "tableAccent": "#2F3185",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "show": true,
+            "fontFamily": "Segoe UI Semibold",
+            "fontSize": 13,
+            "color": {
+              "solid": {
+                "color": "#1E2455"
+              }
+            }
+          }
+        ],
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#DCE2F2"
+              }
+            },
+            "radius": 8
+          }
+        ]
+      }
+    }
+  }
+}

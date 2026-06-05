@@ -1,0 +1,266 @@
+// ============================================================
+// LOUVRE BANQUE PRIVÉE — STRUCTURE DES SHEETS QLIK SENSE
+// 4 boards + 1 sheet de navigation
+// ============================================================
+// Navigation : bouton flottant [≡] sur chaque sheet → popup avec liens vers les 4 boards
+// Filtres globaux partagés : annee_mois_part, perimetre, agc_topz (agence)
+// ============================================================
+
+
+// ============================================================
+// SHEET 0 : ACCUEIL / NAVIGATION
+// ============================================================
+[ACCUEIL]
+  - Logo LoBP en haut à gauche
+  - Titre : "Tableau de Bord — Louvre Banque Privée"
+  - Date fonctionnelle : Text & Image → "Données au $(=Max(dt_fonc))"
+  - 4 boutons de navigation :
+      [Suivi Digital & Adoption]     → Sheet 1
+      [Portefeuille Produits]        → Sheet 2
+      [Risque & Conformité]          → Sheet 3
+      [Commercial & Relation Client] → Sheet 4
+  - Filtres en barre haute : annee_mois_part | lib_cd_typ | agence
+
+
+// ============================================================
+// SHEET 1 : SUIVI DIGITAL & ADOPTION
+// Reprend les anciens boards PDF + enrichissement
+// Tables : CLIENT
+// ============================================================
+[SUIVI DIGITAL]
+
+  LIGNE 1 — KPI Cards (5 cards en ligne)
+  ┌──────────────┬────────────────┬──────────────────┬──────────────────┬────────────────┐
+  │ Nb Clients   │ Clients        │ Smartphones      │ Taux             │ Comptes        │
+  │ Totaux       │ Enrollés       │ Enrollés         │ Enrollment       │ Bloqués        │
+  │ [KPI card]   │ [KPI card]     │ [KPI card]       │ [KPI card] %     │ [KPI card] ⚠   │
+  │ Count id_cli │ nb_dev_enrol>0 │ Sum nb_dev_enrol │ enrollés/total   │ etat_acc='B'   │
+  └──────────────┴────────────────┴──────────────────┴──────────────────┴────────────────┘
+
+  LIGNE 2 — Connexions par canal (5 KPI cards)
+  ┌──────────────┬──────────┬──────────┬──────────┬──────────┐
+  │ Connexions   │ Web      │ Mobile   │ iOS      │ SVI      │
+  │ Uniques      │          │          │          │          │
+  │ canal_ordre  │ ='WEB'   │ ='MOB'   │ ='IOS'   │ ='SVI'   │
+  └──────────────┴──────────┴──────────┴──────────┴──────────┘
+
+  LIGNE 3 — Graphiques (2 objets)
+  ┌─────────────────────────────────┬─────────────────────────────────┐
+  │ Line Chart                      │ Pie Chart                       │
+  │ Dim : dt_enrol (date)           │ Dim : canal_ordre               │
+  │ Mes : Count(id_cli) enrollés    │ Mes : Count(id_cli)             │
+  │ Titre : "Évolution enrollement" │ Titre : "Répartition canaux"    │
+  │ Couleur : bordeaux #8B1F2A      │ Palette : bordeaux/rose/gris    │
+  └─────────────────────────────────┴─────────────────────────────────┘
+
+  LIGNE 4 — Table opérationnelle
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ Table : Clients à surveiller                                         │
+  │ Colonnes : id_cli | nom_cplt | etat_acc | nb_dev_enrol | dt_der_cnx │
+  │            dt_enrol | typ_enrol | agence                             │
+  │ Condition : etat_acc IN ('B','S') OR dt_der_cnx < AddMonths(Today(),-6) │
+  │ Tri : dt_der_cnx ASC (les plus anciens en premier)                  │
+  │ Couleur cond : etat_acc='B' → rouge | etat_acc='S' → orange         │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  FILTRES LOCAUX :
+    - Slider : dt_enrol (période)
+    - List box : etat_acc (O/B/S/C)
+    - List box : typ_enrol
+
+
+// ============================================================
+// SHEET 2 : PORTEFEUILLE PRODUITS
+// Tables : CLIENT, EPARGNE, CREDIT, SERVICE
+// ============================================================
+[PORTEFEUILLE PRODUITS]
+
+  LIGNE 1 — KPI Cards produits (6 cards)
+  ┌────────────┬────────────┬────────────┬────────────┬────────────┬────────────┐
+  │ CARTES     │ VIREMENTS  │ COMPTES    │ ÉPARGNE    │ CRÉDIT     │ ASSURANCE  │
+  │ Nb cartes  │ Vol. total │ Nb comptes │ Nb contrats│ Nb contrats│ Nb contrats│
+  │ fam='carte'│ canal web  │ enc_cpt    │ enc_cnt_m  │ mnt_nom    │ fam='assu' │
+  │ + sous-KPI │ + mobile   │ AUM total  │ col_nette  │ mnt_dblq   │ montant    │
+  └────────────┴────────────┴────────────┴────────────┴────────────┴────────────┘
+  Chaque card est cliquable → drill-down vers Sheet 3 (crédit) ou filtrage
+
+  LIGNE 2 — Graphiques (3 objets)
+  ┌─────────────────────┬──────────────────────┬─────────────────────────┐
+  │ Treemap             │ Bar Chart Horizontal  │ KPI : Taux pénétration  │
+  │ Dim : lib_fam_pdt   │ Dim : lib_famille     │ Mesure : % clients      │
+  │ Mes : Sum(enc_cnt_m)│ Mes : Sum(enc_cnt_m)  │ ayant chaque produit    │
+  │ Titre : "Répartition│ + Sum(enc_cnt_n1)     │ Dim : fam_pdt           │
+  │ encours par produit"│ Titre: "Encours N/N-1"│ Mes: Nb clients/Total   │
+  └─────────────────────┴──────────────────────┴─────────────────────────┘
+
+  LIGNE 3 — Tables de détail (tabs ou accordéon)
+  Tab [ÉPARGNE] :
+    - Dim : lib_fds (fonds), lib_mod_gest
+    - Mes : enc_fds_m, col_nette, performance_cli, risque_isin, bucket_ifrs9
+    - Top 20 fonds par encours
+  Tab [CRÉDIT] :
+    - Dim : lib_type_pret, lib_type_marche
+    - Mes : mnt_nom, mnt_dblq, enc_cpt, taux_endettement, ltv_act
+    - Couleur cond : bucket_ifrs9_credit = 'B3' → rouge
+  Tab [SERVICES] :
+    - Dim : lib_service, fam_pdt
+    - Mes : Count(num_cnt), mnt_tarife_service
+
+  FILTRES LOCAUX :
+    - List box : fam_pdt
+    - Slider : annee_mois_part
+    - List box : lib_portefeuille (GSM)
+
+
+// ============================================================
+// SHEET 3 : RISQUE & CONFORMITÉ
+// Tables : CLIENT, TRANSACTION, CREDIT, GARANTIE, EPARGNE
+// ============================================================
+[RISQUE & CONFORMITÉ]
+
+  BARRE D'ALERTE (haut de page, fond rouge si >0) :
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │ ⚠ [Nb clients pays embargo] | ⚠ [Vol. transactions pays sanctions]  │
+  │ ⚠ [Nb KYC rouge] | ⚠ [Nb certifications échues dans 3 mois]         │
+  └─────────────────────────────────────────────────────────────────────┘
+
+  LIGNE 1 — KPI Cards conformité (5)
+  ┌───────────┬──────────────┬────────────┬─────────────┬──────────────┐
+  │ Clients   │ Transactions │ Volume     │ Clients     │ KYC          │
+  │ Risque    │ Pays         │ Pays GDA   │ FATCA/CRS   │ Rouge        │
+  │ Élevé     │ Sanctions    │            │ détectés    │              │
+  │ E ou F    │ top_sanction │ top_gda    │ lib_fatca   │ gelule=10    │
+  └───────────┴──────────────┴────────────┴─────────────┴──────────────┘
+
+  LIGNE 2 — Heatmap pays (objet central)
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ Heat Map (Straight Table formatée)                                   │
+  │ Ligne : cli_lib_pay_res (pays client)                                │
+  │ Colonne : ctrpty_pays (pays contrepartie)                            │
+  │ Valeur : Sum(mnt_evt)                                                │
+  │ Couleur de fond :                                                    │
+  │   couleur_pays='noir' → #1a1a1a | ='rouge' → #C0392B               │
+  │   ='orange' → #E67E22  | ='vert' → #27AE60                          │
+  │ Tri : descending par montant                                         │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  LIGNE 3 — Graphiques (2)
+  ┌──────────────────────────────┬───────────────────────────────────────┐
+  │ Bar Chart                    │ Donut Chart                           │
+  │ Dim : lib_evt_lv1            │ Dim : lib_cd_risque_pers              │
+  │ Mes : Sum(mnt_evt)           │ Mes : Count(DISTINCT id_cli)          │
+  │ Titre : "Volume par type     │ Titre : "Répartition risque client"   │
+  │ d'événement"                 │ Couleurs : C+=vert, E=orange, F=rouge │
+  │ Top 10                       │                                       │
+  └──────────────────────────────┴───────────────────────────────────────┘
+
+  LIGNE 4 — Table transactions sensibles (drill-down)
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │ Table : Transactions à surveiller                                         │
+  │ Filtre auto : cli_top_pays_embargo=1 OR ctrpty_top_pays_sanctions=1      │
+  │               OR ctrpty_top_pays_gda=1                                   │
+  │ Colonnes :                                                                │
+  │   id_cli | nom_cplt | mnt_evt | devise_compte | dt_realisation            │
+  │   cli_couleur_pays | ctrpty_pays | ctrpty_couleur_pays                    │
+  │   lib_evt_lv1 | mode_paiement | canal_ordre                              │
+  │ Tri : mnt_evt DESC                                                        │
+  │ Couleur cond : ctrpty_couleur_pays='rouge' → rouge, 'orange' → orange    │
+  └──────────────────────────────────────────────────────────────────────────┘
+
+  LIGNE 5 — KYC Dashboard
+  ┌──────────────────────────────┬───────────────────────────────────────────┐
+  │ Gauge Chart                  │ Table KYC à renouveler                    │
+  │ Mes : Nb Clients KYC Vert    │ Filtre : gelule_global IN (5,10)          │
+  │       / Total clients        │ Colonnes : id_cli | nom_cplt | gelule_global│
+  │ Seuils : <80% rouge, <90% or │            dt_der_certif | dt_next_certif  │
+  │ Titre : "Taux conformité KYC"│            lib_scenario_risque             │
+  └──────────────────────────────┴───────────────────────────────────────────┘
+
+  FILTRES LOCAUX :
+    - List box : couleur_pays (vert/orange/rouge/noir)
+    - List box : lib_cd_risque_pers
+    - Slider : dt_realisation (transactions)
+    - List box : typ_evt_lv1
+
+
+// ============================================================
+// SHEET 4 : COMMERCIAL & RELATION CLIENT
+// Tables : CLIENT, EPARGNE, CREDIT
+// ============================================================
+[COMMERCIAL & RELATION CLIENT]
+
+  LIGNE 1 — KPI Cards (5)
+  ┌─────────────┬───────────────┬───────────────┬──────────────┬──────────────┐
+  │ Clients     │ Prospects     │ AUM Moyen     │ Clients sans │ Nb Clients   │
+  │ Actifs      │ (PR)          │ /Client       │ RDV >6 mois  │ Actifs %     │
+  │ cli_c_p=CL  │ cli_c_p=PR    │ Sum/Count     │ dt_dernier   │ top_client   │
+  │             │               │               │ _rdv<-6m     │ _actif='O'   │
+  └─────────────┴───────────────┴───────────────┴──────────────┴──────────────┘
+
+  LIGNE 2 — Graphiques (3)
+  ┌────────────────────────┬─────────────────────────┬───────────────────────┐
+  │ Bar Chart Groupé       │ Scatter Plot             │ Line Chart            │
+  │ Dim : lib_type_client  │ Dim : id_cli             │ Dim : Mois (dt_top_cl)│
+  │       + cli_c_p        │ X : cd_risque_pers       │ Mes1 : Nb nouveaux    │
+  │ Mes : Count(id_cli)    │ Y : aum_titulaire        │       clients         │
+  │ Titre : "Segmentation  │ Taille : encours total   │ Mes2 : Nb sorties     │
+  │ clients par type"      │ Titre: "Risque vs AUM"   │ Titre: "Flux clients" │
+  │                        │ HNWI >1M en rouge        │                       │
+  └────────────────────────┴─────────────────────────┴───────────────────────┘
+
+  LIGNE 3 — Table clients (portefeuille conseiller)
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │ Table : Mon Portefeuille Clients                                          │
+  │ Filtre : par cd_cons (conseiller connecté, via variable $vConseiller)     │
+  │ Colonnes :                                                                │
+  │   id_cli | nom_cplt | lib_type_client | aum_titulaire                    │
+  │   cd_risque_pers | lib_risque_personne | dt_dernier_rdv                  │
+  │   dt_next_certif | top_client_actif | list_fam_pdt                       │
+  │ Tri : aum_titulaire DESC (clients les plus riches en premier)            │
+  │ Couleur cond :                                                            │
+  │   top_client_actif='N' → gris clair (inactif)                            │
+  │   dt_next_certif < Today()+90 → orange (certif à renouveler)             │
+  │   cd_risque_pers='F' → rouge (contentieux)                               │
+  └──────────────────────────────────────────────────────────────────────────┘
+
+  LIGNE 4 — Détail client (clic sur une ligne → expand)
+  ┌──────────────────────────────────────────────────────────────────────────┐
+  │ Fiche Client (via sélection id_cli)                                       │
+  │ - KPI : AUM | Encours épargne | Encours crédit | Score risque            │
+  │ - Liste produits : list_fam_pdt, list_pdt                                │
+  │ - Graphique sparkline : évolution encours 12 mois (enc_cnt_m)            │
+  │ - Statut KYC : gelule_global (coloré vert/orange/rouge)                  │
+  │ - Dernier RDV : dt_dernier_rdv                                           │
+  │ - Prochaine certification : dt_next_certif                               │
+  └──────────────────────────────────────────────────────────────────────────┘
+
+  FILTRES LOCAUX :
+    - List box : lib_groupe_risque
+    - List box : lib_portefeuille
+    - List box : lib_type_client
+    - Toggle : top_client_actif (Actif / Inactif / Tous)
+    - Slider : AUM (fourchette)
+
+
+// ============================================================
+// PALETTE DE COULEURS (charte LoBP — bordeaux/marron)
+// ============================================================
+Couleur principale    : #8B1F2A  (bordeaux foncé)
+Couleur secondaire    : #C9453A  (rouge chaud)
+Accent 1              : #D4A04A  (or/caramel)
+Accent 2              : #6B8FA8  (bleu gris)
+Fond                  : #F4F2EE  (beige clair)
+Fond cards            : #FFFFFF
+Texte principal       : #2C2C2C
+Texte secondaire      : #666666
+Alerte rouge          : #C0392B
+Alerte orange         : #E67E22
+Alerte vert           : #27AE60
+
+// ============================================================
+// POLICE : Segoe UI (natif Windows) ou Inter (Google Fonts)
+// Taille titre sheet : 18px bold
+// Taille KPI valeur  : 28-36px bold
+// Taille KPI label   : 11px normal
+// Taille table       : 13px
+// ============================================================

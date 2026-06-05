@@ -1,0 +1,47 @@
+{
+  "name": "LoBP Premium",
+  "dataColors": [
+    "#2DD4BF",
+    "#38BDF8",
+    "#5EEAD4",
+    "#22D3EE",
+    "#0EA5A4",
+    "#7DD3FC",
+    "#34D399",
+    "#E0C56E",
+    "#F472B6",
+    "#A78BFA",
+    "#60A5FA",
+    "#FB923C"
+  ],
+  "background": "#0E1621",
+  "foreground": "#E6ECF3",
+  "foregroundNeutralSecondary": "#94A3B8",
+  "tableAccent": "#2DD4BF",
+  "good": "#34D399",
+  "neutral": "#E0C56E",
+  "bad": "#F87171",
+  "maximum": "#2DD4BF",
+  "center": "#1F6F6A",
+  "minimum": "#16323A",
+  "textClasses": {
+    "title": {
+      "color": "#E6ECF3",
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12
+    },
+    "header": {
+      "color": "#E6ECF3",
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12
+    },
+    "label": {
+      "color": "#E6ECF3",
+      "fontFace": "Segoe UI"
+    },
+    "callout": {
+      "color": "#E6ECF3",
+      "fontFace": "Segoe UI Semibold"
+    }
+  }
+}

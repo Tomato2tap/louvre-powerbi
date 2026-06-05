@@ -1,0 +1,462 @@
+// ============================================================
+// LOUVRE BANQUE PRIVÉE — DAX MEASURES POWER BI
+// Organiser dans des tables de mesures dédiées :
+//   [_M_Clients], [_M_Digital], [_M_Epargne],
+//   [_M_Credit], [_M_Conformite], [_M_Produits]
+// ============================================================
+
+
+// ============================================================
+// TABLE : _M_Clients
+// Sources : CLIENT
+// ============================================================
+
+Nb Clients Totaux =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[cli_c_p] IN {"CL", "CT"}
+)
+
+Nb Prospects =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[cli_c_p] = "PR"
+)
+
+Nb Clients Actifs =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[top_client_actif] = "O"
+)
+
+Taux Clients Actifs =
+DIVIDE([Nb Clients Actifs], [Nb Clients Totaux], 0)
+// Format : 0.0%
+
+Nb Clients PP =
+CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[cd_typ] = "P")
+
+Nb Clients PM =
+CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[cd_typ] IN {"E","S","A","I"})
+
+AUM Total =
+SUMX(
+    FILTER(CLIENT, CLIENT[stt_cli] = "TIT" || CLIENT[aum_tit] <> BLANK()),
+    CLIENT[aum_tit]
+)
+
+AUM Moyen par Client =
+DIVIDE([AUM Total], [Nb Clients Totaux], 0)
+// Format : # ##0 €
+
+Nb Clients sans RDV depuis 6 mois =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[dt_dernier_rdv] < EDATE(TODAY(), -6)
+    || ISBLANK(CLIENT[dt_dernier_rdv])
+)
+
+Nb Clients KYC Rouge =
+CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[gelule_global] = 10)
+
+Nb Clients KYC Orange =
+CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[gelule_global] = 5)
+
+Nb Clients KYC Vert =
+CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[gelule_global] = 0)
+
+Taux Conformité KYC =
+DIVIDE([Nb Clients KYC Vert], [Nb Clients Totaux], 0)
+// Format : 0.0%
+
+Nb Certifications à Renouveler =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[dt_next_certif] <= EDATE(TODAY(), 3)
+    && NOT(ISBLANK(CLIENT[dt_next_certif]))
+)
+
+Nb Clients Risque E ou F =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[cd_risque_pers] IN {"E", "F"}
+)
+
+Nb Clients Pays Embargo =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[top_pays_embargo] = TRUE()
+)
+
+Nb Clients Pays Sanctions =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[top_pays_sanctions] = TRUE()
+)
+
+Nb Clients GDA =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[top_pays_gda] = TRUE()
+)
+
+Nb Clients FICP =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[cd_ficp] <> BLANK() && CLIENT[cd_ficp] <> ""
+)
+
+
+// ============================================================
+// TABLE : _M_Digital
+// Sources : CLIENT
+// ============================================================
+
+Nb Clients Enrollés =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[nb_dev_enrol] > 0
+)
+
+Taux Enrollment =
+DIVIDE([Nb Clients Enrollés], [Nb Clients Totaux], 0)
+// Format : 0.0%
+
+Nb Smartphones Total =
+SUM(CLIENT[nb_dev_enrol])
+
+Nb Comptes Bloqués =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[etat_acc] = "B"
+)
+
+Nb Comptes Suspendus =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    CLIENT[etat_acc] = "S"
+)
+
+Nb Connexions (Volume Mobile) =
+CALCULATE(
+    COUNTROWS(TRANSACTION),
+    TRANSACTION[canal_ordre] = "MOBILE"
+)
+
+Nb Connexions (Volume Web) =
+CALCULATE(
+    COUNTROWS(TRANSACTION),
+    TRANSACTION[canal_ordre] = "WEB"
+)
+
+Nb Clients Jamais Connectés =
+CALCULATE(
+    DISTINCTCOUNT(CLIENT[id_cli]),
+    ISBLANK(CLIENT[dt_der_cnx]),
+    CLIENT[nb_dev_enrol] > 0
+)
+
+
+// ============================================================
+// TABLE : _M_Epargne
+// Sources : EPARGNE, GSM
+// ============================================================
+
+Encours Épargne =
+CALCULATE(
+    SUM(EPARGNE[enc_cnt_m]),
+    EPARGNE[perimetre] = "epargne"
+)
+
+Encours Épargne N-1 =
+CALCULATE(
+    SUM(EPARGNE[enc_cnt_n1]),
+    EPARGNE[perimetre] = "epargne"
+)
+
+Variation Encours Épargne =
+[Encours Épargne] - [Encours Épargne N-1]
+
+Variation Encours % =
+DIVIDE([Variation Encours Épargne], [Encours Épargne N-1], 0)
+// Format : +0.0%
+
+Collecte Brute =
+CALCULATE(
+    SUM(EPARGNE[col_brute]),
+    EPARGNE[perimetre] = "epargne"
+)
+
+Décollecte =
+CALCULATE(
+    SUM(EPARGNE[decollecte]),
+    EPARGNE[perimetre] = "epargne"
+)
+
+Collecte Nette =
+[Collecte Brute] + [Décollecte]
+// decollecte est déjà négatif dans les données
+
+Nb Contrats Épargne =
+CALCULATE(
+    DISTINCTCOUNT(EPARGNE[num_cnt]),
+    EPARGNE[perimetre] = "epargne",
+    EPARGNE[stt_cnt] = "0"
+)
+
+Nb Contrats Gestion Sous Mandat =
+CALCULATE(
+    DISTINCTCOUNT(EPARGNE[num_cnt]),
+    EPARGNE[mod_gest] = "2"
+)
+
+Performance Moyenne =
+AVERAGEX(
+    FILTER(GSM, GSM[performance_cli] <> BLANK()),
+    GSM[performance_cli]
+)
+// Format : 0.00%
+
+Encours Fonds Durables Art.8-9 =
+CALCULATE(
+    SUM(GSM[enc_fds_m]),
+    GSM[Classification_SFDR] IN {"Article 8 (ESG)", "Article 9 (Impact)"}
+)
+
+Taux Épargne Durable =
+DIVIDE([Encours Fonds Durables Art.8-9], SUM(GSM[enc_fds_m]), 0)
+// Format : 0.0%
+
+Provision IFRS9 Épargne Total =
+SUM(EPARGNE[mnt_prov_b_ifrs9]) + SUM(EPARGNE[mnt_prov_hb_ifrs9])
+
+Nb Contrats IFRS9 B3 Épargne =
+CALCULATE(
+    DISTINCTCOUNT(EPARGNE[num_cnt]),
+    EPARGNE[cd_bck_ifrs9] = "B3"
+)
+
+
+// ============================================================
+// TABLE : _M_Credit
+// Sources : CREDIT, GARANTIE
+// ============================================================
+
+Encours Crédit Total =
+SUM(CREDIT[enc_cpt])
+
+Nb Contrats Crédit =
+CALCULATE(
+    DISTINCTCOUNT(CREDIT[num_cnt]),
+    CREDIT[stt_cnt] = "0"
+)
+
+Nb Crédits Immobiliers =
+CALCULATE(
+    DISTINCTCOUNT(CREDIT[num_cnt]),
+    CREDIT[typ_mar] = "01"
+)
+
+Nb Crédits Conso =
+CALCULATE(
+    DISTINCTCOUNT(CREDIT[num_cnt]),
+    CREDIT[typ_mar] = "02"
+)
+
+Montant Nominal Total =
+SUM(CREDIT[mnt_nom])
+
+Montant Débloqué =
+SUM(CREDIT[mnt_dblq])
+
+Montant HB Disponible =
+SUM(CREDIT[mnt_disp])
+
+Capital Sain =
+SUM(CREDIT[mnt_krd_sain])
+
+Capital Impayé =
+SUM(CREDIT[mnt_krd_imp])
+
+Taux Créances Douteuses =
+DIVIDE(
+    CALCULATE(SUM(CREDIT[mnt_krd_tot]), CREDIT[cd_etat_creance] IN {"10","30"}),
+    SUM(CREDIT[mnt_krd_tot]),
+    0
+)
+// Format : 0.00%
+
+Nb Contrats B3 =
+CALCULATE(
+    DISTINCTCOUNT(CREDIT[num_cnt]),
+    CREDIT[cd_bck_ifrs9] = "B3"
+)
+
+Provision IFRS9 Crédit Bilan =
+SUM(CREDIT[mnt_prov_b_ifrs9])
+
+Provision IFRS9 Crédit HB =
+SUM(CREDIT[mnt_prov_hb_ifrs9])
+
+Provision IFRS9 Crédit Total =
+[Provision IFRS9 Crédit Bilan] + [Provision IFRS9 Crédit HB]
+
+RWA Crédit Total =
+SUM(CREDIT[total_rwa])
+
+LTV Moyenne =
+AVERAGEX(
+    FILTER(CREDIT, CREDIT[ltv_act] <> BLANK() && CREDIT[ltv_act] > 0),
+    CREDIT[ltv_act]
+)
+// Format : 0.0%
+
+Taux Endettement Moyen =
+AVERAGEX(
+    FILTER(CREDIT, CREDIT[tx_edt] <> BLANK() && CREDIT[tx_edt] > 0),
+    CREDIT[tx_edt]
+)
+// Format : 0.0%
+
+Nb Crédits Restructurés =
+CALCULATE(
+    DISTINCTCOUNT(CREDIT[num_cnt]),
+    CREDIT[nb_rst] > 0
+)
+
+// Garanties
+Montant Garanties Total =
+SUM(GARANTIE[mnt_gar])
+
+Montant Garanties Comptable =
+SUM(GARANTIE[mnt_gar_cpta])
+
+Montant Garanties Revalorisé =
+SUM(GARANTIE[mnt_reval])
+
+Taux Couverture Garanties =
+DIVIDE([Montant Garanties Comptable], [Encours Crédit Total], 0)
+// Format : 0.0%
+
+RWA Garanties Total =
+SUM(GARANTIE[mnt_rwa])
+
+
+// ============================================================
+// TABLE : _M_Conformite
+// Sources : TRANSACTION, CLIENT
+// ============================================================
+
+Volume Transactions Total =
+SUM(TRANSACTION[mnt_evt])
+
+Nb Transactions =
+COUNTROWS(TRANSACTION)
+
+Volume Transactions Sensibles =
+CALCULATE(
+    SUM(TRANSACTION[mnt_evt]),
+    TRANSACTION[Transaction_Sensible] = TRUE()
+)
+
+Nb Transactions Sensibles =
+CALCULATE(
+    COUNTROWS(TRANSACTION),
+    TRANSACTION[Transaction_Sensible] = TRUE()
+)
+
+Taux Transactions Sensibles =
+DIVIDE([Volume Transactions Sensibles], [Volume Transactions Total], 0)
+// Format : 0.00%
+
+Volume Pays Embargo =
+CALCULATE(
+    SUM(TRANSACTION[mnt_evt]),
+    TRANSACTION[cli_top_pays_embargo] = TRUE()
+    || TRANSACTION[ctrpty_top_pays_embargo] = TRUE()
+)
+
+Volume Pays Sanctions =
+CALCULATE(
+    SUM(TRANSACTION[mnt_evt]),
+    TRANSACTION[cli_top_pays_sanctions] = TRUE()
+    || TRANSACTION[ctrpty_top_pays_sanctions] = TRUE()
+)
+
+Volume Pays GDA =
+CALCULATE(
+    SUM(TRANSACTION[mnt_evt]),
+    TRANSACTION[ctrpty_top_pays_gda] = TRUE()
+)
+
+Nb Transactions 3DS =
+CALCULATE(COUNTROWS(TRANSACTION), TRANSACTION[ind_3ds] = 1)
+
+Nb Transactions Sans Contact =
+CALCULATE(COUNTROWS(TRANSACTION), TRANSACTION[ind_sans_contact] = 1)
+
+Volume Mobile =
+CALCULATE(SUM(TRANSACTION[mnt_evt]), TRANSACTION[canal_ordre] = "MOBILE")
+
+Volume Web =
+CALCULATE(SUM(TRANSACTION[mnt_evt]), TRANSACTION[canal_ordre] = "WEB")
+
+// Alerte conformité globale (utilisée dans la barre d'alerte)
+Alerte Conformité =
+VAR nbEmb = [Nb Clients Pays Embargo]
+VAR nbKYC = [Nb Clients KYC Rouge]
+VAR nbCertif = [Nb Certifications à Renouveler]
+RETURN
+IF(nbEmb > 0 || nbKYC > 0 || nbCertif > 0, "⚠ ALERTES ACTIVES", "✓ Conforme")
+
+
+// ============================================================
+// TABLE : _M_Produits
+// Sources : CLIENT, EPARGNE, CREDIT, SERVICE
+// ============================================================
+
+Nb Cartes =
+CALCULATE(
+    DISTINCTCOUNT(SERVICE[num_cnt]),
+    SERVICE[fam_pdt] = "carte"
+)
+
+Nb Comptes Courants =
+CALCULATE(
+    DISTINCTCOUNT(SERVICE[num_cnt]),
+    SERVICE[fam_pdt] = "compte_courant"
+)
+
+AUM Épargne + Crédit =
+[Encours Épargne] + [Encours Crédit Total]
+
+Taux Pénétration Épargne =
+DIVIDE(
+    CALCULATE(DISTINCTCOUNT(EPARGNE[id_cli]), EPARGNE[stt_cnt] = "0"),
+    [Nb Clients Totaux],
+    0
+)
+// Format : 0.0%
+
+Taux Pénétration Crédit =
+DIVIDE(
+    CALCULATE(DISTINCTCOUNT(CREDIT[id_cli]), CREDIT[stt_cnt] = "0"),
+    [Nb Clients Totaux],
+    0
+)
+
+Provision IFRS9 Totale (tous produits) =
+[Provision IFRS9 Crédit Total]
++ [Provision IFRS9 Épargne Total]
++ CALCULATE(SUM(SERVICE[mnt_prov_b_ifrs9])) + CALCULATE(SUM(SERVICE[mnt_prov_hb_ifrs9]))
+
+
+// ============================================================
+// MESURES DE FORMATAGE / NAVIGATION
+// ============================================================
+
+Date Fonctionnelle =
+"Données au " & FORMAT(MAX(CLIENT[dt_fonc]), "DD/MM/YYYY")
+
+Dernier Arrêté =
+MAX(CLIENT[dt_fonc])

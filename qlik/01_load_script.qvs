@@ -1,0 +1,590 @@
+// ============================================================
+// LOUVRE BANQUE PRIVÉE — LOAD SCRIPT QLIK SENSE
+// Modèle en étoile autour de la table CLIENT (id_cli)
+//
+// TABLES SOURCE → CHAMPS CLÉ
+//   CLIENT      → id_cli (clé primaire)
+//   TRANSACTION → id_cli, num_cnt
+//   EPARGNE     → id_cli, num_cnt
+//   CREDIT      → id_cli, num_cnt, num_prj
+//   GARANTIE    → id_cli, num_cnt_prt (jointure via CREDIT.num_cnt)
+//   SERVICE     → id_cli, num_cnt
+//   GSM         → isin_fds, id_contrat (jointure via EPARGNE.isin_fds)
+//
+// Adapter les chemins / connexions DB selon l'environnement
+// ============================================================
+
+SET ThousandSep='.';
+SET DecimalSep=',';
+SET MoneyThousandSep='.';
+SET MoneyDecimalSep=',';
+SET MoneyFormat='# ##0,00 €';
+SET DateFormat='DD/MM/YYYY';
+SET TimeFormat='hh:mm:ss';
+SET TimestampFormat='DD/MM/YYYY hh:mm:ss[.fff]';
+
+// ============================================================
+// VARIABLES GLOBALES
+// ============================================================
+LET vDateFonc     = Today();
+LET vAnnéeMois    = Year(Today()) & '-' & Num(Month(Today()), '00');
+
+// ============================================================
+// 1. TABLE CLIENT
+// Source : table principale — toutes les infos du client
+// Clé    : id_cli
+// Usage  : Board Commercial, Board Conformité, tous les boards
+// ============================================================
+[CLIENT]:
+LOAD
+    // Identification
+    id_cli,
+    cd_typ,                  // P=Personne physique, E=Entreprise, S=Société, A=Asso, I=Institut.Fin.
+    lib_cd_typ               AS lib_type_client,
+    id_gr,
+    lib_gr                   AS lib_groupe_risque,
+    cli_c_p,                 // CL=Client, CT=Client Technique, PA=Participant, PR=Prospect
+    nom_cplt,
+    cd_civ,
+    nom_us,
+    prm_prn,
+    age_cli,
+    cd_situ_fam,
+    lib_cd_situ_fam          AS lib_situation_familiale,
+
+    // Relation commerciale
+    id_cli_chrg              AS id_conseiller,
+    cd_cons,
+    nom_cons,
+    prm_cons,
+    lib_ptf                  AS lib_portefeuille,
+    agc_topz                 AS agence,
+    lib_esp                  AS lib_espace,
+    lib_grp_agce             AS lib_groupe_agence,
+
+    // Statut & activité
+    etat_acc,               // O=ouvert, C=clos, B=bloqué, S=suspendu
+    top_client_actif,       // O/N — actif si >9 mvts PP ou >4 mvts PM
+    dt_der_cnx,
+    dt_top_cl,
+    dt_exit_cl,
+    dt_dernier_rdv,
+    dt_1er_cnt,
+
+    // Digital
+    nb_dev_enrol,
+    typ_enrol,
+    dt_enrol,
+    id_cli_web,
+
+    // Risque & conformité
+    cd_risque_pers,
+    cd_risque_ajust,
+    lib_cd_risque_pers       AS lib_risque_personne,
+    lib_cd_risque_ajust      AS lib_risque_ajuste,
+    tot_score_risque,
+    scenario_risque,
+    lib_scenario_risque,
+    cd_mf,                  // risque conformité (PPEF, etc.)
+
+    // KYC
+    gelule_global,          // 0=vert, 5=orange, 10=rouge
+    lib_gelule_global,
+    kyc_idt,
+    kyc_adr,
+    dt_der_certif,
+    dt_next_certif,
+
+    // FATCA/CRS
+    lib_stt_fatca,
+    pay_fis_prin             AS pays_fiscal_principal,
+
+    // Pays de résidence + risque pays
+    pay_res                  AS pays_residence,
+    lib_pay_res              AS lib_pays_residence,
+    couleur_pays,           // vert/orange/rouge/noir
+    niveau_risque_pays,
+    top_pays_embargo,
+    top_pays_sanctions,
+    top_pays_gda,           // Gel Des Avoirs
+    top_pays_gafi,
+    top_pays_etnc,          // Pays et Territoires Non Coopératifs
+    top_pays_pthr,          // Pays à Très Haut Risque
+
+    // FICP
+    cd_ficp,
+    nb_incidents_ficp,
+
+    // Patrimoine & revenus
+    aum_tit                  AS aum_titulaire,
+    aum_cot                  AS aum_cotitulaire,
+    mnt_pat_epargne,
+    mnt_pat_biens_immos,
+    mnt_rev_princ,
+    mnt_credits_externes,
+
+    // Equipement produits (montants agrégés)
+    mnt_equip_emp            AS mnt_credit_emprunteur,
+    nb_equip_emp             AS nb_credit_emprunteur,
+    mnt_equip_tit            AS mnt_epargne_titulaire,
+    nb_equip_tit             AS nb_epargne_titulaire,
+    mnt_equip_cau            AS mnt_credit_cautionnaire,
+    mnt_equip_coe            AS mnt_credit_coemprunteur,
+    list_fam_pdt,
+    list_pdt,
+
+    // Date fonctionnelle
+    dt_fonc,
+    annee_mois_part
+
+FROM [lib://DataWarehouse/CLIENT]
+(qvd)
+WHERE dt_fonc = vDateFonc;
+
+
+// ============================================================
+// 2. TABLE TRANSACTION
+// Source : flux transactionnels (virements, paiements, retraits…)
+// Clé    : id_cli, num_cnt (lien vers CLIENT et EPARGNE/SERVICE)
+// Usage  : Board Conformité & Risque (indicateurs AML, pays sensibles)
+// ============================================================
+[TRANSACTION]:
+LOAD
+    id_cli,
+    num_cnt,
+    perimetre,
+
+    // Type événement
+    typ_evt,
+    typ_evt_lv1,
+    val_evt_lv1,
+    lib_evt_lv1,
+    typ_evt_lv2,
+    val_evt_lv2,
+
+    // Montants
+    sens,                   // crédit/débit
+    mnt_evt,               // montant en devise compte
+    devise_compte,
+    mnt_devise,            // montant en devise opération
+    devise_operation,
+
+    // Dates
+    dt_demande,
+    dt_validation,
+    dt_realisation,
+
+    // Mode paiement
+    mode_paiement,
+    typ_paiement,
+    ind_3ds,               // 1 = paiement 3DS
+    ind_sans_contact,
+    ind_saisie_pin,
+    canal_init,
+    canal_ordre,
+
+    // Contrepartie
+    ctrpty_nom,
+    ctrpty_pays,
+    ctrpty_bnq_bic,
+
+    // Risque pays CLIENT
+    cli_cd_pays_iso,
+    cli_couleur_pays,
+    cli_niveau_risque_pays,
+    cli_top_pays_embargo,
+    cli_top_pays_sanctions,
+    cli_top_pays_gda,
+    cli_top_pays_gafi,
+    cli_top_pays_etnc,
+    cli_top_pays_pthr,
+
+    // Risque pays CONTREPARTIE
+    ctrpty_cd_pays_iso,
+    ctrpty_couleur_pays,
+    ctrpty_niveau_risque_pays,
+    ctrpty_top_pays_embargo,
+    ctrpty_top_pays_sanctions,
+    ctrpty_top_pays_gda,
+    ctrpty_top_pays_gafi,
+
+    // Risque pays BANQUE CONTREPARTIE
+    ctrpty_bnq_cd_pays_iso,
+    ctrpty_bnq_couleur_pays,
+    ctrpty_bnq_top_pays_embargo,
+    ctrpty_bnq_top_pays_sanctions,
+
+    annee_mois_part
+
+FROM [lib://DataWarehouse/TRANSACTION]
+(qvd);
+
+
+// ============================================================
+// 3. TABLE EPARGNE (contrats + grain fonds ISIN)
+// Source : contrats épargne, encours, collecte, ISIN, IFRS9
+// Clé    : id_cli, num_cnt (vers CLIENT), isin_fds (vers GSM)
+// Usage  : Board Épargne & Performance, Board Produits
+// ============================================================
+[EPARGNE]:
+LOAD
+    id_cli,
+    num_cnt,
+    stt_cli,
+    fam_pdt,
+    perimetre,
+    lib_ctl                  AS lib_contrat,
+    lib_fam_niv3_pdt         AS lib_famille_produit,
+    stt_cnt,
+    lib_stt_cnt              AS lib_statut_contrat,
+    dt_eff,
+    dt_fin_eff,
+    mod_gest,               // 0=Libre, 2=Gestion Sous Mandat
+    lib_mod_gest,
+    cd_ges,
+    lib_cd_ges               AS lib_profil_gestion,
+
+    // Encours & performance
+    enc_cnt_m               AS encours_contrat_mois,
+    enc_moy_m               AS encours_moyen_mois,
+    enc_cnt_m1              AS encours_contrat_m1,
+    enc_cnt_n1              AS encours_contrat_n1,
+    var_enc                  AS variation_encours,
+
+    // Collecte
+    col_brute,
+    decollecte,
+    col_nette,
+
+    // ISIN / Fonds
+    isin_fds,
+    lib_fds                  AS lib_fonds,
+    qte_fds,
+    enc_fds_m               AS encours_fonds_mois,
+    volatilite_isin,
+    isin_risq               AS risque_isin,       // note 1 à 7
+
+    // Profil risque client sur ce contrat
+    prof_risq,
+    lib_prof_risq,
+    prof_exp,
+    lib_prof_exp,
+    prof_sfdr,
+
+    // Tarification
+    mnt_tar_brt,
+    mnt_pdt_tar             AS mnt_tarife_net,
+    mnt_fdg                 AS mnt_frais_gestion,
+    mnt_ddg                 AS mnt_droits_garde,
+    tx_int                  AS taux_interet,
+
+    // IFRS9
+    cd_bck_ifrs9            AS bucket_ifrs9,      // B1=Sain, B2=Sensible, B3=Douteux
+    cd_risque               AS code_risque,
+    cd_etat_creance,
+    mnt_prov_b_ifrs9        AS provision_bilan_ifrs9,
+    mnt_prov_hb_ifrs9       AS provision_hb_ifrs9,
+    mnt_dot                 AS dotation,
+    mnt_rep                 AS reprise,
+    mnt_psp                 AS passage_a_perte,
+
+    // RWA
+    total_rwa,
+
+    // Assurance nantissement
+    top_nanti,
+    mnt_nanti,
+    assur                   AS assureur,
+
+    annee_mois_part
+
+FROM [lib://DataWarehouse/EPARGNE]
+(qvd);
+
+
+// ============================================================
+// 4. TABLE GSM (positions ISIN par gestionnaire)
+// Source : positions ISIN dans les contrats de gestion
+// Clé    : isin_fds (vers EPARGNE), id_contrat
+// Usage  : Board Épargne — poids ISIN, performance, SFDR
+// ============================================================
+[GSM]:
+LOAD
+    isin_fds,
+    id_contrat,
+    dt_fonc,
+    cd_ges,
+    mod_gest,
+    reseau,
+
+    // Prix & quantités
+    qte_fds,
+    cours_cot,
+    dt_cot,
+    avg_mnt_achat,
+
+    // Encours à plusieurs niveaux
+    enc_fds_m,
+    enc_cnt_n_1,
+    sum_enc_fds_cnt,
+    poids_isin_cnt,
+    sum_enc_fds_ss_compte,
+    sum_enc_fds_profil,
+    poids_isin_profil,
+    sum_enc_fds_gsm,
+    poids_isin_total_gsm,
+
+    // Performance
+    apport_cli,
+    performance_cli,
+    mnt_pmvl,
+
+    // SFDR (indicateurs Finance Durable)
+    ind_sfdr_10040,
+    ind_sfdr_00050,
+    ind_sfdr_00070,
+    ind_sfdr_00020,
+    ind_sfdr_10000,
+    ind_sfdr_20130,
+    ind_sfdr_20150,
+    ind_sfdr_20390,
+    ind_sfdr_20480,
+    ind_sfdr_30000,
+    ind_sfdr_30010,
+    ind_sfdr_30020,
+    ind_sfdr_30060,
+    ind_sfdr_30100,
+    ind_sfdr_30140,
+
+    // Taxonomie verte
+    ind_taxo_20660,
+    ind_taxo_20670,
+    ind_taxo_20680,
+    ind_taxo_20690,
+    ind_taxo_20700,
+    ind_taxo_20710
+
+FROM [lib://DataWarehouse/GSM]
+(qvd);
+
+
+// ============================================================
+// 5. TABLE CREDIT
+// Source : crédits immobiliers, conso, professionnels
+// Clé    : id_cli, num_cnt, num_prj
+// Usage  : Board Crédit & Garanties, Board Produits
+// ============================================================
+[CREDIT]:
+LOAD
+    id_cli,
+    num_cnt,
+    num_prj,
+    stt_cli,
+    fam_pdt,
+    perimetre,
+    cnt_ctl,
+    lib_ctl                  AS lib_contrat_credit,
+    stt_cnt,
+    lib_stt_cnt             AS lib_statut_credit,
+    cd_etat_prt,
+    lib_cd_etat_prt         AS lib_etat_pret,
+    typ_prt,
+    lib_typ_prt             AS lib_type_pret,
+    typ_mar,
+    lib_typ_mar             AS lib_type_marche,  // LOGEMENT, EQ.FAMILIAL, PROFESSIONNEL
+    typ_remb,               // In Fine / Amort
+    agc_cnt                  AS agence_instruction,
+
+    // Montants
+    mnt_nom,                // montant nominal (signé au contrat)
+    mnt_dblq,               // montant débloqué
+    mnt_nom_proj,
+    mnt_dblq_proj,
+    mnt_disp,               // montant restant à débloquer (HB)
+    enc_cpt,                // encours comptable (CRD)
+    enc_cpt_moy_m,
+    enc_gest,               // encours de gestion
+
+    // Qualité du crédit
+    mnt_krd_tot,            // capital restant dû total
+    mnt_krd_sain,
+    mnt_krd_imp,            // capital restant impayé
+    mnt_ifa_tot,
+    mnt_ifa_sain,
+    mnt_ifa_imp,
+
+    // Taux
+    tx_int_ref,
+    tx_int_ini,
+    tx_int_act,             // taux actuel
+    teg,
+    typ_tx,                 // F=fixe, R=révisable
+
+    // Dates
+    dt_eff,
+    dt_fin_init,
+    dt_fin_eff,
+    mat_init,               // maturité initiale (années)
+    mat_reelle,
+    duree_resi,             // durée résiduelle en jours
+    dt_1er_dblq,
+
+    // IFRS9 & provisions
+    cd_bck_ifrs9            AS bucket_ifrs9_credit,   // B1, B2, B3
+    cd_risque               AS code_risque_credit,
+    cd_etat_creance,
+    lib_cd_etat_creance,
+    mnt_prov_b_ifrs9        AS provision_bilan_ifrs9_credit,
+    mnt_prov_hb_ifrs9       AS provision_hb_ifrs9_credit,
+    mnt_dot                 AS dotation_credit,
+    mnt_rep                 AS reprise_credit,
+    mnt_psp                 AS passage_a_perte_credit,
+
+    // RWA
+    total_rwa               AS total_rwa_credit,
+    ead_nette_b,
+    ead_nette_hb,
+    rwa_collateralized_b,
+    rwa_guaranteed_b,
+    rwa_unguaranteed,
+
+    // Bien immobilier (si crédit immo)
+    cd_nat,
+    cd_res,
+    mnt_bien_ori,
+    mnt_app,
+    ltv_ori,               // Loan to Value initial
+    ltv_act,               // Loan to Value actuel (après revalorisation)
+    bien_commune,
+    cd_postal               AS cp_bien,
+    bien_dpe,
+
+    // Incidents
+    cd_incident,
+    lib_cd_incident,
+    nb_ficp,
+    tx_edt                  AS taux_endettement,
+
+    // Restructuration
+    nb_rst,
+
+    annee_mois_part
+
+FROM [lib://DataWarehouse/CREDIT]
+(qvd);
+
+
+// ============================================================
+// 6. TABLE GARANTIE
+// Source : garanties attachées aux crédits
+// Clé    : id_cli, num_cnt_prt (→ CREDIT.num_cnt)
+// Usage  : Board Crédit & Garanties
+// ============================================================
+[GARANTIE]:
+LOAD
+    id_cli,
+    num_cnt_prt             AS num_cnt,    // jointure avec CREDIT
+    num_cnt_gar,
+    stt_cli,
+
+    // Type & statut
+    det_typ_gar,
+    lib_det_typ_gar         AS lib_type_garantie,  // immeuble, véhicule, assurance-vie, etc.
+    stt_gar,
+    lib_stt_gar             AS lib_statut_garantie,
+    stt_cnt,
+    cd_rang,
+
+    // Dates
+    dt_eff_gar,
+    dt_ech_gar,
+    dur_gar,
+
+    // Montants
+    mnt_gar,                // montant initial garantie
+    mnt_gar_cpta            AS mnt_garantie_comptable,
+    mnt_bien_gar_ori,       // valeur initiale du bien
+    mnt_reval,              // valeur revalorisée
+    vlr_reval_act,
+    dt_reval,
+
+    // Assurance
+    num_cnt_ass,
+    lib_cnt_ass,
+    nom_cie_ass,
+
+    // Adresse bien
+    lib_ville               AS ville_garantie,
+    cd_postal               AS cp_garantie,
+
+    // RWA
+    tx_rwa,
+    mnt_rwa,
+
+    annee_mois_part
+
+FROM [lib://DataWarehouse/GARANTIE]
+(qvd);
+
+
+// ============================================================
+// 7. TABLE SERVICE (cartes, chéquiers, autorisations de découvert)
+// Source : contrats de service bancaire
+// Clé    : id_cli, num_cnt
+// Usage  : Board Digital, Board Produits
+// ============================================================
+[SERVICE]:
+LOAD
+    id_cli,
+    num_cnt,
+    stt_cli,
+    fam_pdt,
+    perimetre,
+    lib_ctl                  AS lib_service,
+    stt_cnt,
+    lib_stt_cnt             AS lib_statut_service,
+    dt_eff,
+    dt_fin_eff,
+    agc_ins                  AS agence_instruction_service,
+
+    // Carte
+    num_carte,
+    cd_typ_debit,           // type débit carte
+    dt_ech_carte,
+    ind_carte_virtu,        // carte virtuelle O/N
+
+    // Tarification
+    mnt_tar_brt,
+    mnt_pdt_tar             AS mnt_tarife_service,
+
+    // IFRS9 (garanties hors bilan / découverts)
+    cd_bck_ifrs9            AS bucket_ifrs9_service,
+    mnt_prov_b_ifrs9        AS provision_bilan_service,
+    mnt_prov_hb_ifrs9       AS provision_hb_service,
+
+    annee_mois_part
+
+FROM [lib://DataWarehouse/SERVICE]
+(qvd);
+
+
+// ============================================================
+// TABLE CALENDRIER (dimension temps pour les graphes temporels)
+// ============================================================
+[CALENDRIER]:
+LOAD
+    Date(MakeDate(Year, Month, Day))    AS Date,
+    Year(MakeDate(Year, Month, Day))    AS Année,
+    Month(MakeDate(Year, Month, Day))   AS Mois,
+    MonthName(MakeDate(Year, Month, Day)) AS LibMois,
+    Week(MakeDate(Year, Month, Day))    AS Semaine,
+    QuarterName(MakeDate(Year, Month, Day)) AS Trimestre,
+    Year(MakeDate(Year, Month, Day)) & '-' & Num(Month(MakeDate(Year, Month, Day)), '00') AS AnnéeMois
+RESIDENT [CREDIT]  // génération auto des dates sur la période du portefeuille
+WHERE dt_fonc >= MakeDate(2023, 1, 1);
+DROP TABLE [CREDIT]; // puis on recharge proprement
+
+
+// ============================================================
+// FIN DU SCRIPT
+// ============================================================

@@ -1,0 +1,252 @@
+// ============================================================
+// LOUVRE BANQUE PRIVÉE — MASTER MEASURES QLIK SENSE
+// À créer dans l'app via : Assets Panel > Master Items > Measures
+// ============================================================
+
+
+// ============================================================
+// GROUPE : CLIENTS
+// Tables : CLIENT
+// ============================================================
+
+[Nb Clients Totaux]
+Count(DISTINCT {<cli_c_p={'CL','CT'}>} id_cli)
+// Compte les clients actifs (hors prospects)
+
+[Nb Clients Actifs]
+Count(DISTINCT {<top_client_actif={'O'}>} id_cli)
+// Clients avec >9 mvts PP ou >4 mvts PM sur 10/12 mois
+
+[Nb Clients Enrollés Digital]
+Count(DISTINCT {<nb_dev_enrol={">0"}>} id_cli)
+// Clients avec au moins un terminal enrollé
+
+[Taux Enrollment]
+Count(DISTINCT {<nb_dev_enrol={">0"}>} id_cli) / Count(DISTINCT id_cli)
+// Format : 0.0%
+
+[Nb Smartphones Enrollés]
+Sum(nb_dev_enrol)
+// Total terminaux de confiance
+
+[Nb Comptes Bloqués]
+Count(DISTINCT {<etat_acc={'B'}>} id_cli)
+// Accès digitaux bloqués — alerte opérationnelle
+
+[Nb Comptes Suspendus]
+Count(DISTINCT {<etat_acc={'S'}>} id_cli)
+
+[Nb Clients KYC Rouge]
+Count(DISTINCT {<gelule_global={10}>} id_cli)
+// KYC à renouveler OBLIGATOIREMENT (rouge)
+
+[Nb Clients KYC Orange]
+Count(DISTINCT {<gelule_global={5}>} id_cli)
+// KYC à mettre à jour (facultatif)
+
+[Nb Clients Certif Échue < 3 mois]
+Count(DISTINCT {<dt_next_certif={"<=$(=AddMonths(Today(), 3))"}>} id_cli)
+// Clients dont la prochaine certification expire dans 3 mois
+
+[Nb Clients Risque Élevé]
+Count(DISTINCT {<cd_risque_pers={'E','F'}>} id_cli)
+// E=Douteux, F=Contentieux (cotation MacDonough)
+
+
+// ============================================================
+// GROUPE : AUM & PATRIMOINE
+// Tables : CLIENT, EPARGNE, CREDIT
+// ============================================================
+
+[AUM Total Titulaires]
+Sum({<stt_cli={'TIT'}>} aum_tit)
+// Encours total des clients en tant que titulaires
+
+[AUM Moyen par Client]
+Sum(aum_tit) / Count(DISTINCT id_cli)
+// Format : # ##0 €
+
+[Patrimoine Épargne Total]
+Sum(mnt_pat_epargne)
+// Montant patrimoine épargne déclaré (table CLIENT)
+
+[Patrimoine Immobilier Total]
+Sum(mnt_pat_biens_immos)
+
+
+// ============================================================
+// GROUPE : ÉPARGNE
+// Tables : EPARGNE, GSM
+// ============================================================
+
+[Encours Épargne Total]
+Sum({<perimetre={'epargne'}>} enc_cnt_m)
+// Encours contrats épargne mois en cours
+
+[Encours Épargne N-1]
+Sum({<perimetre={'epargne'}>} enc_cnt_n1)
+
+[Variation Encours Épargne]
+Sum({<perimetre={'epargne'}>} enc_cnt_m) - Sum({<perimetre={'epargne'}>} enc_cnt_n1)
+
+[Collecte Brute]
+Sum({<perimetre={'epargne'}>} col_brute)
+
+[Décollecte]
+Sum({<perimetre={'epargne'}>} decollecte)
+
+[Collecte Nette]
+Sum({<perimetre={'epargne'}>} col_nette)
+// = col_brute + decollecte
+
+[Nb Contrats Épargne Actifs]
+Count(DISTINCT {<perimetre={'epargne'}, stt_cnt={'0'}>} num_cnt)
+
+[Nb Contrats Gestion Sous Mandat]
+Count(DISTINCT {<perimetre={'epargne'}, mod_gest={'2'}>} num_cnt)
+
+[Performance Moyenne Portefeuille]
+Avg({<perimetre={'epargne'}>} performance_cli)
+// Format : 0.00%
+
+[Top 10 ISIN par Encours]
+// Utiliser en dimension : isin_fds / lib_fonds
+// Mesure :
+Sum(enc_fds_m)
+
+[Encours Fonds Durables SFDR Art.8+]
+Sum({<ind_sfdr_30000={1}>} enc_fds_m)
+// Fonds Article 8 ou Article 9 SFDR
+
+
+// ============================================================
+// GROUPE : CRÉDIT
+// Tables : CREDIT, GARANTIE
+// ============================================================
+
+[Encours Crédit Total]
+Sum({<perimetre={'credit'}>} enc_cpt)
+// Capital restant dû total
+
+[Nb Contrats Crédit Actifs]
+Count(DISTINCT {<perimetre={'credit'}, stt_cnt={'0'}>} num_cnt)
+
+[Nb Crédits Immobiliers]
+Count(DISTINCT {<typ_mar={'01'}>} num_cnt)
+// typ_mar 01 = LOGEMENT
+
+[Nb Crédits Conso]
+Count(DISTINCT {<typ_mar={'02'}>} num_cnt)
+// typ_mar 02 = EQ.FAMILIAL
+
+[Encours Crédit Sain]
+Sum(mnt_krd_sain)
+
+[Encours Crédit Impayé]
+Sum(mnt_krd_imp)
+
+[Taux Créances Douteuses]
+Sum({<cd_etat_creance={'10','30'}>} mnt_krd_tot) / Sum(mnt_krd_tot)
+// B3 douteux + contentieux / total
+
+[Provisions IFRS9 Bilan Crédit]
+Sum(provision_bilan_ifrs9_credit)
+
+[Provisions IFRS9 HB Crédit]
+Sum(provision_hb_ifrs9_credit)
+
+[Total Provisions IFRS9 Crédit]
+Sum(provision_bilan_ifrs9_credit) + Sum(provision_hb_ifrs9_credit)
+
+[Total RWA Crédit]
+Sum(total_rwa_credit)
+
+[LTV Moyenne Actuelle]
+Avg(ltv_act)
+// Ratio Prêt / Valeur du bien revalorisé
+
+[Montant Nominal Total]
+Sum(mnt_nom)
+
+[Montant Débloqué Total]
+Sum(mnt_dblq)
+
+[Montant Disponible HB]
+Sum(mnt_disp)
+// Capital restant à débloquer (Hors-Bilan)
+
+
+// ============================================================
+// GROUPE : GARANTIES
+// Tables : GARANTIE
+// ============================================================
+
+[Montant Garanties Total]
+Sum(mnt_gar)
+
+[Montant Garanties Comptable]
+Sum(mnt_garantie_comptable)
+
+[Montant Garanties Revalorisé]
+Sum(mnt_reval)
+
+[Taux Couverture Garanties]
+Sum(mnt_garantie_comptable) / Sum({<perimetre={'credit'}>} mnt_krd_tot)
+// Couverture = garanties comptables / capital restant dû
+
+[Total RWA Garanties]
+Sum(mnt_rwa)
+
+
+// ============================================================
+// GROUPE : TRANSACTIONS & CONFORMITÉ
+// Tables : TRANSACTION, CLIENT
+// ============================================================
+
+[Volume Total Transactions]
+Sum(mnt_evt)
+
+[Nb Transactions]
+Count(num_operation)
+
+[Volume Transactions Pays Embargo]
+Sum({<cli_top_pays_embargo={1}>} mnt_evt)
++ Sum({<ctrpty_top_pays_embargo={1}>} mnt_evt)
+// Transactions impliquant au moins un pays sous embargo
+
+[Nb Transactions Pays Sanctions]
+Count({<cli_top_pays_sanctions={1}>} num_operation)
++ Count({<ctrpty_top_pays_sanctions={1}>} num_operation)
+
+[Volume Transactions Pays GDA]
+Sum({<ctrpty_top_pays_gda={1}>} mnt_evt)
+// Gel Des Avoirs
+
+[Nb Transactions 3DS]
+Count({<ind_3ds={1}>} num_operation)
+
+[Nb Transactions Sans Contact]
+Count({<ind_sans_contact={1}>} num_operation)
+
+[Clients à Surveiller (Pays Rouge/Noir)]
+Count(DISTINCT {<couleur_pays={'rouge','noir'}>} id_cli)
+
+[Volume Mobile]
+Sum({<canal_ordre={'MOBILE'}>} mnt_evt)
+
+[Volume Web]
+Sum({<canal_ordre={'WEB'}>} mnt_evt)
+
+
+// ============================================================
+// GROUPE : DIGITAL (anciens boards)
+// Tables : CLIENT
+// ============================================================
+
+[Nb Connexions Uniques]
+Count(DISTINCT {<dt_der_cnx={">=@{vDateDebut}"}>} id_cli)
+
+[Nb Clients Jamais Connectés]
+Count(DISTINCT {<dt_der_cnx={''>} id_cli)
+// Clients enrollés mais n'ayant jamais utilisé le digital
+

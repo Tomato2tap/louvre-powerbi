@@ -1,0 +1,18 @@
+# Sous-dépôt séparé (déjà sur github.com/Tomato2tap/dd)
+dd/
+
+# Schémas Power BI téléchargés (régénérables) + temp
+_schemas/
+gh_tree.json
+_test_open.png
+
+# Caches / artefacts Power BI Desktop
+**/.pbi/
+**/cache.abf
+**/*.abf
+**/localSettings.json
+**/unappliedChanges.json
+
+# Python
+__pycache__/
+*.pyc

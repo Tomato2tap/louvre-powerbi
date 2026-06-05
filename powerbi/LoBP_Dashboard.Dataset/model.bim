@@ -1,0 +1,4686 @@
+{
+  "name": "Model",
+  "compatibilityLevel": 1567,
+  "model": {
+    "culture": "fr-FR",
+    "collation": "Latin1_General_100_BIN2_UTF8",
+    "tables": [
+      {
+        "name": "CLIENT",
+        "lineageTag": "fb59a474-11cc-4e87-9a83-8dad1ad0a7a8",
+        "columns": [
+          {
+            "type": "data",
+            "name": "id_cli",
+            "dataType": "string",
+            "lineageTag": "b32f3cc7-ac5d-4912-be44-85b0586c3a56",
+            "summarizeBy": "none",
+            "sourceColumn": "id_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_typ",
+            "dataType": "string",
+            "lineageTag": "32d302c8-4806-4539-8b8c-9407e09ae1de",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_typ",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_cd_typ",
+            "dataType": "string",
+            "lineageTag": "c9eac215-5ad8-4741-b4aa-f929a28ae3d8",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_cd_typ",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "id_gr",
+            "dataType": "string",
+            "lineageTag": "b8f2a616-9cf5-4124-8eba-2704512fd3fa",
+            "summarizeBy": "none",
+            "sourceColumn": "id_gr",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_gr",
+            "dataType": "string",
+            "lineageTag": "4a2d03fe-89f4-4b70-9ece-f09e2d38aa8f",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_gr",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cli_c_p",
+            "dataType": "string",
+            "lineageTag": "b5117770-5359-41f3-a9e6-c4526ce76643",
+            "summarizeBy": "none",
+            "sourceColumn": "cli_c_p",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nom_cplt",
+            "dataType": "string",
+            "lineageTag": "b695ea71-24db-4728-8bf9-a14594d95213",
+            "summarizeBy": "none",
+            "sourceColumn": "nom_cplt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "prm_prn",
+            "dataType": "string",
+            "lineageTag": "b397bb6c-e40e-4495-a252-b13e4708264a",
+            "summarizeBy": "none",
+            "sourceColumn": "prm_prn",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nom_us",
+            "dataType": "string",
+            "lineageTag": "eed33d84-841e-4b9d-97bd-563984a5b1f6",
+            "summarizeBy": "none",
+            "sourceColumn": "nom_us",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "age_cli",
+            "dataType": "int64",
+            "lineageTag": "a6a9edb6-2f2b-4a13-8bf5-dc55f13e26a1",
+            "summarizeBy": "sum",
+            "sourceColumn": "age_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_situ_fam",
+            "dataType": "string",
+            "lineageTag": "3022eead-7d18-406d-82a8-5449827a2da7",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_situ_fam",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_cd_situ_fam",
+            "dataType": "string",
+            "lineageTag": "5a17c44b-de81-4a68-befb-17912a7d0812",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_cd_situ_fam",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_cons",
+            "dataType": "string",
+            "lineageTag": "1eb02d9c-1c4f-4dd4-8128-1ca50d549d38",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_cons",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nom_cons",
+            "dataType": "string",
+            "lineageTag": "e086af3a-2e6a-4ca4-ab18-7a98815f3c0e",
+            "summarizeBy": "none",
+            "sourceColumn": "nom_cons",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_ptf",
+            "dataType": "string",
+            "lineageTag": "2e31f1f2-5817-4cd6-803e-774c26ab2be0",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_ptf",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "agc_topz",
+            "dataType": "string",
+            "lineageTag": "00c4a752-2dbf-4548-9ea4-c5a2f70d32ae",
+            "summarizeBy": "none",
+            "sourceColumn": "agc_topz",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_grp_agce",
+            "dataType": "string",
+            "lineageTag": "4420fc2f-5ee6-4800-aec6-0284182200b5",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_grp_agce",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "etat_acc",
+            "dataType": "string",
+            "lineageTag": "643c7d5b-a780-4de3-8173-cb9f2801edf7",
+            "summarizeBy": "none",
+            "sourceColumn": "etat_acc",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "top_client_actif",
+            "dataType": "string",
+            "lineageTag": "4585f4fa-cf2d-48ca-b5d1-ab23f0b7c5ac",
+            "summarizeBy": "none",
+            "sourceColumn": "top_client_actif",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_der_cnx",
+            "dataType": "dateTime",
+            "lineageTag": "3d62ca8a-8311-4da4-8430-aee9e01f9578",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_der_cnx",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_top_cl",
+            "dataType": "dateTime",
+            "lineageTag": "981db77f-9728-4ecd-9c87-01329e310e34",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_top_cl",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_exit_cl",
+            "dataType": "dateTime",
+            "lineageTag": "ae548971-3f67-4b9f-95c8-d3077febfa64",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_exit_cl",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_dernier_rdv",
+            "dataType": "dateTime",
+            "lineageTag": "1c26c56e-f885-4109-a47f-89693f223463",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_dernier_rdv",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_1er_cnt",
+            "dataType": "dateTime",
+            "lineageTag": "378992af-759c-4014-834a-60d980e4bc4e",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_1er_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nb_dev_enrol",
+            "dataType": "int64",
+            "lineageTag": "3fb5d54e-07f8-437c-a87c-81e542e2cb21",
+            "summarizeBy": "sum",
+            "sourceColumn": "nb_dev_enrol",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "typ_enrol",
+            "dataType": "string",
+            "lineageTag": "d2e0080c-a1e8-4536-af32-ff8cab4182b4",
+            "summarizeBy": "none",
+            "sourceColumn": "typ_enrol",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_enrol",
+            "dataType": "dateTime",
+            "lineageTag": "8529a0c4-0d89-4cba-a1c8-40bcb41882b2",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_enrol",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_risque_pers",
+            "dataType": "string",
+            "lineageTag": "1ef8f03e-ecd0-4053-9f16-263d19a0b37e",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_risque_pers",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_cd_risque_pers",
+            "dataType": "string",
+            "lineageTag": "e4e2c496-cf74-4963-be79-f53eaf5d84b8",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_cd_risque_pers",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_risque_ajust",
+            "dataType": "string",
+            "lineageTag": "2ce12526-f4ad-4af8-92e2-b8890571b9ff",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_risque_ajust",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_cd_risque_ajust",
+            "dataType": "string",
+            "lineageTag": "1131b43b-141c-42e0-a40b-11455958de36",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_cd_risque_ajust",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "tot_score_risque",
+            "dataType": "double",
+            "lineageTag": "4abf3e5e-b721-4369-b3a1-10fe8af5157e",
+            "summarizeBy": "sum",
+            "sourceColumn": "tot_score_risque",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "scenario_risque",
+            "dataType": "string",
+            "lineageTag": "74bb12d7-8a33-4b13-84d1-4c1ee1c8cb69",
+            "summarizeBy": "none",
+            "sourceColumn": "scenario_risque",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_scenario_risque",
+            "dataType": "string",
+            "lineageTag": "ae4c26cd-5bb4-4938-b27e-855df91bb303",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_scenario_risque",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_mf",
+            "dataType": "string",
+            "lineageTag": "bb7ac514-671c-47b5-b3a8-61cf2aa8fbe5",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_mf",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "gelule_global",
+            "dataType": "int64",
+            "lineageTag": "81ee48ac-d0e9-46b8-a296-1f0acdb8525a",
+            "summarizeBy": "sum",
+            "sourceColumn": "gelule_global",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_gelule_global",
+            "dataType": "string",
+            "lineageTag": "909c4bed-867f-423e-8251-860c1a8884c7",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_gelule_global",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_der_certif",
+            "dataType": "dateTime",
+            "lineageTag": "2da03060-dd96-4c9f-9e21-457d5e402cd0",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_der_certif",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_next_certif",
+            "dataType": "dateTime",
+            "lineageTag": "aedd5599-d8c9-4ef7-852d-e3ac8d251ae2",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_next_certif",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_stt_fatca",
+            "dataType": "string",
+            "lineageTag": "99494d8f-2ac6-40dd-998b-c6402963d15b",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_stt_fatca",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "pay_fis_prin",
+            "dataType": "string",
+            "lineageTag": "43afef86-b220-4d0b-9e83-2152a85b67db",
+            "summarizeBy": "none",
+            "sourceColumn": "pay_fis_prin",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "pay_res",
+            "dataType": "string",
+            "lineageTag": "f12b29eb-8417-43dd-b6a0-f2fd604684ea",
+            "summarizeBy": "none",
+            "sourceColumn": "pay_res",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_pay_res",
+            "dataType": "string",
+            "lineageTag": "7a1f8213-7c67-4652-a11d-7719d115871b",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_pay_res",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "couleur_pays",
+            "dataType": "string",
+            "lineageTag": "14ec2b68-d7a0-4ec6-9554-c3bef52bfa30",
+            "summarizeBy": "none",
+            "sourceColumn": "couleur_pays",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "niveau_risque_pays",
+            "dataType": "string",
+            "lineageTag": "5889994d-2f8a-4780-a246-f3400e9d79d9",
+            "summarizeBy": "none",
+            "sourceColumn": "niveau_risque_pays",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "top_pays_embargo",
+            "dataType": "boolean",
+            "lineageTag": "4630c84d-55b8-44a0-b774-b3ba3eca43b7",
+            "summarizeBy": "none",
+            "sourceColumn": "top_pays_embargo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "top_pays_sanctions",
+            "dataType": "boolean",
+            "lineageTag": "976df64d-7cd7-4cf4-be3e-46eab7261d1d",
+            "summarizeBy": "none",
+            "sourceColumn": "top_pays_sanctions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "top_pays_gda",
+            "dataType": "boolean",
+            "lineageTag": "591c4abb-d1b6-447b-b55d-cfa5cd8099a6",
+            "summarizeBy": "none",
+            "sourceColumn": "top_pays_gda",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_ficp",
+            "dataType": "string",
+            "lineageTag": "2a0fc6eb-9463-41e9-a2f0-1c9dffe8d72b",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_ficp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nb_incidents_ficp",
+            "dataType": "int64",
+            "lineageTag": "9dce5745-9d2d-4120-abd5-8d87dfb071a0",
+            "summarizeBy": "sum",
+            "sourceColumn": "nb_incidents_ficp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "aum_tit",
+            "dataType": "double",
+            "lineageTag": "b04a921b-08a4-4aa1-bb45-75219117ef37",
+            "summarizeBy": "sum",
+            "sourceColumn": "aum_tit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "aum_cot",
+            "dataType": "double",
+            "lineageTag": "b891fbef-8981-4bde-8310-db7dc98e5c1d",
+            "summarizeBy": "sum",
+            "sourceColumn": "aum_cot",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_pat_epargne",
+            "dataType": "double",
+            "lineageTag": "5aa8f9fc-f1e1-4756-8750-53889d8afc89",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_pat_epargne",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_pat_biens_immos",
+            "dataType": "double",
+            "lineageTag": "f64ece7b-dee0-424e-acb3-5f4af051c42c",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_pat_biens_immos",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_rev_princ",
+            "dataType": "double",
+            "lineageTag": "58f85977-2238-4b41-918f-a8bf093c2847",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_rev_princ",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_credits_externes",
+            "dataType": "double",
+            "lineageTag": "382d742b-0559-4355-9d8a-995b717a6c24",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_credits_externes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_equip_emp",
+            "dataType": "double",
+            "lineageTag": "5a3f19a5-04ff-4376-9cbb-ee471c8f6ac8",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_equip_emp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nb_equip_emp",
+            "dataType": "int64",
+            "lineageTag": "96b5705c-73f5-42c2-afa7-5bdff16190e0",
+            "summarizeBy": "sum",
+            "sourceColumn": "nb_equip_emp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_equip_tit",
+            "dataType": "double",
+            "lineageTag": "d33df363-ecc4-4e4e-97d9-8a60f54d47fb",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_equip_tit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nb_equip_tit",
+            "dataType": "int64",
+            "lineageTag": "2fdceeba-405d-45c8-a585-6a15b5a7f863",
+            "summarizeBy": "sum",
+            "sourceColumn": "nb_equip_tit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "list_fam_pdt",
+            "dataType": "string",
+            "lineageTag": "c447a3a7-7928-4f5f-8a94-3d2cb7cf1681",
+            "summarizeBy": "none",
+            "sourceColumn": "list_fam_pdt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "list_pdt",
+            "dataType": "string",
+            "lineageTag": "320eed26-eb6a-4d5a-85df-7f393d29a2a7",
+            "summarizeBy": "none",
+            "sourceColumn": "list_pdt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_fonc",
+            "dataType": "dateTime",
+            "lineageTag": "04f8d0d2-9e70-41ce-9804-3ac13a5b8589",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_fonc",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "annee_mois_part",
+            "dataType": "string",
+            "lineageTag": "d1fba1f9-b259-4ded-812e-41df2d241ee3",
+            "summarizeBy": "none",
+            "sourceColumn": "annee_mois_part",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "Couleur_KYC",
+            "dataType": "string",
+            "lineageTag": "944cd0ae-80b1-4946-a378-498ebcc89fc0",
+            "summarizeBy": "none",
+            "sourceColumn": "Couleur_KYC",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "Alerte_Certif",
+            "dataType": "string",
+            "lineageTag": "68a3cb8a-7c26-4ad1-93ec-403a6b7ee213",
+            "summarizeBy": "none",
+            "sourceColumn": "Alerte_Certif",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CLIENT",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\CLIENT.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Types\" = Table.TransformColumnTypes(#\"Promoted Headers\",",
+                "        {",
+                "            {\"id_cli\", type text}",
+                "        })",
+                "in",
+                "    #\"Changed Types\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "TRANSACTION",
+        "lineageTag": "5744da9b-abcd-4701-acd3-2fd2fd236ada",
+        "columns": [
+          {
+            "type": "data",
+            "name": "id_cli",
+            "dataType": "string",
+            "lineageTag": "33e01c6e-fd18-4731-bfa1-b4a2c40db4c1",
+            "summarizeBy": "none",
+            "sourceColumn": "id_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "num_cnt",
+            "dataType": "string",
+            "lineageTag": "2667b20e-e838-4357-a9d4-9f61d19a05ce",
+            "summarizeBy": "none",
+            "sourceColumn": "num_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "perimetre",
+            "dataType": "string",
+            "lineageTag": "61775abc-f4dc-4e9b-907c-45dac82ec55b",
+            "summarizeBy": "none",
+            "sourceColumn": "perimetre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "typ_evt",
+            "dataType": "string",
+            "lineageTag": "d97f0ca8-d39b-4bc7-87c4-ab170856dd5e",
+            "summarizeBy": "none",
+            "sourceColumn": "typ_evt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "typ_evt_lv1",
+            "dataType": "string",
+            "lineageTag": "72ebc562-a851-471b-b13e-f9473e5a5396",
+            "summarizeBy": "none",
+            "sourceColumn": "typ_evt_lv1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_evt_lv1",
+            "dataType": "string",
+            "lineageTag": "94ed305d-89ad-448f-acb2-3aa8e5256966",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_evt_lv1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "sens",
+            "dataType": "string",
+            "lineageTag": "94928dd1-ee88-4881-83a7-6376e7d19be1",
+            "summarizeBy": "none",
+            "sourceColumn": "sens",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_evt",
+            "dataType": "double",
+            "lineageTag": "5bf57ccf-77cb-4fe3-9b32-1a72bf571e71",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_evt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "devise_compte",
+            "dataType": "string",
+            "lineageTag": "016d7703-d808-4057-8aaa-0729fb2ccb49",
+            "summarizeBy": "none",
+            "sourceColumn": "devise_compte",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_devise",
+            "dataType": "double",
+            "lineageTag": "45fc33e0-7739-4dee-84ea-7d35b855b72b",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_devise",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_demande",
+            "dataType": "dateTime",
+            "lineageTag": "cced21e9-b234-404f-ba9d-a3779f7a53bc",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_demande",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_validation",
+            "dataType": "dateTime",
+            "lineageTag": "3d802ce6-99ad-4bbd-9512-86bbd4be2c74",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_validation",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_realisation",
+            "dataType": "dateTime",
+            "lineageTag": "c5a27200-45f2-4b7c-a16e-553d6ff2b808",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_realisation",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mode_paiement",
+            "dataType": "string",
+            "lineageTag": "d2f64bc3-e9b7-4652-a2b8-b46ad5223b0f",
+            "summarizeBy": "none",
+            "sourceColumn": "mode_paiement",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "typ_paiement",
+            "dataType": "string",
+            "lineageTag": "c5eef812-0651-4ba7-92b5-e3c207ac4e24",
+            "summarizeBy": "none",
+            "sourceColumn": "typ_paiement",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ind_3ds",
+            "dataType": "int64",
+            "lineageTag": "e3ca1ab7-e3c0-47fa-99f3-aaf0b1ff689a",
+            "summarizeBy": "sum",
+            "sourceColumn": "ind_3ds",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ind_sans_contact",
+            "dataType": "int64",
+            "lineageTag": "6ac3f175-3abf-419e-ba5c-c69ae4bd83fc",
+            "summarizeBy": "sum",
+            "sourceColumn": "ind_sans_contact",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "canal_init",
+            "dataType": "string",
+            "lineageTag": "fd581d7e-0feb-43b4-a1fa-1451da31731b",
+            "summarizeBy": "none",
+            "sourceColumn": "canal_init",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "canal_ordre",
+            "dataType": "string",
+            "lineageTag": "4bd5d9bc-e403-44e8-bd9f-cbf7d48bf143",
+            "summarizeBy": "none",
+            "sourceColumn": "canal_ordre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ctrpty_nom",
+            "dataType": "string",
+            "lineageTag": "8cbf55cd-bfc6-480e-9bc8-9cb492237d35",
+            "summarizeBy": "none",
+            "sourceColumn": "ctrpty_nom",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ctrpty_pays",
+            "dataType": "string",
+            "lineageTag": "b3b4aa29-2e08-4976-a353-c4196d83b26b",
+            "summarizeBy": "none",
+            "sourceColumn": "ctrpty_pays",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cli_cd_pays_iso",
+            "dataType": "string",
+            "lineageTag": "f840930a-8321-4ef2-8ac9-3b4392385ce0",
+            "summarizeBy": "none",
+            "sourceColumn": "cli_cd_pays_iso",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cli_couleur_pays",
+            "dataType": "string",
+            "lineageTag": "c07200df-c453-495d-a027-32d1af9afe23",
+            "summarizeBy": "none",
+            "sourceColumn": "cli_couleur_pays",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cli_niveau_risque_pays",
+            "dataType": "string",
+            "lineageTag": "b2dd80f5-b535-474e-b107-edfa18809528",
+            "summarizeBy": "none",
+            "sourceColumn": "cli_niveau_risque_pays",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cli_top_pays_embargo",
+            "dataType": "boolean",
+            "lineageTag": "eba936b5-08b7-4496-b5b5-01606f538f08",
+            "summarizeBy": "none",
+            "sourceColumn": "cli_top_pays_embargo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cli_top_pays_sanctions",
+            "dataType": "boolean",
+            "lineageTag": "fce25b8a-3b49-4e2f-9a85-b2992169ca78",
+            "summarizeBy": "none",
+            "sourceColumn": "cli_top_pays_sanctions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cli_top_pays_gda",
+            "dataType": "boolean",
+            "lineageTag": "7cff55e4-ba19-47f8-8221-02be9e9c5396",
+            "summarizeBy": "none",
+            "sourceColumn": "cli_top_pays_gda",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ctrpty_cd_pays_iso",
+            "dataType": "string",
+            "lineageTag": "d062a337-2b98-4e10-b1e6-9ab4a11d33fd",
+            "summarizeBy": "none",
+            "sourceColumn": "ctrpty_cd_pays_iso",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ctrpty_couleur_pays",
+            "dataType": "string",
+            "lineageTag": "77e37f4a-dcd8-43e8-a7f7-18acc363afb8",
+            "summarizeBy": "none",
+            "sourceColumn": "ctrpty_couleur_pays",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ctrpty_niveau_risque_pays",
+            "dataType": "string",
+            "lineageTag": "fe36e92b-e152-466f-bec1-1520ae60c434",
+            "summarizeBy": "none",
+            "sourceColumn": "ctrpty_niveau_risque_pays",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ctrpty_top_pays_embargo",
+            "dataType": "boolean",
+            "lineageTag": "ffd2e87a-2628-4b00-98de-168100f33da3",
+            "summarizeBy": "none",
+            "sourceColumn": "ctrpty_top_pays_embargo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ctrpty_top_pays_sanctions",
+            "dataType": "boolean",
+            "lineageTag": "5021c45a-0df6-48c1-8b72-72839cd7b795",
+            "summarizeBy": "none",
+            "sourceColumn": "ctrpty_top_pays_sanctions",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ctrpty_top_pays_gda",
+            "dataType": "boolean",
+            "lineageTag": "074f72fe-f1ab-429c-a867-6d8733703125",
+            "summarizeBy": "none",
+            "sourceColumn": "ctrpty_top_pays_gda",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "Transaction_Sensible",
+            "dataType": "boolean",
+            "lineageTag": "0fe5d019-e9c8-4f1a-a79c-c17f8caa3e83",
+            "summarizeBy": "none",
+            "sourceColumn": "Transaction_Sensible",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "annee_mois_part",
+            "dataType": "string",
+            "lineageTag": "6fd0ea4d-d6d3-4ac0-a194-168af20bf3cb",
+            "summarizeBy": "none",
+            "sourceColumn": "annee_mois_part",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "TRANSACTION",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\TRANSACTION.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Types\" = Table.TransformColumnTypes(#\"Promoted Headers\",",
+                "        {",
+                "            {\"id_cli\", type text}",
+                "        })",
+                "in",
+                "    #\"Changed Types\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "EPARGNE",
+        "lineageTag": "1d8ee5fb-e5a6-4387-92c7-e98ac90c4516",
+        "columns": [
+          {
+            "type": "data",
+            "name": "id_cli",
+            "dataType": "string",
+            "lineageTag": "7112f722-db08-4858-98e7-17556ca53718",
+            "summarizeBy": "none",
+            "sourceColumn": "id_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "num_cnt",
+            "dataType": "string",
+            "lineageTag": "24c25e2f-a111-4934-ba56-b52f062c0832",
+            "summarizeBy": "none",
+            "sourceColumn": "num_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_cli",
+            "dataType": "string",
+            "lineageTag": "1263b8c0-44f4-405e-9ba2-24e1a6444270",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "fam_pdt",
+            "dataType": "string",
+            "lineageTag": "5e072581-ba60-4529-b742-8908bbdd74fc",
+            "summarizeBy": "none",
+            "sourceColumn": "fam_pdt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "perimetre",
+            "dataType": "string",
+            "lineageTag": "0779d226-acca-42c8-8541-1d0379f090d4",
+            "summarizeBy": "none",
+            "sourceColumn": "perimetre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_ctl",
+            "dataType": "string",
+            "lineageTag": "1df55fcd-19cf-44d1-8cb0-d7bc9c115d15",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_ctl",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_fam_niv3_pdt",
+            "dataType": "string",
+            "lineageTag": "cdab298a-4a13-4a85-984b-79189a44f110",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_fam_niv3_pdt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_cnt",
+            "dataType": "string",
+            "lineageTag": "fe4f56ef-dcd7-493d-873c-d7b12d1ef93b",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_stt_cnt",
+            "dataType": "string",
+            "lineageTag": "923059ff-36d5-4a42-99d5-7e8ad04e399e",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_stt_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_eff",
+            "dataType": "dateTime",
+            "lineageTag": "47582a2a-1a7d-4ac5-8de1-bd6a67fad568",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_eff",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_fin_eff",
+            "dataType": "dateTime",
+            "lineageTag": "6df59b3b-85db-4061-b686-cee3dc3476f5",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_fin_eff",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mod_gest",
+            "dataType": "string",
+            "lineageTag": "ff18e137-f8f1-4139-8b44-6c5404952868",
+            "summarizeBy": "none",
+            "sourceColumn": "mod_gest",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_mod_gest",
+            "dataType": "string",
+            "lineageTag": "0145dfe8-1c09-4091-867c-3865a61c0d7b",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_mod_gest",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_ges",
+            "dataType": "string",
+            "lineageTag": "280abfc8-1316-45ae-b7f0-8261f856f530",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_ges",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_cd_ges",
+            "dataType": "string",
+            "lineageTag": "f8ca3392-1c6b-4e56-9075-3e8e7907a1d3",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_cd_ges",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_cnt_m",
+            "dataType": "double",
+            "lineageTag": "01dfba87-d683-4fa1-aa90-0e3041cb524f",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_cnt_m",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_moy_m",
+            "dataType": "double",
+            "lineageTag": "f7ce2f14-f9cc-4c6a-a7b8-2869b097b724",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_moy_m",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_cnt_m1",
+            "dataType": "double",
+            "lineageTag": "c7d7b04a-eae3-4a96-bf92-af7de127f727",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_cnt_m1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_cnt_n1",
+            "dataType": "double",
+            "lineageTag": "df036ba5-1d9b-473f-b173-f95a3ea4c94a",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_cnt_n1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "var_enc",
+            "dataType": "double",
+            "lineageTag": "543925f0-0f5f-4cf7-ac0e-6df1c4176e87",
+            "summarizeBy": "sum",
+            "sourceColumn": "var_enc",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "col_brute",
+            "dataType": "double",
+            "lineageTag": "40d96c12-16f0-46a6-9c21-2eb3cbb5fa92",
+            "summarizeBy": "sum",
+            "sourceColumn": "col_brute",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "decollecte",
+            "dataType": "double",
+            "lineageTag": "a0b48dc4-1300-46bd-aaf9-bb47532a6ff7",
+            "summarizeBy": "sum",
+            "sourceColumn": "decollecte",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "col_nette",
+            "dataType": "double",
+            "lineageTag": "c7f7ca4e-717f-467a-8dd9-9777fedee954",
+            "summarizeBy": "sum",
+            "sourceColumn": "col_nette",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "isin_fds",
+            "dataType": "string",
+            "lineageTag": "0c567361-e6ec-4d3d-8775-053233ecbb2b",
+            "summarizeBy": "none",
+            "sourceColumn": "isin_fds",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_fds",
+            "dataType": "string",
+            "lineageTag": "7237004e-12dd-49e4-82d7-4f2d5fa78a97",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_fds",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "qte_fds",
+            "dataType": "int64",
+            "lineageTag": "bdbb5eab-7b30-45bf-871c-1e8f4ae83f81",
+            "summarizeBy": "sum",
+            "sourceColumn": "qte_fds",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_fds_m",
+            "dataType": "double",
+            "lineageTag": "83455f4a-31cf-450c-be30-83455225dcd1",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_fds_m",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "volatilite_isin",
+            "dataType": "double",
+            "lineageTag": "47a0616a-b4f7-49aa-81c8-1b873de7d250",
+            "summarizeBy": "sum",
+            "sourceColumn": "volatilite_isin",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "isin_risq",
+            "dataType": "int64",
+            "lineageTag": "3278b665-81d2-4632-9ccf-52206e6dc00c",
+            "summarizeBy": "sum",
+            "sourceColumn": "isin_risq",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "prof_risq",
+            "dataType": "string",
+            "lineageTag": "ad4bf32d-b419-4ad1-9457-a89443df437d",
+            "summarizeBy": "none",
+            "sourceColumn": "prof_risq",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_prof_risq",
+            "dataType": "string",
+            "lineageTag": "0ae1b566-ad22-4288-b334-2c44877909ab",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_prof_risq",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "prof_exp",
+            "dataType": "string",
+            "lineageTag": "54c3936c-630f-4c0f-9331-c21ce8a54108",
+            "summarizeBy": "none",
+            "sourceColumn": "prof_exp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_prof_exp",
+            "dataType": "string",
+            "lineageTag": "c0033b45-81f2-4f3f-9ff2-27876f1ede91",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_prof_exp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "prof_sfdr",
+            "dataType": "string",
+            "lineageTag": "7dac4a3d-d5cb-4f2c-b8e8-bbcecb24fb79",
+            "summarizeBy": "none",
+            "sourceColumn": "prof_sfdr",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_tar_brt",
+            "dataType": "double",
+            "lineageTag": "150f0a4c-09ea-4b11-9957-5567575e9d0e",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_tar_brt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_pdt_tar",
+            "dataType": "double",
+            "lineageTag": "566dca14-e60d-401b-9716-bce60a6920f6",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_pdt_tar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_fdg",
+            "dataType": "double",
+            "lineageTag": "b8d518e5-d296-45cc-bb38-26a85d2dc257",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_fdg",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_ddg",
+            "dataType": "double",
+            "lineageTag": "bb7ddcb7-068b-4b06-ae94-e5085e4ab067",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_ddg",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "tx_int",
+            "dataType": "double",
+            "lineageTag": "ce818321-e373-4b4b-b43c-bbb33dd64fd8",
+            "summarizeBy": "sum",
+            "sourceColumn": "tx_int",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_bck_ifrs9",
+            "dataType": "string",
+            "lineageTag": "30d60547-5547-41d6-b936-d2dcb3374a20",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_bck_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_risque",
+            "dataType": "string",
+            "lineageTag": "90040328-9ce9-433e-986b-02336d37c2b1",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_risque",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_etat_creance",
+            "dataType": "string",
+            "lineageTag": "450577e8-e6b1-4e8e-8db0-789e0b84d51c",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_etat_creance",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_prov_b_ifrs9",
+            "dataType": "double",
+            "lineageTag": "9e60becd-8e4f-4188-87c4-d3dfed23ecb3",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_prov_b_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_prov_hb_ifrs9",
+            "dataType": "double",
+            "lineageTag": "8e536974-1287-48fc-9444-8bcddca26051",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_prov_hb_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_psp",
+            "dataType": "double",
+            "lineageTag": "5aadd0d8-63b4-4498-9b19-bc71d1420fdf",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_psp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "total_rwa",
+            "dataType": "double",
+            "lineageTag": "26fd075e-9e0b-4748-a25e-3d43a2c25657",
+            "summarizeBy": "sum",
+            "sourceColumn": "total_rwa",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "top_nanti",
+            "dataType": "string",
+            "lineageTag": "90707d45-bf21-426f-a882-d68eeabaf5b8",
+            "summarizeBy": "none",
+            "sourceColumn": "top_nanti",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_nanti",
+            "dataType": "double",
+            "lineageTag": "686983b1-5fa6-426e-a182-24d67684a5ce",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_nanti",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "assur",
+            "dataType": "string",
+            "lineageTag": "fb417cf7-9f11-459b-acb7-fb7b9a12efe0",
+            "summarizeBy": "none",
+            "sourceColumn": "assur",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "Lib_Bucket_IFRS9",
+            "dataType": "string",
+            "lineageTag": "d52ee363-6dfa-4450-adea-6348bc020d25",
+            "summarizeBy": "none",
+            "sourceColumn": "Lib_Bucket_IFRS9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "annee_mois_part",
+            "dataType": "string",
+            "lineageTag": "4bb12273-e8d4-4e5d-9657-20b7cda9ad53",
+            "summarizeBy": "none",
+            "sourceColumn": "annee_mois_part",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "EPARGNE",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\EPARGNE.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Types\" = Table.TransformColumnTypes(#\"Promoted Headers\",",
+                "        {",
+                "            {\"id_cli\", type text}",
+                "        })",
+                "in",
+                "    #\"Changed Types\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "CREDIT",
+        "lineageTag": "056d1c08-61c6-46df-ab47-f5ec1f7afa4b",
+        "columns": [
+          {
+            "type": "data",
+            "name": "id_cli",
+            "dataType": "string",
+            "lineageTag": "920ed1fb-70c6-4aff-9a6c-2efa360f8725",
+            "summarizeBy": "none",
+            "sourceColumn": "id_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "num_cnt",
+            "dataType": "string",
+            "lineageTag": "c765772d-cc6e-4d73-bf14-c0eb69b089d3",
+            "summarizeBy": "none",
+            "sourceColumn": "num_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "num_prj",
+            "dataType": "string",
+            "lineageTag": "f8388ec5-1b1f-42cf-9033-9771748fdad4",
+            "summarizeBy": "none",
+            "sourceColumn": "num_prj",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_cli",
+            "dataType": "string",
+            "lineageTag": "d82c6cc6-6d82-479b-a825-92243681c382",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "fam_pdt",
+            "dataType": "string",
+            "lineageTag": "abea69b5-c2b5-4e3f-8d97-f2d51e1f2879",
+            "summarizeBy": "none",
+            "sourceColumn": "fam_pdt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "perimetre",
+            "dataType": "string",
+            "lineageTag": "7bdc1798-f545-443a-bd5d-09d596f1c2e7",
+            "summarizeBy": "none",
+            "sourceColumn": "perimetre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_ctl",
+            "dataType": "string",
+            "lineageTag": "212be5fd-d63a-4060-b0eb-f77f2d25e85e",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_ctl",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_cnt",
+            "dataType": "string",
+            "lineageTag": "de5522fa-ed3e-4ebd-b6df-7534d36e6fee",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_stt_cnt",
+            "dataType": "string",
+            "lineageTag": "0410892e-d070-4b66-95b9-50a7d87c1b0f",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_stt_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_etat_prt",
+            "dataType": "string",
+            "lineageTag": "ad6553e2-fc49-4fb1-9204-9d7d51fa89e8",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_etat_prt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_cd_etat_prt",
+            "dataType": "string",
+            "lineageTag": "3b3cd57c-96ed-4478-bc6e-a12f5583f4d2",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_cd_etat_prt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "typ_prt",
+            "dataType": "string",
+            "lineageTag": "ce49d3e7-8fdc-48a0-942c-812e4957e7d5",
+            "summarizeBy": "none",
+            "sourceColumn": "typ_prt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_typ_prt",
+            "dataType": "string",
+            "lineageTag": "a22442e0-6f2c-48af-a5b0-fd4053d72c09",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_typ_prt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "typ_mar",
+            "dataType": "string",
+            "lineageTag": "3ec74199-748f-4bed-96ee-50355772db94",
+            "summarizeBy": "none",
+            "sourceColumn": "typ_mar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_typ_mar",
+            "dataType": "string",
+            "lineageTag": "7c187ee0-2b0e-4427-b4c9-a6f5d47b300d",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_typ_mar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "typ_remb",
+            "dataType": "string",
+            "lineageTag": "69eb5061-abd5-49cd-b5fe-6a5ce9587c4a",
+            "summarizeBy": "none",
+            "sourceColumn": "typ_remb",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "agc_cnt",
+            "dataType": "string",
+            "lineageTag": "62942eca-e452-45fc-81c6-dd586961c7aa",
+            "summarizeBy": "none",
+            "sourceColumn": "agc_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_nom",
+            "dataType": "double",
+            "lineageTag": "6af55dd8-4555-457d-8db9-2f7f689e8a26",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_nom",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_dblq",
+            "dataType": "double",
+            "lineageTag": "0755de42-d9ca-4346-a619-d6174d696adc",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_dblq",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_disp",
+            "dataType": "double",
+            "lineageTag": "4020adc9-3478-4dca-b9c9-497cc131798b",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_disp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_cpt",
+            "dataType": "double",
+            "lineageTag": "bbfac548-a8e4-44b5-9d01-b4a84301fba5",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_cpt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_cpt_moy_m",
+            "dataType": "double",
+            "lineageTag": "f0c0bbc7-40ad-44af-af25-45de885fc2ad",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_cpt_moy_m",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_gest",
+            "dataType": "double",
+            "lineageTag": "03efa19d-d4b1-4682-a934-a1cf0c625953",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_gest",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_krd_tot",
+            "dataType": "double",
+            "lineageTag": "c34e4e1e-5677-4f28-be0b-36001dc81e84",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_krd_tot",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_krd_sain",
+            "dataType": "double",
+            "lineageTag": "1f536db4-d88c-462e-b29f-274ceda79359",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_krd_sain",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_krd_imp",
+            "dataType": "double",
+            "lineageTag": "d8ecaef7-e081-4a9b-a4ff-867a92593e61",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_krd_imp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "tx_int_ref",
+            "dataType": "double",
+            "lineageTag": "4ae9211e-e4b7-4b4a-9b15-f9761f638faf",
+            "summarizeBy": "sum",
+            "sourceColumn": "tx_int_ref",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "tx_int_act",
+            "dataType": "double",
+            "lineageTag": "6684e45f-ddfb-490f-ac8b-f6119a14e5e4",
+            "summarizeBy": "sum",
+            "sourceColumn": "tx_int_act",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "teg",
+            "dataType": "double",
+            "lineageTag": "3ec32390-729e-4868-aa89-ca4556f9684e",
+            "summarizeBy": "sum",
+            "sourceColumn": "teg",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "typ_tx",
+            "dataType": "string",
+            "lineageTag": "54089fb5-9005-4ad3-b7d8-f52b9e75d0c0",
+            "summarizeBy": "none",
+            "sourceColumn": "typ_tx",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_eff",
+            "dataType": "dateTime",
+            "lineageTag": "668a90bc-9b70-4a99-878d-d07cdc6156c5",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_eff",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_fin_eff",
+            "dataType": "dateTime",
+            "lineageTag": "e5ee21fa-8691-4e4d-a201-b0aaf984a2bd",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_fin_eff",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mat_init",
+            "dataType": "int64",
+            "lineageTag": "173f32b8-f26a-42cb-9cfb-8a12ef66e915",
+            "summarizeBy": "sum",
+            "sourceColumn": "mat_init",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "duree_resi",
+            "dataType": "int64",
+            "lineageTag": "eb0f86ee-792e-414c-bfca-da59f94d7df6",
+            "summarizeBy": "sum",
+            "sourceColumn": "duree_resi",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_bck_ifrs9",
+            "dataType": "string",
+            "lineageTag": "a2f99e81-8aa5-445c-9363-74f1b2c354e7",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_bck_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_etat_creance",
+            "dataType": "string",
+            "lineageTag": "ec2bd9c7-7062-454a-afab-f686e2dd9eb9",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_etat_creance",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_cd_etat_creance",
+            "dataType": "string",
+            "lineageTag": "b2ec6a7f-ed91-412b-9a9e-077dccfb632b",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_cd_etat_creance",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_prov_b_ifrs9",
+            "dataType": "double",
+            "lineageTag": "6b246f79-5aa4-4101-89ed-2d310533d7c0",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_prov_b_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_prov_hb_ifrs9",
+            "dataType": "double",
+            "lineageTag": "8dc63646-0e3d-4130-a230-73a5602b1b46",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_prov_hb_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_psp",
+            "dataType": "double",
+            "lineageTag": "b3814d6a-1bf7-40bc-9d5a-09b0e7e80702",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_psp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "total_rwa",
+            "dataType": "double",
+            "lineageTag": "3960e94a-0728-49fa-aec1-457b34820ee1",
+            "summarizeBy": "sum",
+            "sourceColumn": "total_rwa",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ead_nette_b",
+            "dataType": "double",
+            "lineageTag": "87e140c4-a1a1-4bb4-8b55-6d5823ab29c4",
+            "summarizeBy": "sum",
+            "sourceColumn": "ead_nette_b",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_bien_ori",
+            "dataType": "double",
+            "lineageTag": "64e04919-5155-4adc-8aa4-7de4090bde1c",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_bien_ori",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_app",
+            "dataType": "double",
+            "lineageTag": "06cf6321-664e-419e-97f2-d2ed84990e20",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_app",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ltv_ori",
+            "dataType": "double",
+            "lineageTag": "8ec1f9f0-8474-4319-8a97-0eac18feef4b",
+            "summarizeBy": "sum",
+            "sourceColumn": "ltv_ori",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ltv_act",
+            "dataType": "double",
+            "lineageTag": "fe496ee5-4e75-42eb-934d-a104c64e2c0c",
+            "summarizeBy": "sum",
+            "sourceColumn": "ltv_act",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "bien_commune",
+            "dataType": "string",
+            "lineageTag": "4975cbbd-08a3-43bc-a04f-9ac134651c7a",
+            "summarizeBy": "none",
+            "sourceColumn": "bien_commune",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "bien_dpe",
+            "dataType": "string",
+            "lineageTag": "151f6abf-ecd4-4a40-9d60-76ea3abec591",
+            "summarizeBy": "none",
+            "sourceColumn": "bien_dpe",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "tx_edt",
+            "dataType": "double",
+            "lineageTag": "dcda7296-952b-46ad-9cc7-cce2dd575cd8",
+            "summarizeBy": "sum",
+            "sourceColumn": "tx_edt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nb_rst",
+            "dataType": "int64",
+            "lineageTag": "659bf78b-4872-4391-99fc-0314e0af41ee",
+            "summarizeBy": "sum",
+            "sourceColumn": "nb_rst",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "Lib_Bucket_Credit",
+            "dataType": "string",
+            "lineageTag": "101a2d47-0149-4d42-a675-43fb28184ed0",
+            "summarizeBy": "none",
+            "sourceColumn": "Lib_Bucket_Credit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "Lib_Marche_Simple",
+            "dataType": "string",
+            "lineageTag": "587a1a35-3262-48b4-892d-ab944eaa1192",
+            "summarizeBy": "none",
+            "sourceColumn": "Lib_Marche_Simple",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "annee_mois_part",
+            "dataType": "string",
+            "lineageTag": "a3ec32c9-0545-48aa-8a1a-7ad5cebb579f",
+            "summarizeBy": "none",
+            "sourceColumn": "annee_mois_part",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CREDIT",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\CREDIT.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Types\" = Table.TransformColumnTypes(#\"Promoted Headers\",",
+                "        {",
+                "            {\"id_cli\", type text}",
+                "        })",
+                "in",
+                "    #\"Changed Types\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "GARANTIE",
+        "lineageTag": "0f1aa01f-878c-48a0-850c-e0258b6d8544",
+        "columns": [
+          {
+            "type": "data",
+            "name": "id_cli",
+            "dataType": "string",
+            "lineageTag": "f5d3fb62-3669-417d-8dc3-391bf894308e",
+            "summarizeBy": "none",
+            "sourceColumn": "id_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "num_cnt",
+            "dataType": "string",
+            "lineageTag": "3384ab00-b4e5-4c6d-97ec-d9fbd4d0593f",
+            "summarizeBy": "none",
+            "sourceColumn": "num_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "num_cnt_gar",
+            "dataType": "string",
+            "lineageTag": "73181212-cf5c-4ef7-9f4a-473f32fd4586",
+            "summarizeBy": "none",
+            "sourceColumn": "num_cnt_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_cli",
+            "dataType": "string",
+            "lineageTag": "071e1ce3-5bd0-494d-b930-1ef42a586cf9",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "det_typ_gar",
+            "dataType": "string",
+            "lineageTag": "7eac8fb1-2761-44f7-826c-43248ce49157",
+            "summarizeBy": "none",
+            "sourceColumn": "det_typ_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_det_typ_gar",
+            "dataType": "string",
+            "lineageTag": "93e846fc-0c4b-40f4-9d69-90655442919d",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_det_typ_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_gar",
+            "dataType": "string",
+            "lineageTag": "d86284fc-3ea5-4183-8b2a-65a4c0901969",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_stt_gar",
+            "dataType": "string",
+            "lineageTag": "64c2b661-116e-42a2-be82-9063b71a195e",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_stt_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_cnt",
+            "dataType": "string",
+            "lineageTag": "4281469b-bbe3-46b8-a7e7-a881d0fbc657",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_rang",
+            "dataType": "string",
+            "lineageTag": "36fec3bd-bf5b-4e53-8403-54c16509c8bf",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_rang",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_eff_gar",
+            "dataType": "dateTime",
+            "lineageTag": "046fcd81-f2d1-4b0b-9af9-a2eb06acb143",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_eff_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_ech_gar",
+            "dataType": "dateTime",
+            "lineageTag": "fffe59b5-15e7-4b2a-9ebc-cc7a4b41710a",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_ech_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dur_gar",
+            "dataType": "int64",
+            "lineageTag": "404b9cba-1eea-472e-a00a-deee459babd3",
+            "summarizeBy": "sum",
+            "sourceColumn": "dur_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_gar",
+            "dataType": "double",
+            "lineageTag": "af229da0-94b1-4383-a856-06b02e93f813",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_gar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_gar_cpta",
+            "dataType": "double",
+            "lineageTag": "f0da9aee-f267-4ff4-87ce-68d31d09349a",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_gar_cpta",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_bien_gar_ori",
+            "dataType": "double",
+            "lineageTag": "8c0f7b7a-0e91-42ba-b0ef-d82305d1fddf",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_bien_gar_ori",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_reval",
+            "dataType": "double",
+            "lineageTag": "f506452b-7ae1-4d78-90c7-320cd2b0ecbc",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_reval",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_cnt_ass",
+            "dataType": "string",
+            "lineageTag": "8761e650-bcc0-4826-a7ef-62cbbf49c039",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_cnt_ass",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "nom_cie_ass",
+            "dataType": "string",
+            "lineageTag": "41c5a7e1-1f9c-479c-a54c-150f3eb74c60",
+            "summarizeBy": "none",
+            "sourceColumn": "nom_cie_ass",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_ville",
+            "dataType": "string",
+            "lineageTag": "87affa46-60a4-4c1b-966f-ce76c4f80bd7",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_ville",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_postal",
+            "dataType": "string",
+            "lineageTag": "6a024770-67ec-45e2-9227-dcbecee9e290",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_postal",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "tx_rwa",
+            "dataType": "double",
+            "lineageTag": "1ab9009d-7954-4278-b4af-1c9c1077386d",
+            "summarizeBy": "sum",
+            "sourceColumn": "tx_rwa",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_rwa",
+            "dataType": "double",
+            "lineageTag": "d1666c9e-99a7-4f29-83cd-d41575ebcbe1",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_rwa",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "annee_mois_part",
+            "dataType": "string",
+            "lineageTag": "e7df8d82-5bdb-44ce-8874-d0a89a9695e3",
+            "summarizeBy": "none",
+            "sourceColumn": "annee_mois_part",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "GARANTIE",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\GARANTIE.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Types\" = Table.TransformColumnTypes(#\"Promoted Headers\",",
+                "        {",
+                "            {\"id_cli\", type text}",
+                "        })",
+                "in",
+                "    #\"Changed Types\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "SERVICE",
+        "lineageTag": "d4c1457b-fb4b-4d7f-ab80-c01a75cfd8bc",
+        "columns": [
+          {
+            "type": "data",
+            "name": "id_cli",
+            "dataType": "string",
+            "lineageTag": "6a6dc444-ca01-413f-b7e5-e6e774a536cc",
+            "summarizeBy": "none",
+            "sourceColumn": "id_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "num_cnt",
+            "dataType": "string",
+            "lineageTag": "8961f1e5-4a8a-4015-b9d1-aa11f86e15f1",
+            "summarizeBy": "none",
+            "sourceColumn": "num_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_cli",
+            "dataType": "string",
+            "lineageTag": "12f9c365-7b90-4388-8f06-605a1fb8102c",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "fam_pdt",
+            "dataType": "string",
+            "lineageTag": "cefbd1c6-0d54-43e8-9d84-4ae9d8b375bf",
+            "summarizeBy": "none",
+            "sourceColumn": "fam_pdt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "perimetre",
+            "dataType": "string",
+            "lineageTag": "efa86a55-4ffb-4d0c-a85f-337d584c28c9",
+            "summarizeBy": "none",
+            "sourceColumn": "perimetre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_ctl",
+            "dataType": "string",
+            "lineageTag": "9cceed66-c32c-45cf-aac4-23b8e0d34712",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_ctl",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "stt_cnt",
+            "dataType": "string",
+            "lineageTag": "5cc2b0ea-c9a7-460a-b9ae-4c4ce24d74b7",
+            "summarizeBy": "none",
+            "sourceColumn": "stt_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "lib_stt_cnt",
+            "dataType": "string",
+            "lineageTag": "3b1fb09b-e589-4f28-830a-7258c3c79b8d",
+            "summarizeBy": "none",
+            "sourceColumn": "lib_stt_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_eff",
+            "dataType": "dateTime",
+            "lineageTag": "af5bad55-db98-435f-a4d0-5d062b663478",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_eff",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_fin_eff",
+            "dataType": "dateTime",
+            "lineageTag": "fdde4df6-facc-4c9d-a0d1-583a40aca633",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_fin_eff",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "agc_ins",
+            "dataType": "string",
+            "lineageTag": "99d86ab8-da6d-4617-94db-08784c2812d6",
+            "summarizeBy": "none",
+            "sourceColumn": "agc_ins",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "num_carte",
+            "dataType": "string",
+            "lineageTag": "4d7cc34f-f982-49cb-b307-fba5a0372a9f",
+            "summarizeBy": "none",
+            "sourceColumn": "num_carte",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_typ_debit",
+            "dataType": "string",
+            "lineageTag": "71b77fa3-daca-47fb-bd6b-c07bdddd1f58",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_typ_debit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_ech_carte",
+            "dataType": "dateTime",
+            "lineageTag": "83742462-2725-4d2f-aa82-b09accb3fab9",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_ech_carte",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ind_carte_virtu",
+            "dataType": "int64",
+            "lineageTag": "97154a5b-a357-4b36-93b5-6c3885600f66",
+            "summarizeBy": "sum",
+            "sourceColumn": "ind_carte_virtu",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_tar_brt",
+            "dataType": "double",
+            "lineageTag": "2a17e2a0-e1eb-4b1a-8514-6e2beed13446",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_tar_brt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_pdt_tar",
+            "dataType": "double",
+            "lineageTag": "e4319b46-9585-4609-bd23-5fce3b02f690",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_pdt_tar",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_bck_ifrs9",
+            "dataType": "string",
+            "lineageTag": "1019fb34-e63c-42fd-b507-d1004790870d",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_bck_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_prov_b_ifrs9",
+            "dataType": "double",
+            "lineageTag": "4bc5c53c-c498-4f69-8c3e-73ffd9542d0e",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_prov_b_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_prov_hb_ifrs9",
+            "dataType": "double",
+            "lineageTag": "cecfb8b2-a30a-4fe0-92b3-add01bbe8cc9",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_prov_hb_ifrs9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "annee_mois_part",
+            "dataType": "string",
+            "lineageTag": "9d752816-bce6-4158-bbaf-d59d8d0d8b8a",
+            "summarizeBy": "none",
+            "sourceColumn": "annee_mois_part",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "SERVICE",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\SERVICE.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Types\" = Table.TransformColumnTypes(#\"Promoted Headers\",",
+                "        {",
+                "            {\"id_cli\", type text}",
+                "        })",
+                "in",
+                "    #\"Changed Types\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "GSM",
+        "lineageTag": "06ca7f13-57dd-4117-9a2f-48c7ad7dbee4",
+        "columns": [
+          {
+            "type": "data",
+            "name": "isin_fds",
+            "dataType": "string",
+            "lineageTag": "29c4c036-99a3-4d05-9add-bf73c0dd85d6",
+            "summarizeBy": "none",
+            "sourceColumn": "isin_fds",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "id_contrat",
+            "dataType": "string",
+            "lineageTag": "6a55b8dc-06a7-4c87-baa0-257edd4a12da",
+            "summarizeBy": "none",
+            "sourceColumn": "id_contrat",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_fonc",
+            "dataType": "dateTime",
+            "lineageTag": "5f4b2b52-9451-4287-b6cd-79770180b2f8",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_fonc",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cd_ges",
+            "dataType": "string",
+            "lineageTag": "58228a28-a84e-4728-a6e7-5e53b5c522e5",
+            "summarizeBy": "none",
+            "sourceColumn": "cd_ges",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mod_gest",
+            "dataType": "string",
+            "lineageTag": "86a0a005-7780-43a3-add8-54f240af3102",
+            "summarizeBy": "none",
+            "sourceColumn": "mod_gest",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "reseau",
+            "dataType": "string",
+            "lineageTag": "24560e35-dfef-44b9-a989-04160872bc2f",
+            "summarizeBy": "none",
+            "sourceColumn": "reseau",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "qte_fds",
+            "dataType": "int64",
+            "lineageTag": "ff7451e2-7b82-49ac-ab00-66f6ce766c18",
+            "summarizeBy": "sum",
+            "sourceColumn": "qte_fds",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "cours_cot",
+            "dataType": "double",
+            "lineageTag": "65b1f520-9d9d-4c28-9bda-e4ff87826ee8",
+            "summarizeBy": "sum",
+            "sourceColumn": "cours_cot",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "dt_cot",
+            "dataType": "dateTime",
+            "lineageTag": "646d7b49-8bdf-4a9f-9e94-13ab197c54a8",
+            "summarizeBy": "none",
+            "sourceColumn": "dt_cot",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "avg_mnt_achat",
+            "dataType": "double",
+            "lineageTag": "bc8cd4b3-44fd-4650-84a2-c7f45299a0dd",
+            "summarizeBy": "sum",
+            "sourceColumn": "avg_mnt_achat",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_fds_m",
+            "dataType": "double",
+            "lineageTag": "144d89a2-38af-470a-85d3-726da8540e82",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_fds_m",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "enc_cnt_n_1",
+            "dataType": "double",
+            "lineageTag": "c6696b18-0a8a-41c0-acb8-c0eb7a1480ab",
+            "summarizeBy": "sum",
+            "sourceColumn": "enc_cnt_n_1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "sum_enc_fds_cnt",
+            "dataType": "double",
+            "lineageTag": "bae2b65b-e3e5-4f7d-afc0-a4b93a7228a3",
+            "summarizeBy": "sum",
+            "sourceColumn": "sum_enc_fds_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "poids_isin_cnt",
+            "dataType": "double",
+            "lineageTag": "9a83f024-86cf-4a15-8d69-1038e1166a45",
+            "summarizeBy": "sum",
+            "sourceColumn": "poids_isin_cnt",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "sum_enc_fds_profil",
+            "dataType": "double",
+            "lineageTag": "6482c729-597d-42c4-b47d-4b897e102aaa",
+            "summarizeBy": "sum",
+            "sourceColumn": "sum_enc_fds_profil",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "poids_isin_profil",
+            "dataType": "double",
+            "lineageTag": "3fc6faf4-011b-471b-a3f6-288fabcbdae4",
+            "summarizeBy": "sum",
+            "sourceColumn": "poids_isin_profil",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "sum_enc_fds_gsm",
+            "dataType": "double",
+            "lineageTag": "901466e0-abb5-46e4-86f5-cb3cfc406721",
+            "summarizeBy": "sum",
+            "sourceColumn": "sum_enc_fds_gsm",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "poids_isin_total_gsm",
+            "dataType": "double",
+            "lineageTag": "190c330b-d6c7-487b-8ac5-3a300f839ba7",
+            "summarizeBy": "sum",
+            "sourceColumn": "poids_isin_total_gsm",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "apport_cli",
+            "dataType": "double",
+            "lineageTag": "7650a778-3b5d-4eb2-badb-8a772a9e5d74",
+            "summarizeBy": "sum",
+            "sourceColumn": "apport_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "performance_cli",
+            "dataType": "double",
+            "lineageTag": "275af69f-eaf9-421e-8d49-f6eb43746dc7",
+            "summarizeBy": "sum",
+            "sourceColumn": "performance_cli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "mnt_pmvl",
+            "dataType": "double",
+            "lineageTag": "33621de1-71d5-4a8a-9de4-c4e1338838b9",
+            "summarizeBy": "sum",
+            "sourceColumn": "mnt_pmvl",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ind_sfdr_30000",
+            "dataType": "int64",
+            "lineageTag": "8d75a45a-62bb-47c0-9de2-1297b506a861",
+            "summarizeBy": "sum",
+            "sourceColumn": "ind_sfdr_30000",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ind_sfdr_10000",
+            "dataType": "int64",
+            "lineageTag": "b069f40d-b1ed-4a6c-bf0e-b5ab673edaff",
+            "summarizeBy": "sum",
+            "sourceColumn": "ind_sfdr_10000",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ind_sfdr_20150",
+            "dataType": "int64",
+            "lineageTag": "2d4e87c7-ccf1-484f-9210-a7696a9272c7",
+            "summarizeBy": "sum",
+            "sourceColumn": "ind_sfdr_20150",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ind_taxo_20660",
+            "dataType": "int64",
+            "lineageTag": "24cac992-4a82-4e59-80fa-d91a4c546b68",
+            "summarizeBy": "sum",
+            "sourceColumn": "ind_taxo_20660",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "ind_taxo_20670",
+            "dataType": "int64",
+            "lineageTag": "9189caa4-c96a-4e0b-ad63-bcfca0411c23",
+            "summarizeBy": "sum",
+            "sourceColumn": "ind_taxo_20670",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "data",
+            "name": "Classification_SFDR",
+            "dataType": "string",
+            "lineageTag": "f30f5fd0-b16f-4992-896d-fbfd2960c9fb",
+            "summarizeBy": "none",
+            "sourceColumn": "Classification_SFDR",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "GSM",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\GSM.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Types\" = Table.TransformColumnTypes(#\"Promoted Headers\",",
+                "        {",
+                "            {\"id_cli\", type text}",
+                "        })",
+                "in",
+                "    #\"Changed Types\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "_M_Clients",
+        "lineageTag": "6ae3ef94-1f11-4f9d-ac18-db3fcd037590",
+        "columns": [
+          {
+            "type": "rowNumber",
+            "name": "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+            "dataType": "int64",
+            "isHidden": true,
+            "lineageTag": "c2cc7a80-6527-4c4d-ac24-86894a91a146",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "__M_Clients",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let Source = Table.FromRows({}) in Source"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Nb Clients Totaux",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[cli_c_p] IN {\"CL\",\"CT\"})",
+            "lineageTag": "08809feb-ad99-44d6-a16e-4eb4a0fffbf3",
+            "formatString": "#,0",
+            "displayFolder": "Clients"
+          },
+          {
+            "name": "Nb Prospects",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[cli_c_p]=\"PR\")",
+            "lineageTag": "ab83b0af-c7e5-455d-9be5-d3dfde2cd4b2",
+            "formatString": "#,0",
+            "displayFolder": "Clients"
+          },
+          {
+            "name": "Nb Clients Actifs",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[top_client_actif]=\"O\")",
+            "lineageTag": "e4e610b6-0fd1-4da6-8767-26fcc0251da6",
+            "formatString": "#,0",
+            "displayFolder": "Clients"
+          },
+          {
+            "name": "Taux Clients Actifs",
+            "expression": "DIVIDE([Nb Clients Actifs],[Nb Clients Totaux],0)",
+            "lineageTag": "89c4cc8a-dfca-4a8e-9dc5-e14f8fb1780c",
+            "formatString": "0.0%",
+            "displayFolder": "Clients"
+          },
+          {
+            "name": "AUM Total",
+            "expression": "SUM(CLIENT[aum_tit])",
+            "lineageTag": "ff953bb4-e2dc-4caf-958b-bda8c1296aee",
+            "formatString": "#,0 €",
+            "displayFolder": "Clients"
+          },
+          {
+            "name": "AUM Moyen par Client",
+            "expression": "DIVIDE([AUM Total],[Nb Clients Totaux],0)",
+            "lineageTag": "ca5c68c7-22a3-4fa4-add6-db50cb635fa0",
+            "formatString": "#,0 €",
+            "displayFolder": "Clients"
+          },
+          {
+            "name": "Nb Clients sans RDV depuis 6 mois",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[dt_dernier_rdv]<EDATE(TODAY(),-6)||ISBLANK(CLIENT[dt_dernier_rdv]))",
+            "lineageTag": "58d137ad-082e-49ac-a23f-b5bcbd36f0b6",
+            "formatString": "#,0",
+            "displayFolder": "Clients"
+          },
+          {
+            "name": "Nb Clients KYC Rouge",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[gelule_global]=10)",
+            "lineageTag": "c5546300-5639-4ba5-8aea-11d6ffc638a9",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Clients KYC Orange",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[gelule_global]=5)",
+            "lineageTag": "7d33234e-f182-40e4-a68a-93d4cd9ef4e0",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Clients KYC Vert",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[gelule_global]=0)",
+            "lineageTag": "f3e674c1-5b6a-4d92-8f40-335baccf0734",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Taux Conformité KYC",
+            "expression": "DIVIDE([Nb Clients KYC Vert],[Nb Clients Totaux],0)",
+            "lineageTag": "f6fe7fd9-b78e-47ca-9047-f3f931bd373d",
+            "formatString": "0.0%",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Certifications à Renouveler",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[dt_next_certif]<=EDATE(TODAY(),3),NOT(ISBLANK(CLIENT[dt_next_certif])))",
+            "lineageTag": "0a3eb4d2-8cb4-40cc-9a9a-e0a168571f82",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Clients Pays Embargo",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[top_pays_embargo]=TRUE())",
+            "lineageTag": "ebe79415-c5a9-45cd-a1bf-2928e168fea2",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Clients Pays Sanctions",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[top_pays_sanctions]=TRUE())",
+            "lineageTag": "90288f33-5bad-4734-9c3b-71e4677dfc2f",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Clients Risque EF",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[cd_risque_pers] IN {\"E\",\"F\"})",
+            "lineageTag": "2c01750a-7958-4466-8f03-dcc4e178abb4",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          }
+        ],
+        "isHidden": false
+      },
+      {
+        "name": "_M_Digital",
+        "lineageTag": "3c3f471a-7a1b-4c36-9a17-a15bc03d98cd",
+        "columns": [
+          {
+            "type": "rowNumber",
+            "name": "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+            "dataType": "int64",
+            "isHidden": true,
+            "lineageTag": "567166ec-2ebe-436b-b319-6ae1ff55b9d9",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "__M_Digital",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let Source = Table.FromRows({}) in Source"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Nb Clients Enrollés",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[nb_dev_enrol]>0)",
+            "lineageTag": "1f98d825-9aef-443e-a808-7d16ada1b23d",
+            "formatString": "#,0",
+            "displayFolder": "Digital"
+          },
+          {
+            "name": "Taux Enrollment",
+            "expression": "DIVIDE([Nb Clients Enrollés],[Nb Clients Totaux],0)",
+            "lineageTag": "b5383736-d1ed-4e9a-a3b9-8d0607fccb48",
+            "formatString": "0.0%",
+            "displayFolder": "Digital"
+          },
+          {
+            "name": "Nb Smartphones Total",
+            "expression": "SUM(CLIENT[nb_dev_enrol])",
+            "lineageTag": "39320d10-d265-44b6-bb76-c0ddc945f72a",
+            "formatString": "#,0",
+            "displayFolder": "Digital"
+          },
+          {
+            "name": "Nb Comptes Bloqués",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[etat_acc]=\"B\")",
+            "lineageTag": "0da4f042-938f-4975-86ce-16339d7fc91b",
+            "formatString": "#,0",
+            "displayFolder": "Digital"
+          },
+          {
+            "name": "Nb Comptes Suspendus",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[etat_acc]=\"S\")",
+            "lineageTag": "b8809fb9-52b0-43ef-9c7f-449d9dbade40",
+            "formatString": "#,0",
+            "displayFolder": "Digital"
+          },
+          {
+            "name": "Nb Transactions Web",
+            "expression": "CALCULATE(COUNTROWS('TRANSACTION'),'TRANSACTION'[canal_ordre]=\"WEB\")",
+            "lineageTag": "7e042b31-6f02-4b2f-aeb2-b16537eaa158",
+            "formatString": "#,0",
+            "displayFolder": "Digital"
+          },
+          {
+            "name": "Nb Transactions Mobile",
+            "expression": "CALCULATE(COUNTROWS('TRANSACTION'),'TRANSACTION'[canal_ordre]=\"MOBILE\")",
+            "lineageTag": "3e789ab4-431d-4129-aa11-20b40db0f19f",
+            "formatString": "#,0",
+            "displayFolder": "Digital"
+          }
+        ],
+        "isHidden": false
+      },
+      {
+        "name": "_M_Epargne",
+        "lineageTag": "b560cf49-e68b-442a-9391-c2a45a6e9df9",
+        "columns": [
+          {
+            "type": "rowNumber",
+            "name": "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+            "dataType": "int64",
+            "isHidden": true,
+            "lineageTag": "76a3b8ea-0407-47f1-b24e-2d7b0ab95465",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "__M_Epargne",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let Source = Table.FromRows({}) in Source"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Encours Épargne",
+            "expression": "CALCULATE(SUM(EPARGNE[enc_cnt_m]),EPARGNE[perimetre]=\"epargne\")",
+            "lineageTag": "0d3f8f33-2f24-455b-a91b-37222bb7ad27",
+            "formatString": "#,0 €",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Encours Épargne N-1",
+            "expression": "CALCULATE(SUM(EPARGNE[enc_cnt_n1]),EPARGNE[perimetre]=\"epargne\")",
+            "lineageTag": "bed3bdd7-c4e8-4d69-8e79-221f53dbaf1b",
+            "formatString": "#,0 €",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Variation Encours Épargne",
+            "expression": "[Encours Épargne]-[Encours Épargne N-1]",
+            "lineageTag": "a058f29b-05de-453f-bbfc-5f8c2433fbba",
+            "formatString": "+#,0 €;-#,0 €",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Collecte Brute",
+            "expression": "CALCULATE(SUM(EPARGNE[col_brute]),EPARGNE[perimetre]=\"epargne\")",
+            "lineageTag": "4afd2e49-39a6-4e7f-b6d5-1afbe9423f15",
+            "formatString": "#,0 €",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Décollecte",
+            "expression": "CALCULATE(SUM(EPARGNE[decollecte]),EPARGNE[perimetre]=\"epargne\")",
+            "lineageTag": "1f4acfd4-12f5-4c17-98c9-f6a904393e44",
+            "formatString": "#,0 €",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Collecte Nette",
+            "expression": "[Collecte Brute]+[Décollecte]",
+            "lineageTag": "3f2c19bd-024d-404e-b7ab-426b968b8f24",
+            "formatString": "+#,0 €;-#,0 €",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Nb Contrats Épargne",
+            "expression": "CALCULATE(DISTINCTCOUNT(EPARGNE[num_cnt]),EPARGNE[perimetre]=\"epargne\",EPARGNE[stt_cnt]=\"0\")",
+            "lineageTag": "387b9130-97ef-4ed6-90b8-82edf0dfd10d",
+            "formatString": "#,0",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Performance Moyenne",
+            "expression": "AVERAGEX(FILTER(GSM,GSM[performance_cli]<>BLANK()),GSM[performance_cli])",
+            "lineageTag": "0dd9d871-4a4c-47f0-8913-e8d6e0ee2618",
+            "formatString": "0.00%",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Encours Fonds Durables",
+            "expression": "CALCULATE(SUM(GSM[enc_fds_m]),GSM[Classification_SFDR] IN {\"Article 8 (ESG)\",\"Article 9 (Impact)\"})",
+            "lineageTag": "5389c258-1c15-4edf-bd6c-cb51a6878c61",
+            "formatString": "#,0 €",
+            "displayFolder": "Épargne"
+          },
+          {
+            "name": "Provision IFRS9 Épargne",
+            "expression": "SUM(EPARGNE[mnt_prov_b_ifrs9])+SUM(EPARGNE[mnt_prov_hb_ifrs9])",
+            "lineageTag": "943ad322-b9be-4141-a865-3f0c5437b3c2",
+            "formatString": "#,0 €",
+            "displayFolder": "Épargne"
+          }
+        ],
+        "isHidden": false
+      },
+      {
+        "name": "_M_Credit",
+        "lineageTag": "8c27e87a-ef71-493d-b6dc-6a94f4f78c23",
+        "columns": [
+          {
+            "type": "rowNumber",
+            "name": "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+            "dataType": "int64",
+            "isHidden": true,
+            "lineageTag": "49bde4d3-cd5c-40b1-8559-75c3914c0b8d",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "__M_Credit",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let Source = Table.FromRows({}) in Source"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Encours Crédit Total",
+            "expression": "SUM(CREDIT[enc_cpt])",
+            "lineageTag": "8939303c-96f7-4764-91c6-281993ee0e8d",
+            "formatString": "#,0 €",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Nb Contrats Crédit",
+            "expression": "CALCULATE(DISTINCTCOUNT(CREDIT[num_cnt]),CREDIT[stt_cnt]=\"0\")",
+            "lineageTag": "70fb17ec-3963-47d8-8770-1e47bc15ae92",
+            "formatString": "#,0",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Nb Crédits Immobiliers",
+            "expression": "CALCULATE(DISTINCTCOUNT(CREDIT[num_cnt]),CREDIT[typ_mar]=\"01\")",
+            "lineageTag": "2d2bce60-8a7b-4600-b03f-e53b85bef6d1",
+            "formatString": "#,0",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Montant Nominal Total",
+            "expression": "SUM(CREDIT[mnt_nom])",
+            "lineageTag": "439c264e-baee-4485-89ae-a8881bf02b39",
+            "formatString": "#,0 €",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Capital Sain",
+            "expression": "SUM(CREDIT[mnt_krd_sain])",
+            "lineageTag": "ec53b8b7-7861-4176-a076-8691ca3a0783",
+            "formatString": "#,0 €",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Capital Impayé",
+            "expression": "SUM(CREDIT[mnt_krd_imp])",
+            "lineageTag": "d5d01f0d-14c8-48a7-a618-61c71142b379",
+            "formatString": "#,0 €",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Taux Créances Douteuses",
+            "expression": "DIVIDE(CALCULATE(SUM(CREDIT[mnt_krd_tot]),CREDIT[cd_etat_creance] IN {\"10\",\"30\"}),SUM(CREDIT[mnt_krd_tot]),0)",
+            "lineageTag": "b783d2ef-f508-451e-8506-ffb9135f91fa",
+            "formatString": "0.00%",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Provision IFRS9 Crédit",
+            "expression": "SUM(CREDIT[mnt_prov_b_ifrs9])+SUM(CREDIT[mnt_prov_hb_ifrs9])",
+            "lineageTag": "c2a3d0e6-e418-4a86-b2c8-432ddd48b410",
+            "formatString": "#,0 €",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "RWA Crédit Total",
+            "expression": "SUM(CREDIT[total_rwa])",
+            "lineageTag": "f5139452-551e-4a9c-bc2e-c5b37ad276be",
+            "formatString": "#,0 €",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "LTV Moyenne",
+            "expression": "AVERAGEX(FILTER(CREDIT,CREDIT[ltv_act]<>BLANK()&&CREDIT[ltv_act]>0),CREDIT[ltv_act])",
+            "lineageTag": "b388d7c3-1a24-48d8-842f-74efa8610ca3",
+            "formatString": "0.0%",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Montant Garanties",
+            "expression": "SUM(GARANTIE[mnt_gar])",
+            "lineageTag": "a10c5244-e481-4a0d-8c64-8ff724d0ce9b",
+            "formatString": "#,0 €",
+            "displayFolder": "Crédit"
+          },
+          {
+            "name": "Taux Couverture Garanties",
+            "expression": "DIVIDE(SUM(GARANTIE[mnt_gar_cpta]),[Encours Crédit Total],0)",
+            "lineageTag": "46425ba5-82a2-4d79-ab2c-95ab67e9ed52",
+            "formatString": "0.0%",
+            "displayFolder": "Crédit"
+          }
+        ],
+        "isHidden": false
+      },
+      {
+        "name": "_M_Conformite",
+        "lineageTag": "4e597f03-1549-4f2a-96b0-29f93b86188b",
+        "columns": [
+          {
+            "type": "rowNumber",
+            "name": "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+            "dataType": "int64",
+            "isHidden": true,
+            "lineageTag": "6650f192-a2d4-4b94-8a38-6af95ab0e7c0",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "__M_Conformite",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let Source = Table.FromRows({}) in Source"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Volume Transactions Total",
+            "expression": "SUM('TRANSACTION'[mnt_evt])",
+            "lineageTag": "e5ea734f-d271-4227-8a6a-aeb5c8ed3177",
+            "formatString": "#,0 €",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Transactions",
+            "expression": "COUNTROWS('TRANSACTION')",
+            "lineageTag": "be2603fa-cd07-4073-a29f-c9850514906c",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Transactions Sensibles",
+            "expression": "CALCULATE(COUNTROWS('TRANSACTION'),'TRANSACTION'[Transaction_Sensible]=TRUE())",
+            "lineageTag": "5435fde7-26dd-436c-ade7-a31941a9554e",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Volume Transactions Sensibles",
+            "expression": "CALCULATE(SUM('TRANSACTION'[mnt_evt]),'TRANSACTION'[Transaction_Sensible]=TRUE())",
+            "lineageTag": "974f85e9-4ca2-4a89-9115-a9da33502cbd",
+            "formatString": "#,0 €",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Volume Pays Embargo",
+            "expression": "CALCULATE(SUM('TRANSACTION'[mnt_evt]),'TRANSACTION'[cli_top_pays_embargo]=TRUE()||'TRANSACTION'[ctrpty_top_pays_embargo]=TRUE())",
+            "lineageTag": "52b09def-eac4-45b8-b67d-6b178a4e9aca",
+            "formatString": "#,0 €",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Volume Pays Sanctions",
+            "expression": "CALCULATE(SUM('TRANSACTION'[mnt_evt]),'TRANSACTION'[ctrpty_top_pays_sanctions]=TRUE())",
+            "lineageTag": "dbb90586-fa52-4668-8833-3e743cc75c3b",
+            "formatString": "#,0 €",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Volume Pays GDA",
+            "expression": "CALCULATE(SUM('TRANSACTION'[mnt_evt]),'TRANSACTION'[ctrpty_top_pays_gda]=TRUE())",
+            "lineageTag": "39b33f2a-955e-469c-bcbb-36b24f090e7b",
+            "formatString": "#,0 €",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Nb Transactions 3DS",
+            "expression": "CALCULATE(COUNTROWS('TRANSACTION'),'TRANSACTION'[ind_3ds]=1)",
+            "lineageTag": "25e5e55e-630d-4dcf-8f79-e93753836f20",
+            "formatString": "#,0",
+            "displayFolder": "Conformité"
+          },
+          {
+            "name": "Date Fonctionnelle",
+            "expression": "\"Données au \" & FORMAT(MAX(CLIENT[dt_fonc]),\"DD/MM/YYYY\")",
+            "lineageTag": "78b5c3af-82a7-4433-aa61-fe9bf43e9104"
+          }
+        ],
+        "isHidden": false
+      }
+    ],
+    "relationships": [
+      {
+        "name": "TRANSACTION_id_cli-CLIENT_id_cli",
+        "fromTable": "TRANSACTION",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "joinOnDateBehavior": "datePartOnly",
+        "crossFilteringBehavior": "singleDirection",
+        "state": "active"
+      },
+      {
+        "name": "EPARGNE_id_cli-CLIENT_id_cli",
+        "fromTable": "EPARGNE",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "joinOnDateBehavior": "datePartOnly",
+        "crossFilteringBehavior": "singleDirection",
+        "state": "active"
+      },
+      {
+        "name": "CREDIT_id_cli-CLIENT_id_cli",
+        "fromTable": "CREDIT",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "joinOnDateBehavior": "datePartOnly",
+        "crossFilteringBehavior": "singleDirection",
+        "state": "active"
+      },
+      {
+        "name": "SERVICE_id_cli-CLIENT_id_cli",
+        "fromTable": "SERVICE",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "joinOnDateBehavior": "datePartOnly",
+        "crossFilteringBehavior": "singleDirection",
+        "state": "active"
+      },
+      {
+        "name": "GARANTIE_id_cli-CLIENT_id_cli",
+        "fromTable": "GARANTIE",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "joinOnDateBehavior": "datePartOnly",
+        "crossFilteringBehavior": "singleDirection",
+        "state": "active"
+      },
+      {
+        "name": "GARANTIE_num_cnt-CREDIT_num_cnt",
+        "fromTable": "GARANTIE",
+        "fromColumn": "num_cnt",
+        "toTable": "CREDIT",
+        "toColumn": "num_cnt",
+        "joinOnDateBehavior": "datePartOnly",
+        "crossFilteringBehavior": "singleDirection",
+        "state": "active"
+      },
+      {
+        "name": "GSM_isin_fds-EPARGNE_isin_fds",
+        "fromTable": "GSM",
+        "fromColumn": "isin_fds",
+        "toTable": "EPARGNE",
+        "toColumn": "isin_fds",
+        "joinOnDateBehavior": "datePartOnly",
+        "crossFilteringBehavior": "singleDirection",
+        "state": "active"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.154.0.0"
+      },
+      {
+        "name": "_TM_ExtProp_PowerBITheme",
+        "value": "{\"name\": \"LoBP Theme\", \"dataColors\": [\"#8B1F2A\", \"#C9453A\", \"#D4A04A\", \"#6B8FA8\", \"#8B5E3C\", \"#A8C5D8\", \"#F2C9A8\", \"#3D7E8A\"], \"background\": \"#F4F2EE\", \"foreground\": \"#2C2C2C\", \"tableAccent\": \"#8B1F2A\"}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,214 @@
+// ============================================================
+// LOUVRE BANQUE PRIVÉE — MODÈLE RELATIONNEL POWER BI
+// Schéma en étoile centré sur CLIENT
+// ============================================================
+//
+// À créer dans : Vue Modèle (icône schéma) > Gérer les relations
+// ============================================================
+
+
+// ============================================================
+// RELATIONS PRINCIPALES (cardinalité 1:N — filtrage → CLIENT)
+// ============================================================
+
+[CLIENT] (1)  ──────→  (N) [EPARGNE]
+  Clé : CLIENT[id_cli] → EPARGNE[id_cli]
+  Direction filtre : CLIENT → EPARGNE (sens unique)
+  Actif : OUI
+
+[CLIENT] (1)  ──────→  (N) [CREDIT]
+  Clé : CLIENT[id_cli] → CREDIT[id_cli]
+  Direction filtre : CLIENT → CREDIT (sens unique)
+  Actif : OUI
+
+[CLIENT] (1)  ──────→  (N) [TRANSACTION]
+  Clé : CLIENT[id_cli] → TRANSACTION[id_cli]
+  Direction filtre : CLIENT → TRANSACTION (sens unique)
+  Actif : OUI
+
+[CLIENT] (1)  ──────→  (N) [SERVICE]
+  Clé : CLIENT[id_cli] → SERVICE[id_cli]
+  Direction filtre : CLIENT → SERVICE (sens unique)
+  Actif : OUI
+
+[CLIENT] (1)  ──────→  (N) [GARANTIE]
+  Clé : CLIENT[id_cli] → GARANTIE[id_cli]
+  Direction filtre : CLIENT → GARANTIE (sens unique)
+  Actif : OUI
+
+
+// ============================================================
+// RELATION SECONDAIRE (EPARGNE → GSM via ISIN)
+// ============================================================
+
+[EPARGNE] (N)  ──────→  (1) [GSM]
+  Clé : EPARGNE[isin_fds] → GSM[isin_fds]
+  Direction filtre : EPARGNE → GSM (sens unique)
+  Actif : OUI
+  Note : plusieurs contrats peuvent avoir le même ISIN
+
+
+// ============================================================
+// RELATION CRÉDIT → GARANTIE (contrat de prêt)
+// ============================================================
+
+[CREDIT] (1)  ──────→  (N) [GARANTIE]
+  Clé : CREDIT[num_cnt] → GARANTIE[num_cnt]
+  Direction filtre : CREDIT → GARANTIE
+  Actif : OUI (relation complémentaire à CLIENT→GARANTIE)
+  Note : num_cnt_prt dans GARANTIE a été renommé num_cnt en Power Query
+
+
+// ============================================================
+// TABLE CALENDRIER (dimension temps)
+// ============================================================
+// Créer une table Calendrier avec DAX :
+
+CALENDRIER =
+ADDCOLUMNS(
+    CALENDAR(DATE(2020,1,1), DATE(2030,12,31)),
+    "Année",         YEAR([Date]),
+    "Mois",          MONTH([Date]),
+    "Lib Mois",      FORMAT([Date], "MMMM"),
+    "Mois Court",    FORMAT([Date], "MMM"),
+    "Trimestre",     "T" & CEILING(MONTH([Date]),3)/3,
+    "Lib Trimestre", "T" & CEILING(MONTH([Date]),3)/3 & " " & YEAR([Date]),
+    "AnnéeMois",     FORMAT([Date], "YYYY-MM"),
+    "Semaine",       WEEKNUM([Date]),
+    "Jour Semaine",  WEEKDAY([Date]),
+    "Lib Jour",      FORMAT([Date], "dddd"),
+    "Est Weekend",   IF(WEEKDAY([Date],2) > 5, TRUE(), FALSE())
+)
+
+// Relations CALENDRIER :
+[CALENDRIER] (1) → (N) [TRANSACTION]    via CALENDRIER[Date] → TRANSACTION[dt_realisation]
+[CALENDRIER] (1) → (N) [EPARGNE]        via CALENDRIER[Date] → EPARGNE[dt_eff]
+[CALENDRIER] (1) → (N) [CREDIT]         via CALENDRIER[Date] → CREDIT[dt_eff]
+[CALENDRIER] (1) → (N) [CLIENT]         via CALENDRIER[Date] → CLIENT[dt_enrol]
+// Marquer CALENDRIER comme Table de dates
+
+
+// ============================================================
+// PARAMÉTRAGE DE L'AFFICHAGE (Power BI Desktop)
+// ============================================================
+
+TABLES À CACHER dans le rapport (techniques, pas utiles aux utilisateurs) :
+  - CALENDRIER (exposer uniquement les colonnes via les slicers)
+  - Colonnes techniques : id_cli_web, num_tec, cd_topz, cd_sst_topz
+
+DOSSIERS DE MESURES DANS LE VOLET CHAMPS :
+  📁 _M_Clients        → mesures relatives aux clients
+  📁 _M_Digital        → enrollment, connexions, appareils
+  📁 _M_Epargne        → encours, collecte, ISIN, SFDR
+  📁 _M_Credit         → encours crédit, IFRS9, LTV
+  📁 _M_Conformite     → AML, pays risque, KYC
+  📁 _M_Produits       → taux pénétration, IFRS9 global
+
+FORMAT DES NOMBRES :
+  Montants euros :     # ##0 €        (ou # ##0 K€ si > 1000)
+  Montants K€ :        # ##0 "K€"
+  Montants M€ :        # ##0,0 "M€"
+  Pourcentages :       0,0%
+  Nombres entiers :    # ##0
+  Dates :              DD/MM/YYYY
+
+
+// ============================================================
+// PAGES POWER BI (équivalent des sheets Qlik)
+// ============================================================
+
+PAGE 1 : Navigation / Accueil
+  - Boutons de navigation vers les 4 pages
+  - Slicers partagés : Année-Mois | Type client | Agence
+  - Carte : Date fonctionnelle
+
+PAGE 2 : Suivi Digital & Adoption
+  Visuels :
+    - 5 KPI Cards (Clients, Enrollés, Smartphones, Taux, Bloqués)
+    - 5 KPI Cards connexions par canal
+    - Line Chart : évolution enrollement (Axe X = dt_enrol, Valeur = Nb Clients Enrollés)
+    - Donut Chart : répartition canal_ordre
+    - Table : clients bloqués/suspendus (id_cli, nom, etat_acc, dt_der_cnx, nb_dev_enrol)
+  Slicers locaux :
+    - etat_acc (Liste déroulante)
+    - typ_enrol (boutons)
+    - Plage de dates enrollement
+
+PAGE 3 : Portefeuille Produits
+  Visuels :
+    - 6 KPI Cards (Cartes, Virements, Comptes, Épargne, Crédit, Assurance)
+    - Treemap : fam_pdt par Sum(enc_cnt_m)
+    - Clustered Bar : Encours N vs N-1 par famille produit
+    - Gauge : Taux Pénétration par produit
+    - Onglets (Bookmarks) :
+        Épargne : top fonds par enc_fds_m, risque_isin, bucket_ifrs9
+        Crédit  : typ_mar, mnt_nom, ltv_act, taux_endettement, bucket_ifrs9
+        Services: fam_pdt, nb cartes, tarification
+  Slicers locaux :
+    - fam_pdt
+    - mod_gest (Libre / Sous Mandat)
+
+PAGE 4 : Risque & Conformité
+  Visuels :
+    - Barre d'alerte rouge (Card + conditional formatting) : Alerte Conformité
+    - 5 KPI Cards (Clients risque élevé, Tx sensibles, Vol. GDA, KYC rouge, Certif à renouveler)
+    - Matrix : pays client × pays contrepartie (valeur = Volume Transactions)
+      → Conditional formatting par couleur_pays (rouge/orange/vert/noir)
+    - Bar Chart : Volume par lib_evt_lv1 (top 10 types événements)
+    - Donut : Répartition risque client (lib_cd_risque_pers)
+    - Table transactions sensibles :
+        Filtre : Transaction_Sensible = TRUE
+        Colonnes : nom_cplt, mnt_evt, dt_realisation, cli_couleur_pays,
+                   ctrpty_pays, ctrpty_couleur_pays, lib_evt_lv1, canal_ordre
+    - Table KYC à renouveler :
+        Filtre : gelule_global >= 5 OR dt_next_certif <= EDATE(TODAY(),3)
+        Colonnes : nom_cplt, gelule_global, Couleur_KYC, dt_der_certif,
+                   dt_next_certif, Alerte_Certif, lib_scenario_risque
+  Slicers locaux :
+    - couleur_pays (Filtres risque)
+    - Plage dt_realisation
+    - lib_cd_risque_pers
+
+PAGE 5 : Commercial & Relation Client
+  Visuels :
+    - 5 KPI Cards (Actifs, Prospects, AUM moyen, Sans RDV, Taux actifs)
+    - Clustered Bar : Count(id_cli) par lib_cd_typ + cli_c_p
+    - Scatter Chart :
+        X = cd_risque_pers (axe risque)
+        Y = aum_tit (axe patrimoine)
+        Taille = Encours Épargne
+        Couleur = lib_type_client
+        Tooltip : nom_cplt, AUM, dernier RDV
+    - Line Chart : flux entrées/sorties clients (dt_top_cl vs dt_exit_cl)
+    - Table portefeuille :
+        Tri : aum_tit DESC
+        Conditional formatting :
+          top_client_actif = "N" → gris (ligne entière)
+          Alerte_Certif = "À renouveler" → orange (colonne dt_next_certif)
+          cd_risque_pers IN ("E","F") → rouge (colonne risque)
+        Colonnes : nom_cplt, lib_type_client, aum_tit, cd_risque_pers,
+                   dt_dernier_rdv, dt_next_certif, top_client_actif, list_fam_pdt
+    - Drill-through vers fiche client (page cachée) :
+        KPI : AUM | Encours épargne | Encours crédit | Score risque
+        Sparkline : enc_cnt_m sur 12 mois
+        Statut KYC coloré
+        Liste produits
+  Slicers locaux :
+    - lib_gr (Groupe risque)
+    - lib_ptf (Portefeuille / Conseiller)
+    - lib_cd_typ (Type client)
+    - Toggle : top_client_actif
+
+// ============================================================
+// PARAMÈTRES ROW-LEVEL SECURITY (RLS)
+// ============================================================
+// Rôle : CONSEILLER
+//   Filter : CLIENT[cd_cons] = USERPRINCIPALNAME()
+//   → Chaque conseiller ne voit que son portefeuille
+//
+// Rôle : DIRECTION
+//   No filter → accès total
+//
+// Rôle : CONFORMITE
+//   Filter : accès aux pages Conformité uniquement
+//   (via sécurité page + filter vide sur CLIENT)

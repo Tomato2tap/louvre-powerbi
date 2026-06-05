@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "LoBP_CustomerIntent"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8759af98-f766-4432-9368-9aa56cdcef54"
+  }
+}
