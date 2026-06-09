@@ -344,7 +344,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "14D"
                 }
               }
             }
@@ -379,7 +379,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0F1C3F'"
+                      "Value": "'#000000'"
                     }
                   }
                 }
@@ -395,14 +395,14 @@
             "shadowBlur": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "14D"
                 }
               }
             },
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "82D"
+                  "Value": "70D"
                 }
               }
             }
@@ -462,6 +462,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

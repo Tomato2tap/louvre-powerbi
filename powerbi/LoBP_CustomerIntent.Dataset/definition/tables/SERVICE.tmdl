@@ -1,0 +1,181 @@
+table SERVICE
+	lineageTag: 99bc4d71-4b28-4646-b898-26dd3c046a82
+
+	column id_cli
+		dataType: string
+		lineageTag: 74756645-a59b-4d31-8ab0-5aab0ec65f28
+		summarizeBy: none
+		sourceColumn: id_cli
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_cnt
+		dataType: string
+		lineageTag: 2670b979-77f2-4804-8ac1-61ad6bad42fa
+		summarizeBy: none
+		sourceColumn: num_cnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column fam_pdt
+		dataType: string
+		lineageTag: 947971e0-f077-41e5-838a-c5303efe08cf
+		summarizeBy: none
+		sourceColumn: fam_pdt
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_tar_brt
+		dataType: double
+		lineageTag: 26fd77ad-66eb-4d36-9953-9304223e763c
+		summarizeBy: sum
+		sourceColumn: mnt_tar_brt
+
+		annotation SummarizationSetBy = Automatic
+
+	column stt_cli
+		dataType: string
+		lineageTag: 0012dba9-e840-4b8c-9c8b-73b8d87a2dc2
+		summarizeBy: none
+		sourceColumn: stt_cli
+
+		annotation SummarizationSetBy = Automatic
+
+	column perimetre
+		dataType: string
+		lineageTag: 3019218d-6c17-48ab-8cd0-a3b23c89d74d
+		summarizeBy: none
+		sourceColumn: perimetre
+
+		annotation SummarizationSetBy = Automatic
+
+	column lib_ctl
+		dataType: string
+		lineageTag: 35a9cd9e-f712-4da4-8b90-23b29b5ff27c
+		summarizeBy: none
+		sourceColumn: lib_ctl
+
+		annotation SummarizationSetBy = Automatic
+
+	column stt_cnt
+		dataType: string
+		lineageTag: 266dc087-300e-4bdc-84ec-ee449dc3e8cb
+		summarizeBy: none
+		sourceColumn: stt_cnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column lib_stt_cnt
+		dataType: string
+		lineageTag: 44333783-f36b-4517-8ed3-475388af3fe0
+		summarizeBy: none
+		sourceColumn: lib_stt_cnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_eff
+		dataType: string
+		lineageTag: 283b9886-1df2-4d0c-a76e-959ce63f2d0e
+		summarizeBy: none
+		sourceColumn: dt_eff
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_fin_eff
+		dataType: string
+		lineageTag: 5e3da74c-15c1-486f-bf84-a34eff00c441
+		summarizeBy: none
+		sourceColumn: dt_fin_eff
+
+		annotation SummarizationSetBy = Automatic
+
+	column agc_ins
+		dataType: string
+		lineageTag: f1e620af-5fe8-4484-9e24-6b6884a69cc3
+		summarizeBy: none
+		sourceColumn: agc_ins
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_carte
+		dataType: string
+		lineageTag: 135a2a49-b2c6-4fab-afcc-749c3590738f
+		summarizeBy: none
+		sourceColumn: num_carte
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_typ_debit
+		dataType: string
+		lineageTag: d9cbfb91-81c2-4ced-a0bb-ac08a6477419
+		summarizeBy: none
+		sourceColumn: cd_typ_debit
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_ech_carte
+		dataType: string
+		lineageTag: 2eb73378-0c30-408a-a046-716fbad87dac
+		summarizeBy: none
+		sourceColumn: dt_ech_carte
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_carte_virtu
+		dataType: string
+		lineageTag: d0ca1c1a-bad0-473a-bc38-bce8cfb6740c
+		summarizeBy: none
+		sourceColumn: ind_carte_virtu
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_pdt_tar
+		dataType: string
+		lineageTag: 1af27f55-a077-460e-9e31-d355fbe09e0f
+		summarizeBy: none
+		sourceColumn: mnt_pdt_tar
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_bck_ifrs9
+		dataType: string
+		lineageTag: a2c23ec2-7ca1-4dc4-8de0-eec14f1fe688
+		summarizeBy: none
+		sourceColumn: cd_bck_ifrs9
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_prov_b_ifrs9
+		dataType: string
+		lineageTag: 280f0848-d86a-4c46-b47c-566f2866f505
+		summarizeBy: none
+		sourceColumn: mnt_prov_b_ifrs9
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_prov_hb_ifrs9
+		dataType: string
+		lineageTag: 66da00b5-522a-4c19-bb10-4c002b42714f
+		summarizeBy: none
+		sourceColumn: mnt_prov_hb_ifrs9
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_mois_part
+		dataType: string
+		lineageTag: cb9fac89-4ecc-4944-8931-8384b02bbaed
+		summarizeBy: none
+		sourceColumn: annee_mois_part
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SERVICE = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("E:\\louvre\\powerbi\\data\\SERVICE.csv"),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Typed" = Table.TransformColumnTypes(#"Promoted", {{"id_cli", type text}, {"num_cnt", type text}, {"fam_pdt", type text}, {"mnt_tar_brt", type number}}, "en-US")
+				in
+				    #"Typed"
+

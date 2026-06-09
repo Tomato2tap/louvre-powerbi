@@ -1,0 +1,33 @@
+model Model
+	culture: fr-FR
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["CLIENT","TRANSACTION","EPARGNE","CREDIT","GARANTIE","SERVICE","GSM","_M_Dashboard"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table CLIENT
+ref table TRANSACTION
+ref table EPARGNE
+ref table CREDIT
+ref table GARANTIE
+ref table SERVICE
+ref table GSM
+ref table _M_Dashboard
+ref table Dictionnaire
+ref table Tutoriel
+ref table DateTableTemplate_41b70003-0532-4af4-bded-27b03e1e3b54
+ref table LocalDateTable_be6ff19e-2879-4941-8f52-2116fb02e18e
+ref table LocalDateTable_12081caa-9f24-4891-b4db-334513dcc235
+ref table LocalDateTable_496e8fdc-e07e-4732-87ed-6acf01dbb6e0
+ref table LocalDateTable_e73ad3e1-32f4-42c3-8a6d-bc8280424615
+
+ref cultureInfo fr-FR
+

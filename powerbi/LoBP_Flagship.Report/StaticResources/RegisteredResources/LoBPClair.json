@@ -1,0 +1,42 @@
+{
+  "name": "LoBP Clair",
+  "dataColors": [
+    "#0B2545",
+    "#2A9D8F",
+    "#C8A951",
+    "#1B4D72",
+    "#5B7DB1",
+    "#7FB6A8",
+    "#E0B651",
+    "#3E7C8A",
+    "#9FB3C8",
+    "#B68A2E",
+    "#52708F",
+    "#86A0BF"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#102A43",
+  "foregroundNeutralSecondary": "#627D98",
+  "tableAccent": "#C8A951",
+  "good": "#2E8B6F",
+  "neutral": "#C8A951",
+  "bad": "#C0563B",
+  "maximum": "#0B2545",
+  "center": "#7FB6A8",
+  "minimum": "#EAF0F7",
+  "textClasses": {
+    "title": {
+      "color": "#102A43",
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12
+    },
+    "label": {
+      "color": "#102A43",
+      "fontFace": "Segoe UI"
+    },
+    "callout": {
+      "color": "#102A43",
+      "fontFace": "Segoe UI Semibold"
+    }
+  }
+}

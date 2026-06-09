@@ -1,0 +1,317 @@
+table GSM
+	lineageTag: 21d28057-f49c-4eef-ba22-d172c2f12fe6
+
+	column isin_fds
+		dataType: string
+		lineageTag: 2a5fcc2c-5d6a-4049-9a19-5c99fb32a359
+		summarizeBy: none
+		sourceColumn: isin_fds
+
+		annotation SummarizationSetBy = Automatic
+
+	column Classification_SFDR
+		dataType: string
+		lineageTag: 22c6c170-5d37-4e03-8be9-f5ca299a5f98
+		summarizeBy: none
+		sourceColumn: Classification_SFDR
+
+		annotation SummarizationSetBy = Automatic
+
+	column enc_fds_m
+		dataType: double
+		lineageTag: 0558a245-da3b-426c-9918-6156e113be39
+		summarizeBy: sum
+		sourceColumn: enc_fds_m
+
+		annotation SummarizationSetBy = Automatic
+
+	column performance_cli
+		dataType: double
+		lineageTag: dd576f7e-b5e0-4dee-a1d0-965ac6b7df7f
+		summarizeBy: sum
+		sourceColumn: performance_cli
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_contrat
+		dataType: string
+		lineageTag: 5ab8f145-4510-4b2a-a4dd-f8abbd4f70e9
+		summarizeBy: none
+		sourceColumn: id_contrat
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_fonc
+		dataType: string
+		lineageTag: e812c033-e546-4975-a07c-52c1893d802d
+		summarizeBy: none
+		sourceColumn: dt_fonc
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_ges
+		dataType: string
+		lineageTag: dbaf25c4-19c4-477c-a9c6-e0aec16e2c95
+		summarizeBy: none
+		sourceColumn: cd_ges
+
+		annotation SummarizationSetBy = Automatic
+
+	column mod_gest
+		dataType: string
+		lineageTag: 9e2c0bc6-f1ae-4fc7-89fa-f09748b1c81c
+		summarizeBy: none
+		sourceColumn: mod_gest
+
+		annotation SummarizationSetBy = Automatic
+
+	column reseau
+		dataType: string
+		lineageTag: ae29808a-786c-4233-bc96-5880982fae65
+		summarizeBy: none
+		sourceColumn: reseau
+
+		annotation SummarizationSetBy = Automatic
+
+	column qte_fds
+		dataType: string
+		lineageTag: 2d470dca-a71c-4258-8a2f-98af915c8c9d
+		summarizeBy: none
+		sourceColumn: qte_fds
+
+		annotation SummarizationSetBy = Automatic
+
+	column cours_cot
+		dataType: string
+		lineageTag: 361a33dc-fb1f-4cc2-a03f-75884b7aaf13
+		summarizeBy: none
+		sourceColumn: cours_cot
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_cot
+		dataType: string
+		lineageTag: d4038a85-b1ea-45bb-b5d8-36c573246c92
+		summarizeBy: none
+		sourceColumn: dt_cot
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_mnt_achat
+		dataType: string
+		lineageTag: 5383cd6b-0608-42fe-bc51-f8c1643b1893
+		summarizeBy: none
+		sourceColumn: avg_mnt_achat
+
+		annotation SummarizationSetBy = Automatic
+
+	column enc_cnt_n_1
+		dataType: string
+		lineageTag: 962eef1d-ca97-47f9-b89c-31490211e848
+		summarizeBy: none
+		sourceColumn: enc_cnt_n_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column sum_enc_fds_cnt
+		dataType: string
+		lineageTag: 19791a66-a963-4c21-b038-5a02eaca9449
+		summarizeBy: none
+		sourceColumn: sum_enc_fds_cnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column poids_isin_cnt
+		dataType: string
+		lineageTag: 1f62eb35-ec1e-44c4-86c7-f9f02a92d1f9
+		summarizeBy: none
+		sourceColumn: poids_isin_cnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column sum_enc_fds_profil
+		dataType: string
+		lineageTag: 05a76883-9bc6-4cec-a5bf-954343c8df18
+		summarizeBy: none
+		sourceColumn: sum_enc_fds_profil
+
+		annotation SummarizationSetBy = Automatic
+
+	column poids_isin_profil
+		dataType: string
+		lineageTag: c026b571-5410-473e-95dd-cad761f3fda1
+		summarizeBy: none
+		sourceColumn: poids_isin_profil
+
+		annotation SummarizationSetBy = Automatic
+
+	column sum_enc_fds_gsm
+		dataType: string
+		lineageTag: 5291bd9b-ca3e-4c25-a34c-e3e7ca00d2bb
+		summarizeBy: none
+		sourceColumn: sum_enc_fds_gsm
+
+		annotation SummarizationSetBy = Automatic
+
+	column poids_isin_total_gsm
+		dataType: string
+		lineageTag: 6a6085c0-69df-4c1e-80d6-3bd277036cfc
+		summarizeBy: none
+		sourceColumn: poids_isin_total_gsm
+
+		annotation SummarizationSetBy = Automatic
+
+	column apport_cli
+		dataType: string
+		lineageTag: 1b7298ee-c626-477e-aff1-c8bbd8238a1c
+		summarizeBy: none
+		sourceColumn: apport_cli
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_pmvl
+		dataType: string
+		lineageTag: 0fc3bf3c-140d-4dca-8916-e9f878f1ec3b
+		summarizeBy: none
+		sourceColumn: mnt_pmvl
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_30000
+		dataType: string
+		lineageTag: 781ace1a-17e2-4309-926d-4b101ea1b52b
+		summarizeBy: none
+		sourceColumn: ind_sfdr_30000
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_10000
+		dataType: string
+		lineageTag: dbf72f8f-0763-420e-a0a0-a19da562dae6
+		summarizeBy: none
+		sourceColumn: ind_sfdr_10000
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_20150
+		dataType: string
+		lineageTag: b22765c8-5268-46c1-b15b-e39c0b11aa2b
+		summarizeBy: none
+		sourceColumn: ind_sfdr_20150
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_30010
+		dataType: string
+		lineageTag: 70bc3b21-c6f8-4faa-9621-e47d12637c25
+		summarizeBy: none
+		sourceColumn: ind_sfdr_30010
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_30020
+		dataType: string
+		lineageTag: cb5e7e5f-cb9c-4f62-8010-63687a9b038c
+		summarizeBy: none
+		sourceColumn: ind_sfdr_30020
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_30060
+		dataType: string
+		lineageTag: 7dd63989-9310-4108-8bdd-355f8396a09e
+		summarizeBy: none
+		sourceColumn: ind_sfdr_30060
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_30100
+		dataType: string
+		lineageTag: 2e386869-6402-4b9c-9de7-84a7fd701ebf
+		summarizeBy: none
+		sourceColumn: ind_sfdr_30100
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_30140
+		dataType: string
+		lineageTag: ff2f9587-4e78-40b8-b013-ad40d870e27d
+		summarizeBy: none
+		sourceColumn: ind_sfdr_30140
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_10040
+		dataType: string
+		lineageTag: 6bb366e7-ae21-477a-9f6a-1512240fd553
+		summarizeBy: none
+		sourceColumn: ind_sfdr_10040
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_sfdr_00050
+		dataType: string
+		lineageTag: dab715bb-577d-467f-90dd-2e236b29205e
+		summarizeBy: none
+		sourceColumn: ind_sfdr_00050
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_taxo_20660
+		dataType: string
+		lineageTag: 9fb68df7-37bd-4e91-ba30-411e262caa04
+		summarizeBy: none
+		sourceColumn: ind_taxo_20660
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_taxo_20670
+		dataType: string
+		lineageTag: f1d16369-4126-4b5b-a860-d7f8feb9360c
+		summarizeBy: none
+		sourceColumn: ind_taxo_20670
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_taxo_20680
+		dataType: string
+		lineageTag: 1d8791d4-d231-4d94-8301-952948957d14
+		summarizeBy: none
+		sourceColumn: ind_taxo_20680
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_taxo_20690
+		dataType: string
+		lineageTag: 02dd0aae-b061-4bf2-b62c-58fdd3ca7a60
+		summarizeBy: none
+		sourceColumn: ind_taxo_20690
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_taxo_20700
+		dataType: string
+		lineageTag: eeb8153d-1578-4bc7-a1b7-de305ed1d91b
+		summarizeBy: none
+		sourceColumn: ind_taxo_20700
+
+		annotation SummarizationSetBy = Automatic
+
+	column ind_taxo_20710
+		dataType: string
+		lineageTag: 27c42bc7-f519-4a65-be8c-fdde7cb87c27
+		summarizeBy: none
+		sourceColumn: ind_taxo_20710
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GSM = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("E:\\louvre\\powerbi\\data\\GSM.csv"),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Typed" = Table.TransformColumnTypes(#"Promoted", {{"isin_fds", type text}, {"Classification_SFDR", type text}, {"enc_fds_m", type number}, {"performance_cli", type number}}, "en-US")
+				in
+				    #"Typed"
+

@@ -1,0 +1,51 @@
+relationship 9e8eef39-4104-460e-88c1-1dd09ec55f7b
+	fromColumn: TRANSACTION.id_cli
+	toColumn: CLIENT.id_cli
+
+relationship e1c1d12e-6436-42e9-a7ae-99c044a22cc5
+	fromColumn: EPARGNE.id_cli
+	toColumn: CLIENT.id_cli
+
+relationship bef6e478-399b-4154-a087-889db2adf06d
+	fromColumn: CREDIT.id_cli
+	toColumn: CLIENT.id_cli
+
+relationship f847f974-da8f-4c1a-bbb5-687b85ec39b3
+	fromColumn: SERVICE.id_cli
+	toColumn: CLIENT.id_cli
+
+relationship 3cf4fd0f-a8b7-4e23-abc9-b49b0c2e099e
+	isActive: false
+	fromColumn: GARANTIE.id_cli
+	toColumn: CLIENT.id_cli
+
+relationship f3c4467a-225b-4480-a120-a4d44ad9671f
+	fromColumn: GARANTIE.num_cnt
+	toColumn: CREDIT.num_cnt
+
+relationship e34e470f-80b1-4b52-9ade-1bec54aea6ad
+	joinOnDateBehavior: datePartOnly
+	fromColumn: CLIENT.dt_enrol
+	toColumn: LocalDateTable_be6ff19e-2879-4941-8f52-2116fb02e18e.Date
+
+relationship 2883886a-6d6c-41f9-95ae-a07695e39c25
+	joinOnDateBehavior: datePartOnly
+	fromColumn: CLIENT.dt_der_cnx
+	toColumn: LocalDateTable_12081caa-9f24-4891-b4db-334513dcc235.Date
+
+relationship 72a5054a-a442-4332-aa0e-fce836e56f2c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: CLIENT.dt_fonc
+	toColumn: LocalDateTable_496e8fdc-e07e-4732-87ed-6acf01dbb6e0.Date
+
+relationship 7746df7f-d180-494d-a4bb-9d7df9253220
+	joinOnDateBehavior: datePartOnly
+	fromColumn: TRANSACTION.dt_realisation
+	toColumn: LocalDateTable_e73ad3e1-32f4-42c3-8a6d-bc8280424615.Date
+
+relationship AutoDetected_91540d60-0d31-4b23-a094-b2520532abc5
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: GSM.qte_fds
+	toColumn: EPARGNE.qte_fds
+

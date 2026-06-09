@@ -53,8 +53,12 @@ WANT = {
    ("enc_cnt_m","number"),("enc_cnt_n1","number"),("col_brute","number"),
    ("decollecte","number"),("col_nette","number"),("enc_fds_m","number")],
  "CREDIT": [("id_cli","text"),("num_cnt","text"),("perimetre","text"),
-   ("Lib_Marche_Simple","text"),("lib_typ_prt","text"),("enc_cpt","number"),
-   ("mnt_nom","number"),("mnt_krd_sain","number"),("mnt_krd_imp","number")],
+   ("Lib_Marche_Simple","text"),("lib_typ_prt","text"),("lib_typ_mar","text"),
+   ("lib_cd_etat_creance","text"),("Lib_Bucket_Credit","text"),
+   ("enc_cpt","number"),("mnt_nom","number"),("mnt_dblq","number"),("mnt_disp","number"),
+   ("mnt_krd_tot","number"),("mnt_krd_sain","number"),("mnt_krd_imp","number"),
+   ("mnt_prov_b_ifrs9","number"),("mnt_prov_hb_ifrs9","number"),("total_rwa","number"),
+   ("ltv_act","number"),("teg","number"),("tx_int_act","number")],
  "GARANTIE": [("id_cli","text"),("num_cnt","text"),("det_typ_gar","text"),
    ("mnt_gar","number"),("mnt_gar_cpta","number")],
  "SERVICE": [("id_cli","text"),("num_cnt","text"),("fam_pdt","text"),("mnt_tar_brt","number")],
@@ -104,6 +108,17 @@ MEASURES=[
  measure("Encours Crédit Total","SUM(CREDIT[enc_cpt])","#,0 €"),
  measure("Capital Sain","SUM(CREDIT[mnt_krd_sain])","#,0 €"),
  measure("Capital Impayé","SUM(CREDIT[mnt_krd_imp])","#,0 €"),
+ measure("Nb Crédits","DISTINCTCOUNT(CREDIT[num_cnt])","#,0"),
+ measure("Montant Nominal","SUM(CREDIT[mnt_nom])","#,0 €"),
+ measure("Montant Débloqué","SUM(CREDIT[mnt_dblq])","#,0 €"),
+ measure("Reste à Débloquer","SUM(CREDIT[mnt_disp])","#,0 €"),
+ measure("Taux Impayés","DIVIDE(SUM(CREDIT[mnt_krd_imp]),SUM(CREDIT[mnt_krd_tot]),0)","0.0%"),
+ measure("LTV Moyenne","AVERAGEX(FILTER(CREDIT,CREDIT[ltv_act]>0),CREDIT[ltv_act])","0.0%"),
+ measure("TEG Moyen","AVERAGEX(FILTER(CREDIT,CREDIT[teg]>0),CREDIT[teg])","0.00%"),
+ measure("Provisions IFRS9 Crédit","SUM(CREDIT[mnt_prov_b_ifrs9])+SUM(CREDIT[mnt_prov_hb_ifrs9])","#,0 €"),
+ measure("RWA Crédit","SUM(CREDIT[total_rwa])","#,0 €"),
+ measure("Montant Garanties","SUM(GARANTIE[mnt_gar])","#,0 €"),
+ measure("Taux Couverture Garanties","DIVIDE(SUM(GARANTIE[mnt_gar_cpta]),[Encours Crédit Total],0)","0.0%"),
  measure("Collecte Brute",'CALCULATE(SUM(EPARGNE[col_brute]), EPARGNE[perimetre]="epargne")',"#,0 €"),
  measure("Décollecte",'CALCULATE(SUM(EPARGNE[decollecte]), EPARGNE[perimetre]="epargne")',"#,0 €"),
  measure("Collecte Nette",'CALCULATE(SUM(EPARGNE[col_nette]), EPARGNE[perimetre]="epargne")',"#,0 €"),
@@ -132,12 +147,69 @@ def rel(ft,fc,tt,tc,active=True):
        "crossFilteringBehavior":"oneDirection"}
     if not active: r["isActive"]=False
     return r
+
+# ── Tables de référence (calculées) : Dictionnaire + Mode d'emploi ───────────
+def _datatable(cols, rows):
+    hdr=", ".join('"%s", %s'%(c,t) for c,t in cols)
+    def fmt(v): return str(v) if isinstance(v,int) else '"'+v.replace('"','""')+'"'
+    body=",\n        ".join("{"+", ".join(fmt(v) for v in r)+"}" for r in rows)
+    return "DATATABLE(\n    %s,\n    {\n        %s\n    }\n)"%(hdr,body)
+def calc_table(name, cols, rows):
+    return {"name":name,"lineageTag":str(uuid.uuid4()),"isHidden":True,
+        "columns":[{"type":"calculatedTableColumn","name":c,
+            "dataType":("int64" if t=="INTEGER" else "string"),"sourceColumn":c,
+            "summarizeBy":"none","lineageTag":str(uuid.uuid4()),
+            "annotations":[{"name":"SummarizationSetBy","value":"Automatic"}]} for c,t in cols],
+        "partitions":[{"name":name,"mode":"import",
+            "source":{"type":"calculated","expression":_datatable(cols,rows)}}]}
+
+DICO_ROWS=[
+ ("Patrimoine","AUM","Assets Under Management : encours total géré pour le client (titulaire)."),
+ ("Patrimoine","Encours Épargne","Capital des contrats d'épargne au mois en cours."),
+ ("Patrimoine","Encours Crédit","Capital restant dû sur l'ensemble des crédits."),
+ ("Activité","Client actif","Client avec ≥9 mouvements (pers. physique) ou ≥4 (pers. morale) sur 10 des 12 derniers mois."),
+ ("Activité","Prospect","Relation PR : pas encore client équipé."),
+ ("Activité","Collecte nette","Collecte brute − décollecte : flux net d'épargne sur la période."),
+ ("Risque","Cotation MacDonough","Niveau de risque crédit : C+ solvable, C- incident, E douteux (>90j), F contentieux."),
+ ("Risque","Client sensible","Client coté E (douteux) ou F (contentieux)."),
+ ("Risque","KYC / gélule","Qualité de connaissance client : 0 vert (conforme), 5 orange (à mettre à jour), 10 rouge (MAJ obligatoire)."),
+ ("Risque","Couleur pays","Risque pays : vert/orange/rouge/noir selon embargo, sanctions, gel des avoirs."),
+ ("Conformité","LCB-FT","Lutte Contre le Blanchiment et le Financement du Terrorisme."),
+ ("Conformité","Transaction sensible","Opération impliquant un pays sous embargo, sanctions ou gel des avoirs (GDA)."),
+ ("Conformité","FATCA / CRS","Échange automatique d'informations fiscales (US / OCDE)."),
+ ("Digital","Enrôlement","Client disposant d'au moins un terminal de confiance (mobile / web)."),
+ ("Digital","Taux d'enrôlement","Part des clients enrôlés sur le total des clients."),
+ ("Digital","Canal","Origine de l'opération : Web, Mobile, iOS, Android, Agence, SVI."),
+ ("Crédit","LTV","Loan To Value : montant du prêt rapporté à la valeur (revalorisée) du bien."),
+ ("Crédit","TEG","Taux Effectif Global : coût total du crédit en pourcentage annuel."),
+ ("Crédit","Taux d'impayés","Capital impayé rapporté au capital restant dû total."),
+ ("Crédit","Bucket IFRS9","Classement de la créance : Sain, Sensible, Douteux/Contentieux (provisionnement)."),
+ ("Crédit","RWA","Risk Weighted Assets : actifs pondérés du risque (ratio prudentiel)."),
+ ("Crédit","Couverture garanties","Montant des garanties comptables rapporté à l'encours de crédit."),
+ ("Épargne","SFDR","Classification durabilité : Article 8 (ESG) ou Article 9 (impact)."),
+ ("Épargne","Mode de gestion","Gestion Libre ou Sous Mandat (déléguée à la banque)."),
+ ("Dimensions","Type de client","P personne physique, E entreprise individuelle, S société, I institution financière."),
+ ("Dimensions","Groupe de risque","Segmentation interne du risque client (Groupe 1 à 5)."),
+ ("Dimensions","Agence / PGP","Pôle de Gestion Privée de rattachement du client."),
+]
+TUTO_ROWS=[
+ (1,"Filtrer","Utilisez les listes déroulantes de la barre latérale (Type, Agence, Pays…). Type et Agence sont synchronisés entre toutes les pages."),
+ (2,"Croiser (cross-filter)","Cliquez une part de donut ou une barre : tous les autres visuels se filtrent. Recliquez pour annuler."),
+ (3,"Explorer (drill-down)","Sur un graphe hiérarchique, double-cliquez ou utilisez les flèches en haut du visuel pour descendre (ex. Pays › Agence)."),
+ (4,"Naviguer","Changez de page via les boutons de navigation de la barre latérale ou les onglets en bas."),
+ (5,"Trier","Cliquez l'en-tête d'une colonne d'une table pour trier (ex. AUM décroissant)."),
+ (6,"Voir le détail","Survolez un élément pour l'infobulle ; clic droit puis « Afficher sous forme de table »."),
+ (7,"Exporter","Clic droit sur un visuel › Exporter les données ; ou menu « … » › Exporter."),
+ (8,"Actualiser","Ruban Accueil › Actualiser pour recharger les données depuis les sources."),
+]
 def build_model():
     return {"name":"Model","compatibilityLevel":1600,"model":{
         "culture":"fr-FR","collation":"Latin1_General_100_BIN2_UTF8",
         "dataAccessOptions":{"legacyRedirects":True,"returnErrorValuesAsNull":True},
         "defaultPowerBIDataSourceVersion":"powerBI_V3","sourceQueryCulture":"en-US",
-        "tables":[data_table(t) for t in ["CLIENT","TRANSACTION","EPARGNE","CREDIT","GARANTIE","SERVICE","GSM"]]+[measures_table()],
+        "tables":[data_table(t) for t in ["CLIENT","TRANSACTION","EPARGNE","CREDIT","GARANTIE","SERVICE","GSM"]]+[measures_table(),
+            calc_table("Dictionnaire",[("Catégorie","STRING"),("Terme","STRING"),("Définition","STRING")],DICO_ROWS),
+            calc_table("Tutoriel",[("Étape","INTEGER"),("Action","STRING"),("Détail","STRING")],TUTO_ROWS)],
         "relationships":[rel("TRANSACTION","id_cli","CLIENT","id_cli"),rel("EPARGNE","id_cli","CLIENT","id_cli"),
             rel("CREDIT","id_cli","CLIENT","id_cli"),rel("SERVICE","id_cli","CLIENT","id_cli"),
             rel("GARANTIE","id_cli","CLIENT","id_cli",active=False),rel("GARANTIE","num_cnt","CREDIT","num_cnt")],
@@ -187,13 +259,14 @@ def proj_c(e,p,disp=None):
 PAGES=[]   # list of dicts {name, display, visuals:[...]}
 def card_box(title=None, talign="left"):
     vco={"background":prop({"show":B(True),"color":solid(CARD),"transparency":N(0)}),
-         "border":prop({"show":B(True),"color":solid(LINE),"radius":N(10)}),
+         "border":prop({"show":B(True),"color":solid(LINE),"radius":N(14)}),
          "visualHeader":prop({"show":B(False)}),
-         "dropShadow":prop({"show":B(True),"color":solid("#0F1C3F"),"preset":S("BottomRight"),
-                            "shadowBlur":N(8),"transparency":N(82)})}
+         "dropShadow":prop({"show":B(True),"color":solid("#000000"),"preset":S("BottomRight"),
+                            "shadowBlur":N(14),"transparency":N(70)})}
     if title is not None:
-        vco["title"]=prop({"show":B(True),"text":S(title),"fontColor":solid(INK),"fontSize":N(12),
-                           "bold":B(True),"alignment":S(talign),"fontFamily":S("Segoe UI Semibold")})
+        vco["title"]=prop({"show":B(True),"text":S(title),"fontColor":solid(TXT),"fontSize":N(12),
+                           "bold":B(True),"alignment":S(talign),"fontFamily":S("Segoe UI Semibold"),
+                           "titleWrap":B(False)})
     return vco
 
 def vis(page, name, vtype, x,y,ww,hh, qstate=None, objects=None, vco=None, z=0, sync=None):
@@ -230,28 +303,50 @@ def header(page, x,y,ww,hh, title, cardbg, z=0):
           "categoryLabels":prop({"show":B(False)})}
     vis(page,"header","card",x,y,ww,hh,{"Values":{"projections":[proj_m("Date Fonctionnelle","")]}},objects=objs,vco=vco,z=z)
 
-CARTESIAN={"clusteredColumnChart","clusteredBarChart","stackedColumnChart","stackedBarChart",
-           "lineChart","areaChart","stackedAreaChart","ribbonChart","waterfallChart",
-           "lineClusteredColumnComboChart","lineStackedColumnComboChart","hundredPercentStackedColumnChart",
-           "hundredPercentStackedBarChart","scatterChart"}
-ROUND={"donutChart","pieChart","treemap","funnel"}
+COLBAR={"clusteredColumnChart","clusteredBarChart","stackedColumnChart","stackedBarChart",
+        "hundredPercentStackedColumnChart","hundredPercentStackedBarChart","ribbonChart","waterfallChart"}
+LINEAREA={"lineChart","areaChart","stackedAreaChart"}
+COMBO={"lineClusteredColumnComboChart","lineStackedColumnComboChart"}
+def _legend(show,pos="Top"):
+    return prop({"show":B(show),"position":S(pos),"fontSize":N(9),"labelColor":solid(TXT),
+                 "showTitle":B(False)})
+def _cataxis(): return prop({"show":B(True),"fontSize":N(9),"labelColor":solid(TXT2),
+                             "titleShow":B(False),"gridlineShow":B(False)})
+def _valaxis(show=True): return prop({"show":B(show),"fontSize":N(9),"labelColor":solid(TXT2),
+                             "titleShow":B(False),"gridlineShow":B(True),"gridlineColor":solid(LINE),
+                             "gridlineStyle":S("dotted")})
+def _dlab(show=True,units=0,size=9): return prop({"show":B(show),"color":solid(TXT),"fontSize":N(size),
+                             "bold":B(True),"labelDisplayUnits":N(units),"fontFamily":S("Segoe UI Semibold")})
 def chart(page, name, vtype, x,y,ww,hh, title, roles, legend="Right", z=0):
     qs={role:{"projections":(p if isinstance(p,list) else [p])} for role,p in roles.items()}
+    hasS="Series" in roles
     objs={}
-    if vtype in ROUND:
-        objs["legend"]=prop({"show":B(vtype in("donutChart","pieChart")),"position":S(legend),
-                             "fontSize":N(9),"labelColor":solid(INK)})
-        objs["labels"]=prop({"show":B(True),"fontSize":N(8),"color":solid(INK)})
-        if vtype=="donutChart": objs["slices"]=prop({"innerRadiusRatio":N(58)})
+    if vtype in ("donutChart","pieChart"):
+        objs["legend"]=_legend(True,legend)
+        objs["labels"]=prop({"show":B(True),"labelStyle":S("Category, percent of total"),
+                             "fontSize":N(9),"color":solid(TXT)})
+        if vtype=="donutChart": objs["slices"]=prop({"innerRadiusRatio":N(62)})
+    elif vtype=="treemap":
+        objs["dataLabels"]=_dlab(True); objs["labels"]=prop({"show":B(True),"color":solid(WHITE),"fontSize":N(10)})
+    elif vtype=="funnel":
+        objs["dataLabels"]=prop({"show":B(True),"color":solid(WHITE),"fontSize":N(10),"bold":B(True),
+                                 "labelStyle":S("Data value")})
     elif vtype=="gauge":
-        objs["dataLabels"]=prop({"show":B(True),"fontSize":N(16),"color":solid(INK),"bold":B(True)})
-    elif vtype in CARTESIAN:
-        objs["legend"]=prop({"show":B(("Series" in roles) or vtype.endswith("ComboChart")),
-                             "position":S("Top"),"fontSize":N(9),"labelColor":solid(INK)})
-        objs["categoryAxis"]=prop({"show":B(True),"fontSize":N(9),"labelColor":solid(GREY),
-                                   "titleShow":B(False),"gridlineShow":B(False)})
-        objs["valueAxis"]=prop({"show":B(True),"fontSize":N(9),"labelColor":solid(GREY),
-                                "titleShow":B(False),"gridlineColor":solid(LINE)})
+        objs["dataLabels"]=prop({"show":B(True),"fontSize":N(28),"color":solid(WHITE),"bold":B(True)})
+        objs["calloutValue"]=prop({"fontSize":N(28),"color":solid(WHITE),"bold":B(True)})
+    elif vtype=="filledMap":
+        objs["dataLabels"]=prop({"show":B(False)})
+    elif vtype=="scatterChart":
+        objs["categoryAxis"]=_valaxis(True); objs["valueAxis"]=_valaxis(True)
+        objs["fillPoint"]=prop({"show":B(True)}); objs["categoryLabels"]=prop({"show":B(False)})
+    elif vtype in COLBAR:
+        objs["legend"]=_legend(hasS)
+        objs["categoryAxis"]=_cataxis(); objs["valueAxis"]=_valaxis(False)
+        objs["labels"]=_dlab(True,units=0,size=9)
+    elif vtype in LINEAREA or vtype in COMBO:
+        objs["legend"]=_legend(hasS or vtype in COMBO)
+        objs["categoryAxis"]=_cataxis(); objs["valueAxis"]=_valaxis(True)
+        if vtype in LINEAREA: objs["labels"]=_dlab(False)
     vis(page,name,vtype,x,y,ww,hh,qs,objects=objs,vco=card_box(title=title),z=z)
 
 def matrix(page, name, x,y,ww,hh, title, rows, columns, values, z=0):
@@ -422,7 +517,26 @@ board("Patrimoine","Patrimoine — Épargne & Crédit","#1E2A4A","#7FB0E0",
    [proj_c("EPARGNE","lib_fds","Fonds"),proj_c("EPARGNE","fam_pdt","Famille"),
     proj_c("EPARGNE","lib_mod_gest","Gestion"),proj_m("Encours Fonds","Encours fonds")]))
 
-# --- Board 6 : Analyse Avancée 360° (vitrine de visuels audacieux)
+# --- Board 6 : Crédit & Risque de contrepartie (cuivre / rouge)
+board("Credit","Crédit & Engagements","#3A2A14","#F0A868",
+  [("CREDIT","lib_typ_mar","Marché"),("CREDIT","lib_cd_etat_creance","État créance")],
+  [("Encours Crédit Total","ENCOURS CRÉDIT"),("Nb Crédits","NB CRÉDITS"),("Montant Débloqué","DÉBLOQUÉ"),
+   ("Capital Impayé","CAPITAL IMPAYÉ"),("Taux Impayés","TAUX IMPAYÉS"),("Taux Couverture Garanties","COUVERTURE GAR.")],
+  [("clusteredColumnChart","Encours par type de prêt › marché (drill-down)",
+     {"Category":[proj_c("CREDIT","lib_typ_prt","Type prêt"),proj_c("CREDIT","lib_typ_mar","Marché")],
+      "Y":proj_m("Encours Crédit Total","Encours")}),
+   ("lineClusteredColumnComboChart","Encours (barres) & taux d'impayés (ligne) par marché",
+     {"Category":proj_c("CREDIT","lib_typ_mar","Marché"),"Y":proj_m("Encours Crédit Total","Encours"),
+      "Y2":proj_m("Taux Impayés","Taux impayés")}),
+   ("donutChart","Répartition par bucket IFRS9",
+     {"Category":proj_c("CREDIT","Lib_Bucket_Credit","Bucket"),"Y":proj_m("Encours Crédit Total","Encours")})],
+  ("Détail crédits — engagement, LTV, provisions & garanties",
+   [proj_c("CREDIT","lib_typ_prt","Type prêt"),proj_c("CREDIT","lib_typ_mar","Marché"),
+    proj_c("CREDIT","lib_cd_etat_creance","État"),proj_m("Montant Nominal","Nominal"),
+    proj_m("Encours Crédit Total","Encours"),proj_m("LTV Moyenne","LTV moy."),
+    proj_m("Provisions IFRS9 Crédit","Provisions"),proj_m("Montant Garanties","Garanties")]))
+
+# --- Board 7 : Analyse Avancée 360° (vitrine de visuels audacieux)
 SLATE="#0F2A43"
 p6=new_page("Analyse","Analyse Avancée 360°")
 shell(p6,"Analyse Avancée 360°",SLATE,[("CLIENT","lib_pay_res","Pays"),("CLIENT","lib_cd_risque_pers","Risque")])

@@ -1,0 +1,229 @@
+table GARANTIE
+	lineageTag: bc5a6b0c-2f25-4007-bc39-0a9f2d1e2291
+
+	column id_cli
+		dataType: string
+		lineageTag: f590830a-f1b7-4833-aefd-cf5f9843d2d6
+		summarizeBy: none
+		sourceColumn: id_cli
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_cnt
+		dataType: string
+		lineageTag: ae5ffd22-49bb-4d8e-b8c2-a96e07f2e3b7
+		summarizeBy: none
+		sourceColumn: num_cnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column det_typ_gar
+		dataType: string
+		lineageTag: 9200dd4e-fb7d-4055-b3bf-1823c2d01dd9
+		summarizeBy: none
+		sourceColumn: det_typ_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_gar
+		dataType: double
+		lineageTag: 7392286f-7d68-4b43-a115-b11ab1c3e466
+		summarizeBy: sum
+		sourceColumn: mnt_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_gar_cpta
+		dataType: double
+		lineageTag: 25c10041-666a-48a0-985d-e697a0e2c72e
+		summarizeBy: sum
+		sourceColumn: mnt_gar_cpta
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_cnt_gar
+		dataType: string
+		lineageTag: bc566c8d-fffa-46e8-b1bd-e156cc28240d
+		summarizeBy: none
+		sourceColumn: num_cnt_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column stt_cli
+		dataType: string
+		lineageTag: 66b888de-d148-40cf-8fcc-26144374b1bb
+		summarizeBy: none
+		sourceColumn: stt_cli
+
+		annotation SummarizationSetBy = Automatic
+
+	column lib_det_typ_gar
+		dataType: string
+		lineageTag: ea3637e0-9d66-4408-ae53-c51f56014211
+		summarizeBy: none
+		sourceColumn: lib_det_typ_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column stt_gar
+		dataType: string
+		lineageTag: 2a72003d-dddd-43ec-94f5-377af9cd6be9
+		summarizeBy: none
+		sourceColumn: stt_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column lib_stt_gar
+		dataType: string
+		lineageTag: 2ae8d1ce-5b67-41a1-98dd-ad7622fa6147
+		summarizeBy: none
+		sourceColumn: lib_stt_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column stt_cnt
+		dataType: string
+		lineageTag: 14e9cda0-b651-4c54-bfe4-15f1d8a26563
+		summarizeBy: none
+		sourceColumn: stt_cnt
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_rang
+		dataType: string
+		lineageTag: b973272d-0adc-4f8a-ad82-decbf90a16a6
+		summarizeBy: none
+		sourceColumn: cd_rang
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_eff_gar
+		dataType: string
+		lineageTag: b21502f0-39eb-4425-8ce6-f7f8255f1072
+		summarizeBy: none
+		sourceColumn: dt_eff_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_ech_gar
+		dataType: string
+		lineageTag: 17cb8188-7ec2-4804-ade2-315c0b18b071
+		summarizeBy: none
+		sourceColumn: dt_ech_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column dur_gar
+		dataType: string
+		lineageTag: aa26463b-d5ef-4eb8-bab8-c6b108f46bf9
+		summarizeBy: none
+		sourceColumn: dur_gar
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_bien_gar_ori
+		dataType: string
+		lineageTag: 0c7d4625-d712-4a16-8754-99c957a11615
+		summarizeBy: none
+		sourceColumn: mnt_bien_gar_ori
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_reval
+		dataType: string
+		lineageTag: 8c21c760-6b2c-46ff-9670-21a56d089de4
+		summarizeBy: none
+		sourceColumn: mnt_reval
+
+		annotation SummarizationSetBy = Automatic
+
+	column vlr_reval_act
+		dataType: string
+		lineageTag: 4aac88f6-a628-4d81-9f03-3f6fde820361
+		summarizeBy: none
+		sourceColumn: vlr_reval_act
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_reval
+		dataType: string
+		lineageTag: 1641a4dc-1581-449b-a718-b1b2d08ee47f
+		summarizeBy: none
+		sourceColumn: dt_reval
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_cnt_ass
+		dataType: string
+		lineageTag: 93a05058-7e1a-4050-9e3b-36760bf49e47
+		summarizeBy: none
+		sourceColumn: num_cnt_ass
+
+		annotation SummarizationSetBy = Automatic
+
+	column lib_cnt_ass
+		dataType: string
+		lineageTag: adb5e17a-2e19-4b25-a841-61534d9fd9ae
+		summarizeBy: none
+		sourceColumn: lib_cnt_ass
+
+		annotation SummarizationSetBy = Automatic
+
+	column nom_cie_ass
+		dataType: string
+		lineageTag: bcec7702-793c-4f96-b6fa-d30def1d3642
+		summarizeBy: none
+		sourceColumn: nom_cie_ass
+
+		annotation SummarizationSetBy = Automatic
+
+	column lib_ville
+		dataType: string
+		lineageTag: 76fa3a8c-f4e1-477c-97c0-4bf39d699e34
+		summarizeBy: none
+		sourceColumn: lib_ville
+
+		annotation SummarizationSetBy = Automatic
+
+	column cd_postal
+		dataType: string
+		lineageTag: caed2020-27a4-400b-ad3d-4e614c3d8680
+		summarizeBy: none
+		sourceColumn: cd_postal
+
+		annotation SummarizationSetBy = Automatic
+
+	column tx_rwa
+		dataType: string
+		lineageTag: 01a4ff8e-d1ea-4dbc-b5b7-132051b194d7
+		summarizeBy: none
+		sourceColumn: tx_rwa
+
+		annotation SummarizationSetBy = Automatic
+
+	column mnt_rwa
+		dataType: string
+		lineageTag: d98c0793-04b1-4efa-94e7-3790b7f6ad7f
+		summarizeBy: none
+		sourceColumn: mnt_rwa
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_mois_part
+		dataType: string
+		lineageTag: cb3ba8a6-cc32-4be9-9f29-e1a8721cc554
+		summarizeBy: none
+		sourceColumn: annee_mois_part
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GARANTIE = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("E:\\louvre\\powerbi\\data\\GARANTIE.csv"),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Typed" = Table.TransformColumnTypes(#"Promoted", {{"id_cli", type text}, {"num_cnt", type text}, {"det_typ_gar", type text}, {"mnt_gar", type number}, {"mnt_gar_cpta", type number}}, "en-US")
+				in
+				    #"Typed"
+
