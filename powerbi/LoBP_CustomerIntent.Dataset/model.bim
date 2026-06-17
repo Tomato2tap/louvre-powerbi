@@ -1,0 +1,1774 @@
+{
+  "name": "Model",
+  "compatibilityLevel": 1600,
+  "model": {
+    "culture": "fr-FR",
+    "collation": "Latin1_General_100_BIN2_UTF8",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "CLIENT",
+        "lineageTag": "42270aad-fdf6-4f42-aa38-0a0db4430ff7",
+        "columns": [
+          {
+            "name": "id_cli",
+            "dataType": "string",
+            "sourceColumn": "id_cli",
+            "summarizeBy": "none",
+            "lineageTag": "d117b16b-8164-4cc5-9c1c-9ae540916c8e",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "cli_c_p",
+            "dataType": "string",
+            "sourceColumn": "cli_c_p",
+            "summarizeBy": "none",
+            "lineageTag": "8551cb08-1715-4e71-89ed-f1d80d593cbe",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "nom_cplt",
+            "dataType": "string",
+            "sourceColumn": "nom_cplt",
+            "summarizeBy": "none",
+            "lineageTag": "b280fc9d-9f86-4076-8649-3eae26d99be5",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_cd_typ",
+            "dataType": "string",
+            "sourceColumn": "lib_cd_typ",
+            "summarizeBy": "none",
+            "lineageTag": "2d9c8171-06e8-437b-9ce0-5fb109cf6a2a",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_gr",
+            "dataType": "string",
+            "sourceColumn": "lib_gr",
+            "summarizeBy": "none",
+            "lineageTag": "e66a7ec4-4d38-40a5-89e9-0dd65e5e2885",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "agc_topz",
+            "dataType": "string",
+            "sourceColumn": "agc_topz",
+            "summarizeBy": "none",
+            "lineageTag": "d34b196d-3820-4707-b91f-d211b9c90fe5",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_ptf",
+            "dataType": "string",
+            "sourceColumn": "lib_ptf",
+            "summarizeBy": "none",
+            "lineageTag": "f476e36b-6fae-4cc6-9727-9a78a3f040ed",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "nom_cons",
+            "dataType": "string",
+            "sourceColumn": "nom_cons",
+            "summarizeBy": "none",
+            "lineageTag": "58ed58f2-79e0-43e1-85e6-94c894e36d46",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "pay_res",
+            "dataType": "string",
+            "sourceColumn": "pay_res",
+            "summarizeBy": "none",
+            "lineageTag": "56e2dcb7-db78-41fd-b64f-722bbee5450e",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_pay_res",
+            "dataType": "string",
+            "sourceColumn": "lib_pay_res",
+            "summarizeBy": "none",
+            "lineageTag": "73e19403-bd68-43e0-a503-6f5d19641904",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "couleur_pays",
+            "dataType": "string",
+            "sourceColumn": "couleur_pays",
+            "summarizeBy": "none",
+            "lineageTag": "4300e303-3667-4965-9371-1505bcfb8101",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_cd_risque_pers",
+            "dataType": "string",
+            "sourceColumn": "lib_cd_risque_pers",
+            "summarizeBy": "none",
+            "lineageTag": "fbd2470f-2a87-4e10-806b-ea51e3393fef",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "cd_risque_pers",
+            "dataType": "string",
+            "sourceColumn": "cd_risque_pers",
+            "summarizeBy": "none",
+            "lineageTag": "f93f51d1-34be-4453-b426-19ddf7bd1d64",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "etat_acc",
+            "dataType": "string",
+            "sourceColumn": "etat_acc",
+            "summarizeBy": "none",
+            "lineageTag": "ac6c8c1a-847e-4a70-99da-c387fd1b7fd1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "top_client_actif",
+            "dataType": "string",
+            "sourceColumn": "top_client_actif",
+            "summarizeBy": "none",
+            "lineageTag": "392f3eb0-c549-47ba-82a1-1c0f97a1ef12",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "typ_enrol",
+            "dataType": "string",
+            "sourceColumn": "typ_enrol",
+            "summarizeBy": "none",
+            "lineageTag": "0c17a18d-f105-4c42-899c-1300ae1ba8b5",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "gelule_global",
+            "dataType": "int64",
+            "sourceColumn": "gelule_global",
+            "summarizeBy": "sum",
+            "lineageTag": "d4b7ed66-12ba-4fc5-a185-821122fe1b3b",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "nb_dev_enrol",
+            "dataType": "int64",
+            "sourceColumn": "nb_dev_enrol",
+            "summarizeBy": "sum",
+            "lineageTag": "009df285-6f84-4666-aefd-97a3ac185698",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "age_cli",
+            "dataType": "int64",
+            "sourceColumn": "age_cli",
+            "summarizeBy": "sum",
+            "lineageTag": "8d4aa43d-fcc2-45ee-aed5-6f740bea0057",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "dt_enrol",
+            "dataType": "dateTime",
+            "sourceColumn": "dt_enrol",
+            "summarizeBy": "none",
+            "lineageTag": "648fe166-6b6c-4e34-9685-afad30b483a9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "dt_der_cnx",
+            "dataType": "dateTime",
+            "sourceColumn": "dt_der_cnx",
+            "summarizeBy": "none",
+            "lineageTag": "11f30df1-8a9b-4db7-8c95-2f10af1f1371",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "dt_fonc",
+            "dataType": "dateTime",
+            "sourceColumn": "dt_fonc",
+            "summarizeBy": "none",
+            "lineageTag": "d5ac4c94-3946-443d-a7bf-92ff243175bf",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "aum_tit",
+            "dataType": "double",
+            "sourceColumn": "aum_tit",
+            "summarizeBy": "sum",
+            "lineageTag": "30ad6747-9331-4f42-b631-4a793f98b42d",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "aum_cot",
+            "dataType": "double",
+            "sourceColumn": "aum_cot",
+            "summarizeBy": "sum",
+            "lineageTag": "3b132401-76e1-4da3-bbfb-7c78677924d5",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_pat_epargne",
+            "dataType": "double",
+            "sourceColumn": "mnt_pat_epargne",
+            "summarizeBy": "sum",
+            "lineageTag": "142056fb-cb5d-445e-a72b-b17861113a40",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_rev_princ",
+            "dataType": "double",
+            "sourceColumn": "mnt_rev_princ",
+            "summarizeBy": "sum",
+            "lineageTag": "755ac300-41b4-4b83-b74a-4429e158ed6b",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CLIENT",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\CLIENT.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    #\"Promoted\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Typed\" = Table.TransformColumnTypes(#\"Promoted\", {{\"id_cli\", type text}, {\"cli_c_p\", type text}, {\"nom_cplt\", type text}, {\"lib_cd_typ\", type text}, {\"lib_gr\", type text}, {\"agc_topz\", type text}, {\"lib_ptf\", type text}, {\"nom_cons\", type text}, {\"pay_res\", type text}, {\"lib_pay_res\", type text}, {\"couleur_pays\", type text}, {\"lib_cd_risque_pers\", type text}, {\"cd_risque_pers\", type text}, {\"etat_acc\", type text}, {\"top_client_actif\", type text}, {\"typ_enrol\", type text}, {\"gelule_global\", Int64.Type}, {\"nb_dev_enrol\", Int64.Type}, {\"age_cli\", Int64.Type}, {\"dt_enrol\", type date}, {\"dt_der_cnx\", type date}, {\"dt_fonc\", type date}, {\"aum_tit\", type number}, {\"aum_cot\", type number}, {\"mnt_pat_epargne\", type number}, {\"mnt_rev_princ\", type number}}, \"en-US\")",
+                "in",
+                "    #\"Typed\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "TRANSACTION",
+        "lineageTag": "52d0cb5b-9709-493c-813a-8751cafd518a",
+        "columns": [
+          {
+            "name": "id_cli",
+            "dataType": "string",
+            "sourceColumn": "id_cli",
+            "summarizeBy": "none",
+            "lineageTag": "04edb2a6-2b47-4dbc-8a0e-0a730c0f6438",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "num_cnt",
+            "dataType": "string",
+            "sourceColumn": "num_cnt",
+            "summarizeBy": "none",
+            "lineageTag": "d584c057-571c-4c1e-9283-6cf9fb0e4e91",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "perimetre",
+            "dataType": "string",
+            "sourceColumn": "perimetre",
+            "summarizeBy": "none",
+            "lineageTag": "651a8565-7560-4c5a-a08a-96eb1cbb3259",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "typ_evt_lv1",
+            "dataType": "string",
+            "sourceColumn": "typ_evt_lv1",
+            "summarizeBy": "none",
+            "lineageTag": "ff5357fa-85c8-48ef-9d99-a6c9b3235a67",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_evt_lv1",
+            "dataType": "string",
+            "sourceColumn": "lib_evt_lv1",
+            "summarizeBy": "none",
+            "lineageTag": "9cbd88ef-8e98-49cc-a4f2-279738ba898f",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "sens",
+            "dataType": "string",
+            "sourceColumn": "sens",
+            "summarizeBy": "none",
+            "lineageTag": "f7291d98-adf8-45e4-816f-300e8711c435",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_evt",
+            "dataType": "double",
+            "sourceColumn": "mnt_evt",
+            "summarizeBy": "sum",
+            "lineageTag": "14f7f891-7ab2-4544-a2b9-a9c6a21f133c",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "devise_compte",
+            "dataType": "string",
+            "sourceColumn": "devise_compte",
+            "summarizeBy": "none",
+            "lineageTag": "bb7c6961-29ef-4d3f-b41b-5058e5432dd3",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mode_paiement",
+            "dataType": "string",
+            "sourceColumn": "mode_paiement",
+            "summarizeBy": "none",
+            "lineageTag": "b7633655-50a0-4ba0-8483-5c6ea5d4ebd6",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "canal_ordre",
+            "dataType": "string",
+            "sourceColumn": "canal_ordre",
+            "summarizeBy": "none",
+            "lineageTag": "951b7191-8593-411b-acd1-586909e675d0",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ctrpty_pays",
+            "dataType": "string",
+            "sourceColumn": "ctrpty_pays",
+            "summarizeBy": "none",
+            "lineageTag": "f84b97c8-24d9-487f-be97-6b5d6318d29e",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ctrpty_couleur_pays",
+            "dataType": "string",
+            "sourceColumn": "ctrpty_couleur_pays",
+            "summarizeBy": "none",
+            "lineageTag": "6aa3335e-0d46-41a3-8349-e923bc24a1d6",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ind_3ds",
+            "dataType": "int64",
+            "sourceColumn": "ind_3ds",
+            "summarizeBy": "sum",
+            "lineageTag": "cbbb7e42-0ccd-452e-8981-927165da12c7",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Transaction_Sensible",
+            "dataType": "int64",
+            "sourceColumn": "Transaction_Sensible",
+            "summarizeBy": "sum",
+            "lineageTag": "db65cdec-7349-4007-a0d1-c6697d6db214",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "dt_realisation",
+            "dataType": "dateTime",
+            "sourceColumn": "dt_realisation",
+            "summarizeBy": "none",
+            "lineageTag": "755e523c-ca0d-4b5a-90c3-3c4568493d04",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "TRANSACTION",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\TRANSACTION.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    #\"Promoted\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Typed\" = Table.TransformColumnTypes(#\"Promoted\", {{\"id_cli\", type text}, {\"num_cnt\", type text}, {\"perimetre\", type text}, {\"typ_evt_lv1\", type text}, {\"lib_evt_lv1\", type text}, {\"sens\", type text}, {\"mnt_evt\", type number}, {\"devise_compte\", type text}, {\"mode_paiement\", type text}, {\"canal_ordre\", type text}, {\"ctrpty_pays\", type text}, {\"ctrpty_couleur_pays\", type text}, {\"ind_3ds\", Int64.Type}, {\"Transaction_Sensible\", Int64.Type}, {\"dt_realisation\", type date}}, \"en-US\")",
+                "in",
+                "    #\"Typed\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "EPARGNE",
+        "lineageTag": "78540698-9674-4e53-8db8-6d2ab039b08a",
+        "columns": [
+          {
+            "name": "id_cli",
+            "dataType": "string",
+            "sourceColumn": "id_cli",
+            "summarizeBy": "none",
+            "lineageTag": "cf94bcb7-7b05-4f23-9dfe-837c4dfd10e0",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "num_cnt",
+            "dataType": "string",
+            "sourceColumn": "num_cnt",
+            "summarizeBy": "none",
+            "lineageTag": "a63539ca-dd25-4451-bd8d-de52acdf93ae",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "perimetre",
+            "dataType": "string",
+            "sourceColumn": "perimetre",
+            "summarizeBy": "none",
+            "lineageTag": "bacdfa2a-3371-47b8-ac6c-0b9a502c6f89",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "fam_pdt",
+            "dataType": "string",
+            "sourceColumn": "fam_pdt",
+            "summarizeBy": "none",
+            "lineageTag": "9357f9b8-92d7-4719-a92d-4640a4fb5cc0",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_fds",
+            "dataType": "string",
+            "sourceColumn": "lib_fds",
+            "summarizeBy": "none",
+            "lineageTag": "7d8a2815-e7f4-4129-b170-f7f03500fe77",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "isin_fds",
+            "dataType": "string",
+            "sourceColumn": "isin_fds",
+            "summarizeBy": "none",
+            "lineageTag": "b1a5628e-3b55-4d89-9053-878e43b3f0bd",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_mod_gest",
+            "dataType": "string",
+            "sourceColumn": "lib_mod_gest",
+            "summarizeBy": "none",
+            "lineageTag": "4fe6463a-9bab-4f67-99f4-6c90a1c3da4b",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "enc_cnt_m",
+            "dataType": "double",
+            "sourceColumn": "enc_cnt_m",
+            "summarizeBy": "sum",
+            "lineageTag": "8f8411c3-bfb1-4aa3-ae84-0ebb406140ae",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "enc_cnt_n1",
+            "dataType": "double",
+            "sourceColumn": "enc_cnt_n1",
+            "summarizeBy": "sum",
+            "lineageTag": "723ae3ef-49b1-48f1-a312-520754927292",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "col_brute",
+            "dataType": "double",
+            "sourceColumn": "col_brute",
+            "summarizeBy": "sum",
+            "lineageTag": "fb5b7a5b-6484-4a59-93a3-7a286fe9e1af",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "decollecte",
+            "dataType": "double",
+            "sourceColumn": "decollecte",
+            "summarizeBy": "sum",
+            "lineageTag": "1ff30b9d-81eb-42df-b7f7-253724fa7882",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "col_nette",
+            "dataType": "double",
+            "sourceColumn": "col_nette",
+            "summarizeBy": "sum",
+            "lineageTag": "68f8730d-26af-443a-b1f3-f3487aedad0e",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "enc_fds_m",
+            "dataType": "double",
+            "sourceColumn": "enc_fds_m",
+            "summarizeBy": "sum",
+            "lineageTag": "eb65489b-ee0e-417d-83fe-b20286dd9c37",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "EPARGNE",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\EPARGNE.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    #\"Promoted\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Typed\" = Table.TransformColumnTypes(#\"Promoted\", {{\"id_cli\", type text}, {\"num_cnt\", type text}, {\"perimetre\", type text}, {\"fam_pdt\", type text}, {\"lib_fds\", type text}, {\"isin_fds\", type text}, {\"lib_mod_gest\", type text}, {\"enc_cnt_m\", type number}, {\"enc_cnt_n1\", type number}, {\"col_brute\", type number}, {\"decollecte\", type number}, {\"col_nette\", type number}, {\"enc_fds_m\", type number}}, \"en-US\")",
+                "in",
+                "    #\"Typed\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "CREDIT",
+        "lineageTag": "6b9cfa6e-defe-4fe5-a860-7b955a9e728f",
+        "columns": [
+          {
+            "name": "id_cli",
+            "dataType": "string",
+            "sourceColumn": "id_cli",
+            "summarizeBy": "none",
+            "lineageTag": "01e2b1ac-54a6-476e-8c46-858c55e3d442",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "num_cnt",
+            "dataType": "string",
+            "sourceColumn": "num_cnt",
+            "summarizeBy": "none",
+            "lineageTag": "8e20a577-2d15-4b91-9451-a0f688593827",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "perimetre",
+            "dataType": "string",
+            "sourceColumn": "perimetre",
+            "summarizeBy": "none",
+            "lineageTag": "d95b51c7-8e30-4ac6-94a5-83b7f8fd8082",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Lib_Marche_Simple",
+            "dataType": "string",
+            "sourceColumn": "Lib_Marche_Simple",
+            "summarizeBy": "none",
+            "lineageTag": "b6592ab9-38a2-4ce1-92e5-9f60a5439f23",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_typ_prt",
+            "dataType": "string",
+            "sourceColumn": "lib_typ_prt",
+            "summarizeBy": "none",
+            "lineageTag": "01f1b88d-6a5e-484c-ab3c-21b1d5aab02a",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_typ_mar",
+            "dataType": "string",
+            "sourceColumn": "lib_typ_mar",
+            "summarizeBy": "none",
+            "lineageTag": "85886a47-85ae-4fa9-bf71-3f9defdefd88",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "lib_cd_etat_creance",
+            "dataType": "string",
+            "sourceColumn": "lib_cd_etat_creance",
+            "summarizeBy": "none",
+            "lineageTag": "db2fb583-ed68-4bd7-8944-83cd2ca73980",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Lib_Bucket_Credit",
+            "dataType": "string",
+            "sourceColumn": "Lib_Bucket_Credit",
+            "summarizeBy": "none",
+            "lineageTag": "ec946d76-09eb-4bae-8a56-74a3e326894a",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "enc_cpt",
+            "dataType": "double",
+            "sourceColumn": "enc_cpt",
+            "summarizeBy": "sum",
+            "lineageTag": "26f32ade-bfd0-476a-9391-5738d304d1d8",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_nom",
+            "dataType": "double",
+            "sourceColumn": "mnt_nom",
+            "summarizeBy": "sum",
+            "lineageTag": "e9f88735-24b8-46fb-a0a5-7cedca0f4b3d",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_dblq",
+            "dataType": "double",
+            "sourceColumn": "mnt_dblq",
+            "summarizeBy": "sum",
+            "lineageTag": "6ffa214b-3c71-467d-9807-db3734726705",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_disp",
+            "dataType": "double",
+            "sourceColumn": "mnt_disp",
+            "summarizeBy": "sum",
+            "lineageTag": "27eaee3e-e7d8-47c4-9b49-55fed4a3f174",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_krd_tot",
+            "dataType": "double",
+            "sourceColumn": "mnt_krd_tot",
+            "summarizeBy": "sum",
+            "lineageTag": "e786117c-3f02-4cbc-a593-d5303bdad1cb",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_krd_sain",
+            "dataType": "double",
+            "sourceColumn": "mnt_krd_sain",
+            "summarizeBy": "sum",
+            "lineageTag": "a6a4aa1f-d15f-4fcd-8233-500370a004fe",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_krd_imp",
+            "dataType": "double",
+            "sourceColumn": "mnt_krd_imp",
+            "summarizeBy": "sum",
+            "lineageTag": "111968bc-1ed2-400d-868e-94aa14a2d26d",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_prov_b_ifrs9",
+            "dataType": "double",
+            "sourceColumn": "mnt_prov_b_ifrs9",
+            "summarizeBy": "sum",
+            "lineageTag": "e4b79b30-8659-40fb-ab0f-6902aeae19e6",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_prov_hb_ifrs9",
+            "dataType": "double",
+            "sourceColumn": "mnt_prov_hb_ifrs9",
+            "summarizeBy": "sum",
+            "lineageTag": "97b00196-4351-45c6-935d-8b69063379e9",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "total_rwa",
+            "dataType": "double",
+            "sourceColumn": "total_rwa",
+            "summarizeBy": "sum",
+            "lineageTag": "a3a7e854-8232-4eaa-a45f-248fb637e26d",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "ltv_act",
+            "dataType": "double",
+            "sourceColumn": "ltv_act",
+            "summarizeBy": "sum",
+            "lineageTag": "47430507-1b07-4097-8e2b-ab009dd7196f",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "teg",
+            "dataType": "double",
+            "sourceColumn": "teg",
+            "summarizeBy": "sum",
+            "lineageTag": "8176b9ee-f87c-408d-98b5-5330a59f3f46",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "tx_int_act",
+            "dataType": "double",
+            "sourceColumn": "tx_int_act",
+            "summarizeBy": "sum",
+            "lineageTag": "912a2873-e2c1-4268-a336-1933c4c81feb",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CREDIT",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\CREDIT.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    #\"Promoted\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Typed\" = Table.TransformColumnTypes(#\"Promoted\", {{\"id_cli\", type text}, {\"num_cnt\", type text}, {\"perimetre\", type text}, {\"Lib_Marche_Simple\", type text}, {\"lib_typ_prt\", type text}, {\"lib_typ_mar\", type text}, {\"lib_cd_etat_creance\", type text}, {\"Lib_Bucket_Credit\", type text}, {\"enc_cpt\", type number}, {\"mnt_nom\", type number}, {\"mnt_dblq\", type number}, {\"mnt_disp\", type number}, {\"mnt_krd_tot\", type number}, {\"mnt_krd_sain\", type number}, {\"mnt_krd_imp\", type number}, {\"mnt_prov_b_ifrs9\", type number}, {\"mnt_prov_hb_ifrs9\", type number}, {\"total_rwa\", type number}, {\"ltv_act\", type number}, {\"teg\", type number}, {\"tx_int_act\", type number}}, \"en-US\")",
+                "in",
+                "    #\"Typed\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "GARANTIE",
+        "lineageTag": "d4be9a34-2108-4de3-8d94-3072d1fc3547",
+        "columns": [
+          {
+            "name": "id_cli",
+            "dataType": "string",
+            "sourceColumn": "id_cli",
+            "summarizeBy": "none",
+            "lineageTag": "791dc7a3-998e-406a-bf10-258a9e194924",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "num_cnt",
+            "dataType": "string",
+            "sourceColumn": "num_cnt",
+            "summarizeBy": "none",
+            "lineageTag": "0dceb307-8441-4c49-b243-5c9c3abd8c89",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "det_typ_gar",
+            "dataType": "string",
+            "sourceColumn": "det_typ_gar",
+            "summarizeBy": "none",
+            "lineageTag": "502087d1-d47a-4c21-b0ae-2d5e9fa4b950",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_gar",
+            "dataType": "double",
+            "sourceColumn": "mnt_gar",
+            "summarizeBy": "sum",
+            "lineageTag": "c53d91d6-98d9-4e2b-ac52-0be3a13a400d",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_gar_cpta",
+            "dataType": "double",
+            "sourceColumn": "mnt_gar_cpta",
+            "summarizeBy": "sum",
+            "lineageTag": "dd4c1de8-1308-4fd5-bee4-e01ba72833f2",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "GARANTIE",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\GARANTIE.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    #\"Promoted\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Typed\" = Table.TransformColumnTypes(#\"Promoted\", {{\"id_cli\", type text}, {\"num_cnt\", type text}, {\"det_typ_gar\", type text}, {\"mnt_gar\", type number}, {\"mnt_gar_cpta\", type number}}, \"en-US\")",
+                "in",
+                "    #\"Typed\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "SERVICE",
+        "lineageTag": "78b6b710-3613-492c-871c-46e81619048c",
+        "columns": [
+          {
+            "name": "id_cli",
+            "dataType": "string",
+            "sourceColumn": "id_cli",
+            "summarizeBy": "none",
+            "lineageTag": "fff25a7b-63a4-42c2-9e45-f5311437c3ea",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "num_cnt",
+            "dataType": "string",
+            "sourceColumn": "num_cnt",
+            "summarizeBy": "none",
+            "lineageTag": "cb1e44a0-b198-4d86-afff-61ba426dbeaf",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "fam_pdt",
+            "dataType": "string",
+            "sourceColumn": "fam_pdt",
+            "summarizeBy": "none",
+            "lineageTag": "bf2faee4-4e81-4bfd-9aab-ef905a772ab1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "mnt_tar_brt",
+            "dataType": "double",
+            "sourceColumn": "mnt_tar_brt",
+            "summarizeBy": "sum",
+            "lineageTag": "db0b5407-2523-4920-a0f9-71e6e9ef7088",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "SERVICE",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\SERVICE.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    #\"Promoted\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Typed\" = Table.TransformColumnTypes(#\"Promoted\", {{\"id_cli\", type text}, {\"num_cnt\", type text}, {\"fam_pdt\", type text}, {\"mnt_tar_brt\", type number}}, \"en-US\")",
+                "in",
+                "    #\"Typed\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "GSM",
+        "lineageTag": "8168b988-9dcf-4af1-b348-d4f4539c6e04",
+        "columns": [
+          {
+            "name": "isin_fds",
+            "dataType": "string",
+            "sourceColumn": "isin_fds",
+            "summarizeBy": "none",
+            "lineageTag": "6ffa2b2f-3413-4acf-b446-e7e47c6a9fe4",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Classification_SFDR",
+            "dataType": "string",
+            "sourceColumn": "Classification_SFDR",
+            "summarizeBy": "none",
+            "lineageTag": "9fb35ceb-7444-4749-9854-a89566156b58",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "enc_fds_m",
+            "dataType": "double",
+            "sourceColumn": "enc_fds_m",
+            "summarizeBy": "sum",
+            "lineageTag": "4a801f1f-4122-4285-b2c5-dc433aba0696",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "performance_cli",
+            "dataType": "double",
+            "sourceColumn": "performance_cli",
+            "summarizeBy": "sum",
+            "lineageTag": "26959277-7e27-4311-8e28-376f20405497",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "GSM",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"E:\\\\louvre\\\\powerbi\\\\data\\\\GSM.csv\"),[Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    #\"Promoted\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Typed\" = Table.TransformColumnTypes(#\"Promoted\", {{\"isin_fds\", type text}, {\"Classification_SFDR\", type text}, {\"enc_fds_m\", type number}, {\"performance_cli\", type number}}, \"en-US\")",
+                "in",
+                "    #\"Typed\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "_M_Dashboard",
+        "lineageTag": "a3269373-3afc-4ede-b936-1bd1659167e6",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "Column1",
+            "dataType": "string",
+            "sourceColumn": "Column1",
+            "isHidden": true,
+            "summarizeBy": "none",
+            "lineageTag": "6fe675b6-aadc-44d9-be2a-c5e2cfe52c7a",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "_M_Dashboard",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text)) in type table [ Column1 = _t ])\nin\n    Source"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Nb Clients Totaux",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[cli_c_p] IN {\"CL\",\"CT\"})",
+            "lineageTag": "93b9fe05-5aa2-4ed3-af66-96b72ac9bb35",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb Clients Actifs",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[top_client_actif]=\"O\")",
+            "lineageTag": "fa392e70-205c-4c27-8992-668e2dd1327d",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb Prospects",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[cli_c_p]=\"PR\")",
+            "lineageTag": "fd5fa9e2-ed9d-48e5-97f4-8ae0883231b8",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb Clients Enrollés",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[nb_dev_enrol]>0)",
+            "lineageTag": "c1a64528-3df6-49bd-8af9-bf48b6997ef0",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Taux Enrollment",
+            "expression": "DIVIDE([Nb Clients Enrollés],[Nb Clients Totaux],0)",
+            "lineageTag": "5cd54e60-45bf-4ee1-8643-93996ff4ae6e",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Taux Clients Actifs",
+            "expression": "DIVIDE([Nb Clients Actifs],[Nb Clients Totaux],0)",
+            "lineageTag": "56df4891-386f-45e8-91d3-78d10486a0f4",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Nb Smartphones",
+            "expression": "SUM(CLIENT[nb_dev_enrol])",
+            "lineageTag": "9a5ac5e7-ccf7-453e-b6ac-2c83dfeaad8a",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb Comptes Bloqués",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[etat_acc]=\"B\")",
+            "lineageTag": "6bb02496-0ef3-4d6e-a5a9-d30f01cfebc7",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb Comptes Suspendus",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[etat_acc]=\"S\")",
+            "lineageTag": "2abd465c-bffb-446b-bb23-e994ba74ac10",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb Agences",
+            "expression": "DISTINCTCOUNT(CLIENT[agc_topz])",
+            "lineageTag": "31ed3e7d-f67b-48f9-acfb-848627e69704",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb Pays",
+            "expression": "DISTINCTCOUNT(CLIENT[pay_res])",
+            "lineageTag": "c8f41666-e7a3-45b7-a076-d5d8594d9f2b",
+            "formatString": "#,0"
+          },
+          {
+            "name": "AUM Total",
+            "expression": "SUM(CLIENT[aum_tit])",
+            "lineageTag": "c4ae2a2f-2548-450b-96ec-d8c4c4836183",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "AUM Moyen",
+            "expression": "DIVIDE([AUM Total],[Nb Clients Totaux],0)",
+            "lineageTag": "b2b83a70-3611-4aa0-894d-b7ce4be77925",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Encours Épargne",
+            "expression": "CALCULATE(SUM(EPARGNE[enc_cnt_m]), EPARGNE[perimetre]=\"epargne\")",
+            "lineageTag": "0db85f79-f278-41f0-9016-44e2315d1c1e",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Encours Fonds",
+            "expression": "SUM(EPARGNE[enc_fds_m])",
+            "lineageTag": "d2c9a734-be51-4e20-8dea-9da1d9e9d269",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Encours Crédit Total",
+            "expression": "SUM(CREDIT[enc_cpt])",
+            "lineageTag": "14bb9759-5b4b-4718-9f3c-fb9c490f0db7",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Capital Sain",
+            "expression": "SUM(CREDIT[mnt_krd_sain])",
+            "lineageTag": "8ede058a-f0d8-4339-8fb9-f790fad01037",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Capital Impayé",
+            "expression": "SUM(CREDIT[mnt_krd_imp])",
+            "lineageTag": "54c4622d-9010-490f-957b-f277f2efb419",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Nb Crédits",
+            "expression": "DISTINCTCOUNT(CREDIT[num_cnt])",
+            "lineageTag": "93eef186-88da-439c-8a21-92b3e241af77",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Montant Nominal",
+            "expression": "SUM(CREDIT[mnt_nom])",
+            "lineageTag": "aef55835-d079-40f8-a803-fe79548f0b3c",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Montant Débloqué",
+            "expression": "SUM(CREDIT[mnt_dblq])",
+            "lineageTag": "986a4848-ede0-4b7e-839e-6b5a5c95f04f",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Reste à Débloquer",
+            "expression": "SUM(CREDIT[mnt_disp])",
+            "lineageTag": "f7a09b41-5227-4370-8601-843e32e52c15",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Taux Impayés",
+            "expression": "DIVIDE(SUM(CREDIT[mnt_krd_imp]),SUM(CREDIT[mnt_krd_tot]),0)",
+            "lineageTag": "2db0ab78-12ef-4963-9774-68ed6550cad5",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "LTV Moyenne",
+            "expression": "AVERAGEX(FILTER(CREDIT,CREDIT[ltv_act]>0),CREDIT[ltv_act])",
+            "lineageTag": "c08f82ab-e7b9-4987-bfd4-3d531ddd403c",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "TEG Moyen",
+            "expression": "AVERAGEX(FILTER(CREDIT,CREDIT[teg]>0),CREDIT[teg])",
+            "lineageTag": "3fbe33f4-82aa-4a3c-9307-0f03239d3f53",
+            "formatString": "0.00%"
+          },
+          {
+            "name": "Provisions IFRS9 Crédit",
+            "expression": "SUM(CREDIT[mnt_prov_b_ifrs9])+SUM(CREDIT[mnt_prov_hb_ifrs9])",
+            "lineageTag": "81f29b63-0f2e-4c17-b923-68024924f6e6",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "RWA Crédit",
+            "expression": "SUM(CREDIT[total_rwa])",
+            "lineageTag": "25b708c2-e82a-4d58-b90c-e04bab1048e7",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Montant Garanties",
+            "expression": "SUM(GARANTIE[mnt_gar])",
+            "lineageTag": "dc4b88e1-2c7a-4658-95c3-ab695fd13a55",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Taux Couverture Garanties",
+            "expression": "DIVIDE(SUM(GARANTIE[mnt_gar_cpta]),[Encours Crédit Total],0)",
+            "lineageTag": "9da72659-b950-4ca3-bf82-97d48b3f98e0",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Collecte Brute",
+            "expression": "CALCULATE(SUM(EPARGNE[col_brute]), EPARGNE[perimetre]=\"epargne\")",
+            "lineageTag": "08be68db-40cb-438f-b690-c3ef66f182b0",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Décollecte",
+            "expression": "CALCULATE(SUM(EPARGNE[decollecte]), EPARGNE[perimetre]=\"epargne\")",
+            "lineageTag": "f52610f4-54f7-40d9-bce7-4ce3abc6e1e0",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Collecte Nette",
+            "expression": "CALCULATE(SUM(EPARGNE[col_nette]), EPARGNE[perimetre]=\"epargne\")",
+            "lineageTag": "9c32e77f-c64c-4515-9b9f-ef405cfd0a86",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Volume Transactions",
+            "expression": "SUM('TRANSACTION'[mnt_evt])",
+            "lineageTag": "577b34fb-e6b1-4719-9c0d-436cb8b34ec2",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Nb Transactions",
+            "expression": "COUNTROWS('TRANSACTION')",
+            "lineageTag": "6eb9c33a-e2b7-453d-9cb1-5ccd5cd048e0",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb Transactions Sensibles",
+            "expression": "CALCULATE(COUNTROWS('TRANSACTION'), 'TRANSACTION'[Transaction_Sensible]=1)",
+            "lineageTag": "fcdeeb7b-4bcf-4f21-b6e4-5f572b82b523",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Volume Tx Sensibles",
+            "expression": "CALCULATE(SUM('TRANSACTION'[mnt_evt]), 'TRANSACTION'[Transaction_Sensible]=1)",
+            "lineageTag": "5c7f7cd1-9d57-4146-a664-cfb010ffc5e2",
+            "formatString": "#,0 €"
+          },
+          {
+            "name": "Clients Sensibles",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[cd_risque_pers] IN {\"E\",\"F\"})",
+            "lineageTag": "9ab0f01e-f661-4e93-8cb5-5ea260d09d28",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb KYC Rouge",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[gelule_global]=10)",
+            "lineageTag": "eed997cf-9670-463a-9d8e-00a232286d46",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Nb KYC Orange",
+            "expression": "CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]), CLIENT[gelule_global]=5)",
+            "lineageTag": "e00c07fa-3db8-445a-8a7a-6a2e2295eba8",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Taux Conformité KYC",
+            "expression": "DIVIDE(CALCULATE(DISTINCTCOUNT(CLIENT[id_cli]),CLIENT[gelule_global]=0),[Nb Clients Totaux],0)",
+            "lineageTag": "380a084f-bd88-4a84-b13d-d45ea8ffe319",
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Date Fonctionnelle",
+            "expression": "\"Données arrêtées au \" & FORMAT(MAX(CLIENT[dt_fonc]),\"DD/MM/YYYY\")",
+            "lineageTag": "720a188e-5786-4029-8f5f-935fbf5633b7"
+          }
+        ]
+      },
+      {
+        "name": "Dictionnaire",
+        "lineageTag": "bed9adfa-3d7d-46c3-8589-a08e812ea34b",
+        "isHidden": true,
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Catégorie",
+            "dataType": "string",
+            "sourceColumn": "Catégorie",
+            "summarizeBy": "none",
+            "lineageTag": "eac93c4f-d763-4645-b859-e3d4b67d4cdb",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Terme",
+            "dataType": "string",
+            "sourceColumn": "Terme",
+            "summarizeBy": "none",
+            "lineageTag": "88f2e100-c144-4b1c-91bf-d995a48c6756",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Définition",
+            "dataType": "string",
+            "sourceColumn": "Définition",
+            "summarizeBy": "none",
+            "lineageTag": "caf8fee7-53ab-4807-b159-c74c7eceee9c",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Dictionnaire",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\n    \"Catégorie\", STRING, \"Terme\", STRING, \"Définition\", STRING,\n    {\n        {\"Patrimoine\", \"AUM\", \"Assets Under Management : encours total géré pour le client (titulaire).\"},\n        {\"Patrimoine\", \"Encours Épargne\", \"Capital des contrats d'épargne au mois en cours.\"},\n        {\"Patrimoine\", \"Encours Crédit\", \"Capital restant dû sur l'ensemble des crédits.\"},\n        {\"Activité\", \"Client actif\", \"Client avec ≥9 mouvements (pers. physique) ou ≥4 (pers. morale) sur 10 des 12 derniers mois.\"},\n        {\"Activité\", \"Prospect\", \"Relation PR : pas encore client équipé.\"},\n        {\"Activité\", \"Collecte nette\", \"Collecte brute − décollecte : flux net d'épargne sur la période.\"},\n        {\"Risque\", \"Cotation MacDonough\", \"Niveau de risque crédit : C+ solvable, C- incident, E douteux (>90j), F contentieux.\"},\n        {\"Risque\", \"Client sensible\", \"Client coté E (douteux) ou F (contentieux).\"},\n        {\"Risque\", \"KYC / gélule\", \"Qualité de connaissance client : 0 vert (conforme), 5 orange (à mettre à jour), 10 rouge (MAJ obligatoire).\"},\n        {\"Risque\", \"Couleur pays\", \"Risque pays : vert/orange/rouge/noir selon embargo, sanctions, gel des avoirs.\"},\n        {\"Conformité\", \"LCB-FT\", \"Lutte Contre le Blanchiment et le Financement du Terrorisme.\"},\n        {\"Conformité\", \"Transaction sensible\", \"Opération impliquant un pays sous embargo, sanctions ou gel des avoirs (GDA).\"},\n        {\"Conformité\", \"FATCA / CRS\", \"Échange automatique d'informations fiscales (US / OCDE).\"},\n        {\"Digital\", \"Enrôlement\", \"Client disposant d'au moins un terminal de confiance (mobile / web).\"},\n        {\"Digital\", \"Taux d'enrôlement\", \"Part des clients enrôlés sur le total des clients.\"},\n        {\"Digital\", \"Canal\", \"Origine de l'opération : Web, Mobile, iOS, Android, Agence, SVI.\"},\n        {\"Crédit\", \"LTV\", \"Loan To Value : montant du prêt rapporté à la valeur (revalorisée) du bien.\"},\n        {\"Crédit\", \"TEG\", \"Taux Effectif Global : coût total du crédit en pourcentage annuel.\"},\n        {\"Crédit\", \"Taux d'impayés\", \"Capital impayé rapporté au capital restant dû total.\"},\n        {\"Crédit\", \"Bucket IFRS9\", \"Classement de la créance : Sain, Sensible, Douteux/Contentieux (provisionnement).\"},\n        {\"Crédit\", \"RWA\", \"Risk Weighted Assets : actifs pondérés du risque (ratio prudentiel).\"},\n        {\"Crédit\", \"Couverture garanties\", \"Montant des garanties comptables rapporté à l'encours de crédit.\"},\n        {\"Épargne\", \"SFDR\", \"Classification durabilité : Article 8 (ESG) ou Article 9 (impact).\"},\n        {\"Épargne\", \"Mode de gestion\", \"Gestion Libre ou Sous Mandat (déléguée à la banque).\"},\n        {\"Dimensions\", \"Type de client\", \"P personne physique, E entreprise individuelle, S société, I institution financière.\"},\n        {\"Dimensions\", \"Groupe de risque\", \"Segmentation interne du risque client (Groupe 1 à 5).\"},\n        {\"Dimensions\", \"Agence / PGP\", \"Pôle de Gestion Privée de rattachement du client.\"}\n    }\n)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tutoriel",
+        "lineageTag": "38efb690-1c2e-48e9-b9f7-6585454a5550",
+        "isHidden": true,
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Étape",
+            "dataType": "int64",
+            "sourceColumn": "Étape",
+            "summarizeBy": "none",
+            "lineageTag": "9f672567-dcff-457b-9354-ab77ede822b8",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Action",
+            "dataType": "string",
+            "sourceColumn": "Action",
+            "summarizeBy": "none",
+            "lineageTag": "f848a0e2-274b-4632-af67-ba76e2b9d494",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Détail",
+            "dataType": "string",
+            "sourceColumn": "Détail",
+            "summarizeBy": "none",
+            "lineageTag": "b46e5591-22ea-4469-a628-1bcdf22ee2c4",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Tutoriel",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DATATABLE(\n    \"Étape\", INTEGER, \"Action\", STRING, \"Détail\", STRING,\n    {\n        {1, \"Filtrer\", \"Utilisez les listes déroulantes de la barre latérale (Type, Agence, Pays…). Type et Agence sont synchronisés entre toutes les pages.\"},\n        {2, \"Croiser (cross-filter)\", \"Cliquez une part de donut ou une barre : tous les autres visuels se filtrent. Recliquez pour annuler.\"},\n        {3, \"Explorer (drill-down)\", \"Sur un graphe hiérarchique, double-cliquez ou utilisez les flèches en haut du visuel pour descendre (ex. Pays › Agence).\"},\n        {4, \"Naviguer\", \"Changez de page via les boutons de navigation de la barre latérale ou les onglets en bas.\"},\n        {5, \"Trier\", \"Cliquez l'en-tête d'une colonne d'une table pour trier (ex. AUM décroissant).\"},\n        {6, \"Voir le détail\", \"Survolez un élément pour l'infobulle ; clic droit puis « Afficher sous forme de table ».\"},\n        {7, \"Exporter\", \"Clic droit sur un visuel › Exporter les données ; ou menu « … » › Exporter.\"},\n        {8, \"Actualiser\", \"Ruban Accueil › Actualiser pour recharger les données depuis les sources.\"}\n    }\n)"
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "191d7a8b-399b-49ce-9d39-f3ed82869163",
+        "fromTable": "TRANSACTION",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "d242face-df85-4b9a-8648-a410399dcf4f",
+        "fromTable": "EPARGNE",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "faca26c1-8b32-410d-9f65-445403abdb04",
+        "fromTable": "CREDIT",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "2a52aad7-1d52-4e7c-959d-e629d55cf469",
+        "fromTable": "SERVICE",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "5da64adb-ea71-4710-b814-55463ca8f779",
+        "fromTable": "GARANTIE",
+        "fromColumn": "id_cli",
+        "toTable": "CLIENT",
+        "toColumn": "id_cli",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": false
+      },
+      {
+        "name": "49f9a149-19c9-4496-bd1e-7a97c612fe50",
+        "fromTable": "GARANTIE",
+        "fromColumn": "num_cnt",
+        "toTable": "CREDIT",
+        "toColumn": "num_cnt",
+        "crossFilteringBehavior": "oneDirection"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"CLIENT\", \"TRANSACTION\", \"EPARGNE\", \"CREDIT\", \"GARANTIE\", \"SERVICE\", \"GSM\"]"
+      }
+    ]
+  }
+}

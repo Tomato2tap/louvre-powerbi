@@ -16,3 +16,9 @@ _test_open.png
 # Python
 __pycache__/
 *.pyc
+
+# Screenshots / captures de travail (racine)
+/_*.png
+
+# Outputs générés
+outputs/
