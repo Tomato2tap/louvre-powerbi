@@ -129,19 +129,55 @@ def filtre(field, label=None):
                               "qInitialDataFetch": [{"qTop":0,"qLeft":0,
                                                      "qHeight":200,"qWidth":1}]}]}
 
+_SIZES = {
+    "kpi":           (4, 3),
+    "barchart":      (8, 5), "piechart":   (8, 5), "linechart":     (8, 5),
+    "combochart":    (8, 5), "treemap":    (8, 5), "waterfallchart": (8, 5),
+    "scatterplot":   (12, 5),
+    "table":         (24, 4),
+    "pivot-table":   (24, 5),
+    "filterpane":    (6, 3),
+}
+
+def _place(items):
+    """Auto-place (qid, vtype) items on a 24-col grid, return cells list."""
+    cells, col, row, row_h = [], 0, 0, 0
+    for qid, vtype in items:
+        w, h = _SIZES.get(vtype, (6, 4))
+        if vtype in ("table", "pivot-table"):
+            if col > 0: row += row_h; col = 0; row_h = 0
+        elif col + w > 24:
+            row += row_h; col = 0; row_h = 0
+        cells.append({"name": qid, "type": vtype,
+                      "col": col, "row": row, "colspan": w, "rowspan": h})
+        row_h = max(row_h, h); col += w
+    return cells
+
 def new_sheet(q, doc_handle, title):
     r = q.call(doc_handle, "CreateObject", [{
         "qInfo": {"qType": "sheet"},
         "qMetaDef": {"title": title},
-        "cells": [], "columns": 24, "rows": 12
+        "cells": [], "columns": 24, "rows": 24
     }])
-    h = r["result"]["qReturn"]["qHandle"]
+    ret = r["result"]["qReturn"]
+    h, qid = ret["qHandle"], ret["qGenericId"]
     print(f"    [OK] Feuille '{title}' [h={h}]")
-    return h
+    return h, qid
 
 def child(q, sheet_h, props):
     r = q.call(sheet_h, "CreateChild", [props])
-    return r["result"]["qReturn"]["qHandle"]
+    ret = r["result"]["qReturn"]
+    return ret["qGenericId"], ret["qHandle"]
+
+def layout(q, sheet_h, sheet_qid, items):
+    cells = _place(items)
+    q.call(sheet_h, "SetProperties", [{
+        "qInfo": {"qId": sheet_qid, "qType": "sheet"},
+        "qMetaDef": {},
+        "cells": cells,
+        "columns": 24,
+        "rows": 24
+    }])
 
 # ── SCRIPT LOCAL ──────────────────────────────────────────────────────────────
 def local_script():
@@ -162,210 +198,196 @@ def create_connection(q, doc):
     return conn_id
 
 # ── 7 FEUILLES ────────────────────────────────────────────────────────────────
-def create_sheets(q, doc):
-    print("\n[3/3] Création des 7 feuilles…")
+def _sheet(q, doc, title, objects):
+    """Crée une feuille avec tous ses objets positionnés dans le grid."""
+    s, sqid = new_sheet(q, doc, title)
+    items = []
+    for props in objects:
+        vtype = props["qInfo"]["qType"]
+        qid, _ = child(q, s, props)
+        items.append((qid, vtype))
+    layout(q, s, sqid, items)
 
-    # 1 — Synthèse Exécutive
-    s = new_sheet(q, doc, "Synthèse Exécutive")
-    for lbl, expr, fmt in [
-        ("Nb Clients",        NB_CLI,   FMTK),
-        ("AUM Total",         AUM,      FMTN),
-        ("Encours Épargne",   EP_ENC,   FMTN),
-        ("Encours Crédit",    CR_ENC,   FMTN),
-        ("Collecte Nette",    COL_NET,  FMTN),
-        ("Clients Actifs",    NB_ACT,   FMTK),
-        ("Clients Sensibles", SENSIB,   FMTK),
-        ("Taux Enrôlement",   ENROL_TX, FMTP),
-    ]:
-        child(q, s, kpi(lbl, expr, fmt))
-    child(q, s, chart("piechart","Clients par type",
-        [_dim("lib_cd_typ","Type")],[_meas(NB_CLI,"Clients",FMTK)]))
-    child(q, s, chart("barchart","Clients par agence",
-        [_dim("agc_topz","Agence")],[_meas(NB_CLI,"Clients",FMTK)]))
-    child(q, s, chart("linechart","Volume transactions par mois",
-        [_dim("AnneeMois","Mois")],[_meas(VOL_TX,"Volume",FMTN)]))
-    child(q, s, tbl("Détail clients",
-        [_dim("nom_cplt","Client"),_dim("lib_cd_typ","Type"),
-         _dim("agc_topz","Agence"),_dim("lib_pay_res","Pays"),
-         _dim("lib_cd_risque_pers","Risque")],
-        [_meas(AUM,"AUM",FMTN),_meas(EP_ENC,"Épargne",FMTN),_meas(CR_ENC,"Crédit",FMTN)]))
-    for f,l in [("lib_cd_typ","Type client"),("agc_topz","Agence"),
-                ("lib_pay_res","Pays"),("lib_gr","Groupe risque")]:
-        child(q, s, filtre(f, l))
+def create_sheets(q, doc):
+    print("\n[3/3] Creation des 7 feuilles...")
+
+    # 1 — Synthese Executive
+    _sheet(q, doc, "Synthese Executive", [
+        kpi("Nb Clients",        NB_CLI,   FMTK),
+        kpi("AUM Total",         AUM,      FMTN),
+        kpi("Encours Epargne",   EP_ENC,   FMTN),
+        kpi("Encours Credit",    CR_ENC,   FMTN),
+        kpi("Collecte Nette",    COL_NET,  FMTN),
+        kpi("Clients Actifs",    NB_ACT,   FMTK),
+        kpi("Clients Sensibles", SENSIB,   FMTK),
+        kpi("Taux Enrolement",   ENROL_TX, FMTP),
+        chart("piechart","Clients par type",
+            [_dim("lib_cd_typ","Type")],[_meas(NB_CLI,"Clients",FMTK)]),
+        chart("barchart","Clients par agence",
+            [_dim("agc_topz","Agence")],[_meas(NB_CLI,"Clients",FMTK)]),
+        chart("linechart","Volume transactions par mois",
+            [_dim("AnneeMois","Mois")],[_meas(VOL_TX,"Volume",FMTN)]),
+        tbl("Detail clients",
+            [_dim("nom_cplt","Client"),_dim("lib_cd_typ","Type"),
+             _dim("agc_topz","Agence"),_dim("lib_pay_res","Pays"),
+             _dim("lib_cd_risque_pers","Risque")],
+            [_meas(AUM,"AUM",FMTN),_meas(EP_ENC,"Epargne",FMTN),_meas(CR_ENC,"Credit",FMTN)]),
+        filtre("lib_cd_typ","Type client"), filtre("agc_topz","Agence"),
+        filtre("lib_pay_res","Pays"),       filtre("lib_gr","Groupe risque"),
+    ])
 
     # 2 — Digital & Adoption
-    s = new_sheet(q, doc, "Digital & Adoption")
-    for lbl, expr, fmt in [
-        ("Nb Clients",         NB_CLI,                                              FMTK),
-        ("Clients Enrôlés",    NB_ENROL,                                            FMTK),
-        ("Taux Enrôlement",    ENROL_TX,                                            FMTP),
-        ("Nb Smartphones",     "Sum(nb_dev_enrol)",                                 FMTK),
-        ("Comptes Bloqués",    "Count(DISTINCT {<etat_acc={'B'}>} id_cli)",         FMTK),
-        ("Comptes Suspendus",  "Count(DISTINCT {<etat_acc={'S'}>} id_cli)",         FMTK),
-    ]:
-        child(q, s, kpi(lbl, expr, fmt))
-    child(q, s, chart("piechart","Transactions par canal",
-        [_dim("TR_canal_ordre","Canal")],[_meas("Count(TR_mnt_evt)","Transactions",FMTK)]))
-    child(q, s, chart("linechart","Volume transactions / mois",
-        [_dim("AnneeMois","Mois")],[_meas(VOL_TX,"Volume",FMTN)]))
-    child(q, s, chart("barchart","Enrôlés par type",
-        [_dim("typ_enrol","Type")],[_meas(NB_ENROL,"Enrôlés",FMTK)]))
-    child(q, s, tbl("Clients à surveiller",
-        [_dim("nom_cplt","Client"),_dim("etat_acc","État accès"),
-         _dim("typ_enrol","Type enrôl."),_dim("agc_topz","Agence")],
-        [_meas("Sum(nb_dev_enrol)","Appareils",FMTK)]))
-    for f,l in [("lib_cd_typ","Type"),("agc_topz","Agence"),
-                ("etat_acc","État accès"),("typ_enrol","Type enrôlement")]:
-        child(q, s, filtre(f, l))
+    _sheet(q, doc, "Digital & Adoption", [
+        kpi("Nb Clients",         NB_CLI,                                             FMTK),
+        kpi("Clients Enroles",    NB_ENROL,                                           FMTK),
+        kpi("Taux Enrolement",    ENROL_TX,                                           FMTP),
+        kpi("Nb Smartphones",     "Sum(nb_dev_enrol)",                                FMTK),
+        kpi("Comptes Bloques",    "Count(DISTINCT {<etat_acc={'B'}>} id_cli)",        FMTK),
+        kpi("Comptes Suspendus",  "Count(DISTINCT {<etat_acc={'S'}>} id_cli)",        FMTK),
+        chart("piechart","Transactions par canal",
+            [_dim("TR_canal_ordre","Canal")],[_meas("Count(TR_mnt_evt)","Transactions",FMTK)]),
+        chart("linechart","Volume transactions / mois",
+            [_dim("AnneeMois","Mois")],[_meas(VOL_TX,"Volume",FMTN)]),
+        chart("barchart","Enroles par type",
+            [_dim("typ_enrol","Type")],[_meas(NB_ENROL,"Enroles",FMTK)]),
+        tbl("Clients a surveiller",
+            [_dim("nom_cplt","Client"),_dim("etat_acc","Etat acces"),
+             _dim("typ_enrol","Type enrol."),_dim("agc_topz","Agence")],
+            [_meas("Sum(nb_dev_enrol)","Appareils",FMTK)]),
+        filtre("lib_cd_typ","Type"), filtre("agc_topz","Agence"),
+        filtre("etat_acc","Etat acces"), filtre("typ_enrol","Type enrolement"),
+    ])
 
-    # 3 — Risque & Conformité
-    s = new_sheet(q, doc, "Risque & Conformité")
-    for lbl, expr, fmt in [
-        ("Clients Sensibles",  SENSIB,                                                    FMTK),
-        ("KYC Rouge",          "Count(DISTINCT {<gelule_global={10}>} id_cli)",           FMTK),
-        ("KYC Orange",         "Count(DISTINCT {<gelule_global={5}>} id_cli)",            FMTK),
-        ("Tx Sensibles",       "Sum({<TR_Transaction_Sensible={1}>} 1)",                  FMTK),
-        ("Vol. Tx Sensibles",  "Sum({<TR_Transaction_Sensible={1}>} TR_mnt_evt)",         FMTN),
-        ("Conformité KYC",     KYC_TX,                                                    FMTP),
-    ]:
-        child(q, s, kpi(lbl, expr, fmt))
-    child(q, s, chart("barchart","Clients par niveau risque",
-        [_dim("lib_cd_risque_pers","Risque")],[_meas(NB_CLI,"Clients",FMTK)]))
-    child(q, s, chart("barchart","Volume tx par couleur pays",
-        [_dim("TR_ctrpty_couleur_pays","Couleur pays")],[_meas(VOL_TX,"Volume",FMTN)]))
-    child(q, s, chart("barchart","Volume sensible par opération",
-        [_dim("TR_lib_evt_lv1","Opération")],
-        [_meas("Sum({<TR_Transaction_Sensible={1}>} TR_mnt_evt)","Vol. sensible",FMTN)]))
-    child(q, s, tbl("Clients à risque",
-        [_dim("nom_cplt","Client"),_dim("lib_cd_risque_pers","Risque"),
-         _dim("couleur_pays","Pays couleur"),_dim("agc_topz","Agence")],
-        [_meas("Max(gelule_global)","KYC",FMTK),_meas(AUM,"AUM",FMTN)]))
-    for f,l in [("lib_cd_typ","Type"),("agc_topz","Agence"),
-                ("lib_cd_risque_pers","Niveau risque"),("couleur_pays","Couleur pays")]:
-        child(q, s, filtre(f, l))
+    # 3 — Risque & Conformite
+    _sheet(q, doc, "Risque & Conformite", [
+        kpi("Clients Sensibles",  SENSIB,                                                   FMTK),
+        kpi("KYC Rouge",          "Count(DISTINCT {<gelule_global={10}>} id_cli)",          FMTK),
+        kpi("KYC Orange",         "Count(DISTINCT {<gelule_global={5}>} id_cli)",           FMTK),
+        kpi("Tx Sensibles",       "Sum({<TR_Transaction_Sensible={1}>} 1)",                 FMTK),
+        kpi("Vol. Tx Sensibles",  "Sum({<TR_Transaction_Sensible={1}>} TR_mnt_evt)",        FMTN),
+        kpi("Conformite KYC",     KYC_TX,                                                   FMTP),
+        chart("barchart","Clients par niveau risque",
+            [_dim("lib_cd_risque_pers","Risque")],[_meas(NB_CLI,"Clients",FMTK)]),
+        chart("barchart","Volume tx par couleur pays",
+            [_dim("TR_ctrpty_couleur_pays","Couleur pays")],[_meas(VOL_TX,"Volume",FMTN)]),
+        chart("barchart","Volume sensible par operation",
+            [_dim("TR_lib_evt_lv1","Operation")],
+            [_meas("Sum({<TR_Transaction_Sensible={1}>} TR_mnt_evt)","Vol. sensible",FMTN)]),
+        tbl("Clients a risque",
+            [_dim("nom_cplt","Client"),_dim("lib_cd_risque_pers","Risque"),
+             _dim("couleur_pays","Pays couleur"),_dim("agc_topz","Agence")],
+            [_meas("Max(gelule_global)","KYC",FMTK),_meas(AUM,"AUM",FMTN)]),
+        filtre("lib_cd_typ","Type"), filtre("agc_topz","Agence"),
+        filtre("lib_cd_risque_pers","Niveau risque"), filtre("couleur_pays","Couleur pays"),
+    ])
 
     # 4 — Commercial & Relation Client
-    s = new_sheet(q, doc, "Commercial & Relation Client")
-    for lbl, expr, fmt in [
-        ("Clients Actifs",  NB_ACT,                                          FMTK),
-        ("Prospects",       "Count(DISTINCT {<cli_c_p={'PR'}>} id_cli)",     FMTK),
-        ("AUM Total",       AUM,                                             FMTN),
-        ("AUM Moyen",       f"{AUM} / {NB_CLI}",                            FMTN),
-        ("Taux Actifs",     ACT_TX,                                          FMTP),
-        ("Nb Clients",      NB_CLI,                                          FMTK),
-    ]:
-        child(q, s, kpi(lbl, expr, fmt))
-    child(q, s, chart("barchart","Clients par type › groupe",
-        [_dim("lib_cd_typ","Type"),_dim("lib_gr","Groupe")],
-        [_meas(NB_CLI,"Clients",FMTK)]))
-    child(q, s, chart("combochart","AUM & taux actifs par agence",
-        [_dim("agc_topz","Agence")],
-        [_meas(AUM,"AUM",FMTN),_meas(ACT_TX,"Taux actifs",FMTP)]))
-    child(q, s, chart("treemap","Clients par groupe risque",
-        [_dim("lib_gr","Groupe")],[_meas(NB_CLI,"Clients",FMTK)]))
-    child(q, s, tbl("Portefeuille par conseiller",
-        [_dim("nom_cplt","Client"),_dim("lib_cd_typ","Type"),
-         _dim("nom_cons","Conseiller"),_dim("agc_topz","Agence"),
-         _dim("top_client_actif","Actif")],
-        [_meas(AUM,"AUM",FMTN)]))
-    for f,l in [("lib_cd_typ","Type client"),("agc_topz","Agence"),
-                ("lib_gr","Groupe risque"),("top_client_actif","Actif O/N")]:
-        child(q, s, filtre(f, l))
+    _sheet(q, doc, "Commercial & Relation Client", [
+        kpi("Clients Actifs", NB_ACT,                                         FMTK),
+        kpi("Prospects",      "Count(DISTINCT {<cli_c_p={'PR'}>} id_cli)",    FMTK),
+        kpi("AUM Total",      AUM,                                            FMTN),
+        kpi("AUM Moyen",      f"{AUM} / {NB_CLI}",                           FMTN),
+        kpi("Taux Actifs",    ACT_TX,                                         FMTP),
+        kpi("Nb Clients",     NB_CLI,                                         FMTK),
+        chart("barchart","Clients par type et groupe",
+            [_dim("lib_cd_typ","Type"),_dim("lib_gr","Groupe")],
+            [_meas(NB_CLI,"Clients",FMTK)]),
+        chart("combochart","AUM et taux actifs par agence",
+            [_dim("agc_topz","Agence")],
+            [_meas(AUM,"AUM",FMTN),_meas(ACT_TX,"Taux actifs",FMTP)]),
+        chart("treemap","Clients par groupe risque",
+            [_dim("lib_gr","Groupe")],[_meas(NB_CLI,"Clients",FMTK)]),
+        tbl("Portefeuille par conseiller",
+            [_dim("nom_cplt","Client"),_dim("lib_cd_typ","Type"),
+             _dim("nom_cons","Conseiller"),_dim("agc_topz","Agence"),
+             _dim("top_client_actif","Actif")],
+            [_meas(AUM,"AUM",FMTN)]),
+        filtre("lib_cd_typ","Type client"), filtre("agc_topz","Agence"),
+        filtre("lib_gr","Groupe risque"),   filtre("top_client_actif","Actif O/N"),
+    ])
 
-    # 5 — Patrimoine — Épargne & Crédit
-    s = new_sheet(q, doc, "Patrimoine — Épargne & Crédit")
-    for lbl, expr, fmt in [
-        ("Encours Épargne", EP_ENC,  FMTN),
-        ("Collecte Brute",  COL_BRT, FMTN),
-        ("Décollecte",      DECOL,   FMTN),
-        ("Collecte Nette",  COL_NET, FMTN),
-        ("Encours Crédit",  CR_ENC,  FMTN),
-        ("Capital Impayé",  CAP_IMP, FMTN),
-    ]:
-        child(q, s, kpi(lbl, expr, fmt))
-    child(q, s, chart("barchart","Épargne par famille › fonds",
-        [_dim("EP_fam_pdt","Famille"),_dim("EP_lib_fds","Fonds")],
-        [_meas(EP_ENC,"Encours",FMTN)]))
-    child(q, s, chart("waterfallchart","Cascade collecte nette",
-        [_dim("EP_fam_pdt","Famille")],[_meas(COL_NET,"Collecte nette",FMTN)]))
-    child(q, s, chart("barchart","Crédit par marché",
-        [_dim("CR_Lib_Marche_Simple","Marché")],[_meas(CR_ENC,"Encours",FMTN)]))
-    child(q, s, tbl("Fonds — encours",
-        [_dim("EP_lib_fds","Fonds"),_dim("EP_fam_pdt","Famille"),
-         _dim("EP_lib_mod_gest","Gestion")],
-        [_meas("Sum(EP_enc_fds_m)","Encours fonds",FMTN)]))
-    for f,l in [("lib_cd_typ","Type"),("agc_topz","Agence"),
-                ("EP_fam_pdt","Famille produit"),("EP_lib_mod_gest","Mode gestion")]:
-        child(q, s, filtre(f, l))
+    # 5 — Patrimoine Epargne & Credit
+    _sheet(q, doc, "Patrimoine Epargne & Credit", [
+        kpi("Encours Epargne", EP_ENC,  FMTN),
+        kpi("Collecte Brute",  COL_BRT, FMTN),
+        kpi("Decollecte",      DECOL,   FMTN),
+        kpi("Collecte Nette",  COL_NET, FMTN),
+        kpi("Encours Credit",  CR_ENC,  FMTN),
+        kpi("Capital Impaye",  CAP_IMP, FMTN),
+        chart("barchart","Epargne par famille et fonds",
+            [_dim("EP_fam_pdt","Famille"),_dim("EP_lib_fds","Fonds")],
+            [_meas(EP_ENC,"Encours",FMTN)]),
+        chart("waterfallchart","Cascade collecte nette",
+            [_dim("EP_fam_pdt","Famille")],[_meas(COL_NET,"Collecte nette",FMTN)]),
+        chart("barchart","Credit par marche",
+            [_dim("CR_Lib_Marche_Simple","Marche")],[_meas(CR_ENC,"Encours",FMTN)]),
+        tbl("Fonds encours",
+            [_dim("EP_lib_fds","Fonds"),_dim("EP_fam_pdt","Famille"),
+             _dim("EP_lib_mod_gest","Gestion")],
+            [_meas("Sum(EP_enc_fds_m)","Encours fonds",FMTN)]),
+        filtre("lib_cd_typ","Type"), filtre("agc_topz","Agence"),
+        filtre("EP_fam_pdt","Famille produit"), filtre("EP_lib_mod_gest","Mode gestion"),
+    ])
 
-    # 6 — Crédit & Engagements
-    s = new_sheet(q, doc, "Crédit & Engagements")
-    for lbl, expr, fmt in [
-        ("Encours Crédit",   CR_ENC,                    FMTN),
-        ("Nb Crédits",       "Count(DISTINCT num_cnt)", FMTK),
-        ("Montant Débloqué", "Sum(CR_mnt_dblq)",        FMTN),
-        ("Capital Impayé",   CAP_IMP,                   FMTN),
-        ("Taux Impayés",     IMP_TX,                    FMTP),
-        ("Couverture Gar.",  COV_TX,                    FMTP),
-    ]:
-        child(q, s, kpi(lbl, expr, fmt))
-    child(q, s, chart("barchart","Encours par type › marché",
-        [_dim("CR_lib_typ_prt","Type prêt"),_dim("CR_lib_typ_mar","Marché")],
-        [_meas(CR_ENC,"Encours",FMTN)]))
-    child(q, s, chart("combochart","Encours & taux impayés par marché",
-        [_dim("CR_lib_typ_mar","Marché")],
-        [_meas(CR_ENC,"Encours",FMTN),_meas(IMP_TX,"Taux impayés",FMTP)]))
-    child(q, s, chart("piechart","Répartition IFRS9",
-        [_dim("CR_Lib_Bucket_Credit","Bucket")],[_meas(CR_ENC,"Encours",FMTN)]))
-    child(q, s, tbl("Détail crédits",
-        [_dim("CR_lib_typ_prt","Type prêt"),_dim("CR_lib_typ_mar","Marché"),
-         _dim("CR_lib_cd_etat_creance","État")],
-        [_meas("Sum(CR_mnt_nom)","Nominal",FMTN),
-         _meas(CR_ENC,"Encours",FMTN),
-         _meas("Avg({<CR_ltv_act={'>0'}>} CR_ltv_act)","LTV moy.",FMTP),
-         _meas(PROV,"Provisions",FMTN),
-         _meas("Sum(GA_mnt_gar)","Garanties",FMTN)]))
-    for f,l in [("lib_cd_typ","Type"),("agc_topz","Agence"),
-                ("CR_lib_typ_mar","Marché"),("CR_lib_cd_etat_creance","État créance")]:
-        child(q, s, filtre(f, l))
+    # 6 — Credit & Engagements
+    _sheet(q, doc, "Credit & Engagements", [
+        kpi("Encours Credit",   CR_ENC,                    FMTN),
+        kpi("Nb Credits",       "Count(DISTINCT num_cnt)", FMTK),
+        kpi("Montant Debloque", "Sum(CR_mnt_dblq)",        FMTN),
+        kpi("Capital Impaye",   CAP_IMP,                   FMTN),
+        kpi("Taux Impayes",     IMP_TX,                    FMTP),
+        kpi("Couverture Gar.",  COV_TX,                    FMTP),
+        chart("barchart","Encours par type et marche",
+            [_dim("CR_lib_typ_prt","Type pret"),_dim("CR_lib_typ_mar","Marche")],
+            [_meas(CR_ENC,"Encours",FMTN)]),
+        chart("combochart","Encours et taux impayes par marche",
+            [_dim("CR_lib_typ_mar","Marche")],
+            [_meas(CR_ENC,"Encours",FMTN),_meas(IMP_TX,"Taux impayes",FMTP)]),
+        chart("piechart","Repartition IFRS9",
+            [_dim("CR_Lib_Bucket_Credit","Bucket")],[_meas(CR_ENC,"Encours",FMTN)]),
+        tbl("Detail credits",
+            [_dim("CR_lib_typ_prt","Type pret"),_dim("CR_lib_typ_mar","Marche"),
+             _dim("CR_lib_cd_etat_creance","Etat")],
+            [_meas("Sum(CR_mnt_nom)","Nominal",FMTN),
+             _meas(CR_ENC,"Encours",FMTN),
+             _meas("Avg({<CR_ltv_act={'>0'}>} CR_ltv_act)","LTV moy.",FMTP),
+             _meas(PROV,"Provisions",FMTN),
+             _meas("Sum(GA_mnt_gar)","Garanties",FMTN)]),
+        filtre("lib_cd_typ","Type"), filtre("agc_topz","Agence"),
+        filtre("CR_lib_typ_mar","Marche"), filtre("CR_lib_cd_etat_creance","Etat creance"),
+    ])
 
-    # 7 — Analyse Avancée 360°
-    s = new_sheet(q, doc, "Analyse Avancée 360°")
-    child(q, s, {
-        "qInfo": {"qType": "pivot-table"}, "visualization": "pivot-table",
-        "title": "Croisé AUM par type × groupe", "showTitles": True,
-        "qHyperCubeDef": {
-            "qDimensions": [_dim("lib_cd_typ","Type"),_dim("lib_gr","Groupe")],
-            "qMeasures": [_meas(AUM,"AUM",FMTN)],
-            "qMode": "P",
-            "qInitialDataFetch": [{"qTop":0,"qLeft":0,"qHeight":50,"qWidth":20}]
-        }
-    })
-    child(q, s, {
-        "qInfo": {"qType": "scatterplot"}, "visualization": "scatterplot",
-        "title": "Clients : AUM vs Épargne (taille = Crédit)", "showTitles": True,
-        "qHyperCubeDef": {
-            "qDimensions": [_dim("nom_cplt","Client")],
-            "qMeasures": [_meas(AUM,"AUM",FMTN),
-                          _meas(EP_ENC,"Épargne",FMTN),
-                          _meas(CR_ENC,"Crédit (taille)",FMTN)],
-            "qMode": "S",
-            "qInitialDataFetch": [{"qTop":0,"qLeft":0,"qHeight":500,"qWidth":10}]
-        }
-    })
-    child(q, s, kpi("Conformité KYC", KYC_TX, FMTP))
-    child(q, s, chart("waterfallchart","Cascade collecte nette / famille",
-        [_dim("EP_fam_pdt","Famille")],[_meas(COL_NET,"Collecte nette",FMTN)]))
-    child(q, s, chart("barchart","Volume par opération & canal",
-        [_dim("TR_lib_evt_lv1","Opération"),_dim("TR_canal_ordre","Canal")],
-        [_meas(VOL_TX,"Volume",FMTN)]))
-    child(q, s, chart("barchart","Entonnoir — clients par risque",
-        [_dim("lib_cd_risque_pers","Risque")],[_meas(NB_CLI,"Clients",FMTK)]))
-    for f,l in [("lib_cd_typ","Type"),("agc_topz","Agence"),
-                ("lib_pay_res","Pays"),("lib_cd_risque_pers","Risque")]:
-        child(q, s, filtre(f, l))
+    # 7 — Analyse Avancee 360
+    _sheet(q, doc, "Analyse Avancee 360", [
+        {"qInfo": {"qType": "pivot-table"}, "visualization": "pivot-table",
+         "title": "Croise AUM par type x groupe", "showTitles": True,
+         "qHyperCubeDef": {
+             "qDimensions": [_dim("lib_cd_typ","Type"),_dim("lib_gr","Groupe")],
+             "qMeasures": [_meas(AUM,"AUM",FMTN)],
+             "qInitialDataFetch": [{"qTop":0,"qLeft":0,"qHeight":50,"qWidth":20}]
+         }},
+        {"qInfo": {"qType": "scatterplot"}, "visualization": "scatterplot",
+         "title": "Clients AUM vs Epargne", "showTitles": True,
+         "qHyperCubeDef": {
+             "qDimensions": [_dim("nom_cplt","Client")],
+             "qMeasures": [_meas(AUM,"AUM",FMTN),
+                           _meas(EP_ENC,"Epargne",FMTN),
+                           _meas(CR_ENC,"Credit taille",FMTN)],
+             "qInitialDataFetch": [{"qTop":0,"qLeft":0,"qHeight":500,"qWidth":10}]
+         }},
+        kpi("Conformite KYC", KYC_TX, FMTP),
+        chart("waterfallchart","Cascade collecte nette famille",
+            [_dim("EP_fam_pdt","Famille")],[_meas(COL_NET,"Collecte nette",FMTN)]),
+        chart("barchart","Volume par operation et canal",
+            [_dim("TR_lib_evt_lv1","Operation"),_dim("TR_canal_ordre","Canal")],
+            [_meas(VOL_TX,"Volume",FMTN)]),
+        chart("barchart","Entonnoir clients par risque",
+            [_dim("lib_cd_risque_pers","Risque")],[_meas(NB_CLI,"Clients",FMTK)]),
+        filtre("lib_cd_typ","Type"), filtre("agc_topz","Agence"),
+        filtre("lib_pay_res","Pays"), filtre("lib_cd_risque_pers","Risque"),
+    ])
 
-    print("  7 feuilles créées.")
+    print("  7 feuilles creees.")
 
 
 # ── MAIN ─────────────────────────────────────────────────────────────────────
