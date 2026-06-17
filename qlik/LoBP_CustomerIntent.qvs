@@ -1,0 +1,493 @@
+// ============================================================
+// LOUVRE BANQUE PRIVÉE — SCRIPT COMPLET QLIK CLOUD
+// Projet  : LoBP_CustomerIntent
+// Auteur  : build_customerintent / build_qlik_cloud.py
+// Usage   : Coller dans l'Éditeur de chargement de données
+//           d'une app Qlik Cloud vide, puis cliquer "Charger".
+//
+// ⚠  Adapter vPath (ligne ~38) :
+//   - Qlik Cloud DataFiles : SET vPath = 'lib://DataFiles';
+//   - Local / Desktop      : SET vPath = 'E:\louvre\powerbi\data';
+// ============================================================
+
+// ────────────────────────────────────────────────────────────
+// SECTION 1 — PARAMÈTRES D'INTERPRÉTATION
+// ────────────────────────────────────────────────────────────
+SET ThousandSep=',';
+SET DecimalSep='.';
+SET MoneyThousandSep=' ';
+SET MoneyDecimalSep=',';
+SET MoneyFormat='# ##0 €';
+SET DateFormat='YYYY-MM-DD';
+SET TimestampFormat='YYYY-MM-DD hh:mm:ss';
+
+// ────────────────────────────────────────────────────────────
+// SECTION 2 — CHEMIN DES DONNÉES (adapter selon l'environnement)
+// ────────────────────────────────────────────────────────────
+// Qlik Cloud  → SET vPath = 'lib://DataFiles';
+// Local/Desktop → SET vPath = 'E:\louvre\powerbi\data';
+SET vPath = 'lib://DataFiles';
+
+// ────────────────────────────────────────────────────────────
+// SECTION 3 — VARIABLES MESURES (utilisables dans tous les graphiques)
+// Syntaxe dans un graphique : $(vNB_CLI) , $(vAUM) , etc.
+// ────────────────────────────────────────────────────────────
+
+// Clientèle
+LET vNB_CLI    = 'Count(DISTINCT {<cli_c_p={''CL'',''CT''}>} id_cli)';
+LET vNB_ACT    = 'Count(DISTINCT {<top_client_actif={''O''}>} id_cli)';
+LET vNB_ENROL  = 'Count(DISTINCT {<nb_dev_enrol={''>0''}>} id_cli)';
+LET vSENSIB    = 'Count(DISTINCT {<cd_risque_pers={''E'',''F''}>} id_cli)';
+LET vACT_TX    = 'Count(DISTINCT {<top_client_actif={''O''}>} id_cli) / Count(DISTINCT {<cli_c_p={''CL'',''CT''}>} id_cli)';
+LET vENROL_TX  = 'Count(DISTINCT {<nb_dev_enrol={''>0''}>} id_cli) / Count(DISTINCT {<cli_c_p={''CL'',''CT''}>} id_cli)';
+LET vKYC_TX    = 'Count(DISTINCT {<gelule_global={0}>} id_cli) / Count(DISTINCT {<cli_c_p={''CL'',''CT''}>} id_cli)';
+
+// Patrimoine
+LET vAUM       = 'Sum(aum_tit)';
+LET vAUM_MOY   = 'Sum(aum_tit) / Count(DISTINCT {<cli_c_p={''CL'',''CT''}>} id_cli)';
+
+// Épargne
+LET vEP_ENC    = 'Sum({<EP_perimetre={''epargne''}>} EP_enc_cnt_m)';
+LET vCOL_NET   = 'Sum({<EP_perimetre={''epargne''}>} EP_col_nette)';
+LET vCOL_BRT   = 'Sum({<EP_perimetre={''epargne''}>} EP_col_brute)';
+LET vDECOL     = 'Sum({<EP_perimetre={''epargne''}>} EP_decollecte)';
+
+// Crédit
+LET vCR_ENC    = 'Sum(CR_enc_cpt)';
+LET vCAP_IMP   = 'Sum(CR_mnt_krd_imp)';
+LET vMNT_DBL   = 'Sum(CR_mnt_dblq)';
+LET vMNT_NOM   = 'Sum(CR_mnt_nom)';
+LET vIMP_TX    = 'Sum(CR_mnt_krd_imp) / Sum(CR_mnt_krd_tot)';
+LET vLTV_MOY   = 'Avg({<CR_ltv_act={''>0''}>} CR_ltv_act)';
+LET vTEG_MOY   = 'Avg({<CR_teg={''>0''}>} CR_teg)';
+LET vPROV      = 'Sum(CR_mnt_prov_b_ifrs9) + Sum(CR_mnt_prov_hb_ifrs9)';
+LET vRWA       = 'Sum(CR_total_rwa)';
+
+// Garanties
+LET vGAR       = 'Sum(GA_mnt_gar)';
+LET vGAR_CPTA  = 'Sum(GA_mnt_gar_cpta)';
+LET vCOV_TX    = 'Sum(GA_mnt_gar_cpta) / Sum(CR_enc_cpt)';
+
+// Transactions
+LET vVOL_TX    = 'Sum(TR_mnt_evt)';
+LET vNB_TX     = 'Count(TR_mnt_evt)';
+LET vVOL_SENS  = 'Sum({<TR_Transaction_Sensible={1}>} TR_mnt_evt)';
+LET vNB_SENS   = 'Sum({<TR_Transaction_Sensible={1}>} 1)';
+
+// ────────────────────────────────────────────────────────────
+// SECTION 4 — MODÈLE EN ÉTOILE (chargement des 7 tables CSV)
+// ────────────────────────────────────────────────────────────
+// Stratégie préfixes pour éviter les clés synthétiques :
+//   CLIENT     → pas de préfixe (table centrale)
+//   TRANSACTION → TR_  (sauf id_cli qui reste non préfixé)
+//   EPARGNE    → EP_  (sauf id_cli et isin_fds)
+//   CREDIT     → CR_  (sauf id_cli et num_cnt)
+//   GARANTIE   → GA_  (sauf num_cnt ; id_cli → GA_id_cli)
+//   SERVICE    → SV_  (sauf id_cli)
+//   GSM        → GS_  (sauf isin_fds)
+
+// ------------------------------------------------------------
+[CLIENT]:
+LOAD
+    [id_cli],
+    [cd_typ],
+    [lib_cd_typ],
+    [id_gr],
+    [lib_gr],
+    [cli_c_p],
+    [nom_cplt],
+    [prm_prn],
+    [nom_us],
+    [age_cli],
+    [cd_situ_fam],
+    [lib_cd_situ_fam],
+    [cd_cons],
+    [nom_cons],
+    [prm_cons],
+    [lib_ptf],
+    [agc_topz],
+    [lib_grp_agce],
+    [etat_acc],
+    [top_client_actif],
+    [dt_der_cnx],
+    [dt_top_cl],
+    [dt_exit_cl],
+    [dt_dernier_rdv],
+    [dt_1er_cnt],
+    [nb_dev_enrol],
+    [typ_enrol],
+    [dt_enrol],
+    [cd_risque_pers],
+    [lib_cd_risque_pers],
+    [cd_risque_ajust],
+    [lib_cd_risque_ajust],
+    [tot_score_risque],
+    [scenario_risque],
+    [lib_scenario_risque],
+    [cd_mf],
+    [gelule_global],
+    [lib_gelule_global],
+    [kyc_idt],
+    [kyc_adr],
+    [dt_der_certif],
+    [dt_next_certif],
+    [lib_stt_fatca],
+    [pay_fis_prin],
+    [pay_res],
+    [lib_pay_res],
+    [couleur_pays],
+    [niveau_risque_pays],
+    [top_pays_embargo],
+    [top_pays_sanctions],
+    [top_pays_gda],
+    [top_pays_gafi],
+    [top_pays_etnc],
+    [top_pays_pthr],
+    [cd_ficp],
+    [nb_incidents_ficp],
+    [aum_tit],
+    [aum_cot],
+    [mnt_pat_epargne],
+    [mnt_pat_biens_immos],
+    [mnt_rev_princ],
+    [mnt_credits_externes],
+    [mnt_equip_emp],
+    [nb_equip_emp],
+    [mnt_equip_tit],
+    [nb_equip_tit],
+    [mnt_equip_cau],
+    [mnt_equip_coe],
+    [list_fam_pdt],
+    [list_pdt],
+    [dt_fonc],
+    [annee_mois_part]
+FROM [$(vPath)/CLIENT.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+// ------------------------------------------------------------
+[TRANSACTION]:
+LOAD
+    [id_cli],
+    [num_cnt]                       AS [TR_num_cnt],
+    [perimetre]                     AS [TR_perimetre],
+    [typ_evt]                       AS [TR_typ_evt],
+    [typ_evt_lv1]                   AS [TR_typ_evt_lv1],
+    [val_evt_lv1]                   AS [TR_val_evt_lv1],
+    [lib_evt_lv1]                   AS [TR_lib_evt_lv1],
+    [typ_evt_lv2]                   AS [TR_typ_evt_lv2],
+    [val_evt_lv2]                   AS [TR_val_evt_lv2],
+    [sens]                          AS [TR_sens],
+    [mnt_evt]                       AS [TR_mnt_evt],
+    [devise_compte]                 AS [TR_devise_compte],
+    [mnt_devise]                    AS [TR_mnt_devise],
+    [devise_operation]              AS [TR_devise_operation],
+    [dt_demande]                    AS [TR_dt_demande],
+    [dt_validation]                 AS [TR_dt_validation],
+    [dt_realisation]                AS [TR_dt_realisation],
+    [mode_paiement]                 AS [TR_mode_paiement],
+    [typ_paiement]                  AS [TR_typ_paiement],
+    [ind_3ds]                       AS [TR_ind_3ds],
+    [ind_sans_contact]              AS [TR_ind_sans_contact],
+    [ind_saisie_pin]                AS [TR_ind_saisie_pin],
+    [canal_init]                    AS [TR_canal_init],
+    [canal_ordre]                   AS [TR_canal_ordre],
+    [ctrpty_nom]                    AS [TR_ctrpty_nom],
+    [ctrpty_pays]                   AS [TR_ctrpty_pays],
+    [ctrpty_bnq_bic]                AS [TR_ctrpty_bnq_bic],
+    [cli_cd_pays_iso]               AS [TR_cli_cd_pays_iso],
+    [cli_couleur_pays]              AS [TR_cli_couleur_pays],
+    [cli_niveau_risque_pays]        AS [TR_cli_niveau_risque_pays],
+    [cli_top_pays_embargo]          AS [TR_cli_top_pays_embargo],
+    [cli_top_pays_sanctions]        AS [TR_cli_top_pays_sanctions],
+    [cli_top_pays_gda]              AS [TR_cli_top_pays_gda],
+    [cli_top_pays_gafi]             AS [TR_cli_top_pays_gafi],
+    [cli_top_pays_etnc]             AS [TR_cli_top_pays_etnc],
+    [cli_top_pays_pthr]             AS [TR_cli_top_pays_pthr],
+    [ctrpty_cd_pays_iso]            AS [TR_ctrpty_cd_pays_iso],
+    [ctrpty_couleur_pays]           AS [TR_ctrpty_couleur_pays],
+    [ctrpty_niveau_risque_pays]     AS [TR_ctrpty_niveau_risque_pays],
+    [ctrpty_top_pays_embargo]       AS [TR_ctrpty_top_pays_embargo],
+    [ctrpty_top_pays_sanctions]     AS [TR_ctrpty_top_pays_sanctions],
+    [ctrpty_top_pays_gda]           AS [TR_ctrpty_top_pays_gda],
+    [ctrpty_top_pays_gafi]          AS [TR_ctrpty_top_pays_gafi],
+    [ctrpty_bnq_cd_pays_iso]        AS [TR_ctrpty_bnq_cd_pays_iso],
+    [ctrpty_bnq_couleur_pays]       AS [TR_ctrpty_bnq_couleur_pays],
+    [ctrpty_bnq_top_pays_embargo]   AS [TR_ctrpty_bnq_top_pays_embargo],
+    [ctrpty_bnq_top_pays_sanctions] AS [TR_ctrpty_bnq_top_pays_sanctions],
+    [Transaction_Sensible]          AS [TR_Transaction_Sensible],
+    [annee_mois_part]               AS [TR_annee_mois_part]
+FROM [$(vPath)/TRANSACTION.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+// ------------------------------------------------------------
+[EPARGNE]:
+LOAD
+    [id_cli],
+    [num_cnt]               AS [EP_num_cnt],
+    [stt_cli]               AS [EP_stt_cli],
+    [fam_pdt]               AS [EP_fam_pdt],
+    [perimetre]             AS [EP_perimetre],
+    [lib_ctl]               AS [EP_lib_ctl],
+    [lib_fam_niv3_pdt]      AS [EP_lib_fam_niv3_pdt],
+    [stt_cnt]               AS [EP_stt_cnt],
+    [lib_stt_cnt]           AS [EP_lib_stt_cnt],
+    [dt_eff]                AS [EP_dt_eff],
+    [dt_fin_eff]            AS [EP_dt_fin_eff],
+    [mod_gest]              AS [EP_mod_gest],
+    [lib_mod_gest]          AS [EP_lib_mod_gest],
+    [cd_ges]                AS [EP_cd_ges],
+    [lib_cd_ges]            AS [EP_lib_cd_ges],
+    [enc_cnt_m]             AS [EP_enc_cnt_m],
+    [enc_moy_m]             AS [EP_enc_moy_m],
+    [enc_cnt_m1]            AS [EP_enc_cnt_m1],
+    [enc_cnt_n1]            AS [EP_enc_cnt_n1],
+    [var_enc]               AS [EP_var_enc],
+    [col_brute]             AS [EP_col_brute],
+    [decollecte]            AS [EP_decollecte],
+    [col_nette]             AS [EP_col_nette],
+    [isin_fds],
+    [lib_fds]               AS [EP_lib_fds],
+    [qte_fds]               AS [EP_qte_fds],
+    [enc_fds_m]             AS [EP_enc_fds_m],
+    [volatilite_isin]       AS [EP_volatilite_isin],
+    [isin_risq]             AS [EP_isin_risq],
+    [prof_risq]             AS [EP_prof_risq],
+    [lib_prof_risq]         AS [EP_lib_prof_risq],
+    [prof_exp]              AS [EP_prof_exp],
+    [lib_prof_exp]          AS [EP_lib_prof_exp],
+    [prof_sfdr]             AS [EP_prof_sfdr],
+    [mnt_tar_brt]           AS [EP_mnt_tar_brt],
+    [mnt_pdt_tar]           AS [EP_mnt_pdt_tar],
+    [mnt_fdg]               AS [EP_mnt_fdg],
+    [mnt_ddg]               AS [EP_mnt_ddg],
+    [tx_int]                AS [EP_tx_int],
+    [cd_bck_ifrs9]          AS [EP_cd_bck_ifrs9],
+    [cd_risque]             AS [EP_cd_risque],
+    [cd_etat_creance]       AS [EP_cd_etat_creance],
+    [mnt_prov_b_ifrs9]      AS [EP_mnt_prov_b_ifrs9],
+    [mnt_prov_hb_ifrs9]     AS [EP_mnt_prov_hb_ifrs9],
+    [mnt_dot]               AS [EP_mnt_dot],
+    [mnt_rep]               AS [EP_mnt_rep],
+    [mnt_psp]               AS [EP_mnt_psp],
+    [total_rwa]             AS [EP_total_rwa],
+    [top_nanti]             AS [EP_top_nanti],
+    [mnt_nanti]             AS [EP_mnt_nanti],
+    [assur]                 AS [EP_assur],
+    [Lib_Bucket_IFRS9]      AS [EP_Lib_Bucket_IFRS9],
+    [annee_mois_part]       AS [EP_annee_mois_part]
+FROM [$(vPath)/EPARGNE.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+// ------------------------------------------------------------
+[SERVICE]:
+LOAD
+    [id_cli],
+    [num_cnt]               AS [SV_num_cnt],
+    [stt_cli]               AS [SV_stt_cli],
+    [fam_pdt]               AS [SV_fam_pdt],
+    [perimetre]             AS [SV_perimetre],
+    [lib_ctl]               AS [SV_lib_ctl],
+    [stt_cnt]               AS [SV_stt_cnt],
+    [lib_stt_cnt]           AS [SV_lib_stt_cnt],
+    [dt_eff]                AS [SV_dt_eff],
+    [dt_fin_eff]            AS [SV_dt_fin_eff],
+    [agc_ins]               AS [SV_agc_ins],
+    [num_carte]             AS [SV_num_carte],
+    [cd_typ_debit]          AS [SV_cd_typ_debit],
+    [dt_ech_carte]          AS [SV_dt_ech_carte],
+    [ind_carte_virtu]       AS [SV_ind_carte_virtu],
+    [mnt_tar_brt]           AS [SV_mnt_tar_brt],
+    [mnt_pdt_tar]           AS [SV_mnt_pdt_tar],
+    [cd_bck_ifrs9]          AS [SV_cd_bck_ifrs9],
+    [mnt_prov_b_ifrs9]      AS [SV_mnt_prov_b_ifrs9],
+    [mnt_prov_hb_ifrs9]     AS [SV_mnt_prov_hb_ifrs9],
+    [annee_mois_part]       AS [SV_annee_mois_part]
+FROM [$(vPath)/SERVICE.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+// ------------------------------------------------------------
+[CREDIT]:
+LOAD
+    [id_cli],
+    [num_cnt],
+    [num_prj]               AS [CR_num_prj],
+    [stt_cli]               AS [CR_stt_cli],
+    [fam_pdt]               AS [CR_fam_pdt],
+    [perimetre]             AS [CR_perimetre],
+    [lib_ctl]               AS [CR_lib_ctl],
+    [stt_cnt]               AS [CR_stt_cnt],
+    [lib_stt_cnt]           AS [CR_lib_stt_cnt],
+    [cd_etat_prt]           AS [CR_cd_etat_prt],
+    [lib_cd_etat_prt]       AS [CR_lib_cd_etat_prt],
+    [typ_prt]               AS [CR_typ_prt],
+    [lib_typ_prt]           AS [CR_lib_typ_prt],
+    [typ_mar]               AS [CR_typ_mar],
+    [lib_typ_mar]           AS [CR_lib_typ_mar],
+    [typ_remb]              AS [CR_typ_remb],
+    [agc_cnt]               AS [CR_agc_cnt],
+    [mnt_nom]               AS [CR_mnt_nom],
+    [mnt_dblq]              AS [CR_mnt_dblq],
+    [mnt_nom_proj]          AS [CR_mnt_nom_proj],
+    [mnt_dblq_proj]         AS [CR_mnt_dblq_proj],
+    [mnt_disp]              AS [CR_mnt_disp],
+    [enc_cpt]               AS [CR_enc_cpt],
+    [enc_cpt_moy_m]         AS [CR_enc_cpt_moy_m],
+    [enc_gest]              AS [CR_enc_gest],
+    [mnt_krd_tot]           AS [CR_mnt_krd_tot],
+    [mnt_krd_sain]          AS [CR_mnt_krd_sain],
+    [mnt_krd_imp]           AS [CR_mnt_krd_imp],
+    [mnt_ifa_tot]           AS [CR_mnt_ifa_tot],
+    [mnt_ifa_sain]          AS [CR_mnt_ifa_sain],
+    [mnt_ifa_imp]           AS [CR_mnt_ifa_imp],
+    [tx_int_ref]            AS [CR_tx_int_ref],
+    [tx_int_ini]            AS [CR_tx_int_ini],
+    [tx_int_act]            AS [CR_tx_int_act],
+    [teg]                   AS [CR_teg],
+    [typ_tx]                AS [CR_typ_tx],
+    [dt_eff]                AS [CR_dt_eff],
+    [dt_fin_init]           AS [CR_dt_fin_init],
+    [dt_fin_eff]            AS [CR_dt_fin_eff],
+    [mat_init]              AS [CR_mat_init],
+    [mat_reelle]            AS [CR_mat_reelle],
+    [duree_resi]            AS [CR_duree_resi],
+    [cd_bck_ifrs9]          AS [CR_cd_bck_ifrs9],
+    [cd_risque]             AS [CR_cd_risque],
+    [cd_etat_creance]       AS [CR_cd_etat_creance],
+    [lib_cd_etat_creance]   AS [CR_lib_cd_etat_creance],
+    [mnt_prov_b_ifrs9]      AS [CR_mnt_prov_b_ifrs9],
+    [mnt_prov_hb_ifrs9]     AS [CR_mnt_prov_hb_ifrs9],
+    [mnt_dot]               AS [CR_mnt_dot],
+    [mnt_rep]               AS [CR_mnt_rep],
+    [mnt_psp]               AS [CR_mnt_psp],
+    [total_rwa]             AS [CR_total_rwa],
+    [ead_nette_b]           AS [CR_ead_nette_b],
+    [ead_nette_hb]          AS [CR_ead_nette_hb],
+    [rwa_collateralized_b]  AS [CR_rwa_collateralized_b],
+    [rwa_guaranteed_b]      AS [CR_rwa_guaranteed_b],
+    [rwa_unguaranteed]      AS [CR_rwa_unguaranteed],
+    [cd_nat]                AS [CR_cd_nat],
+    [cd_res]                AS [CR_cd_res],
+    [mnt_bien_ori]          AS [CR_mnt_bien_ori],
+    [mnt_app]               AS [CR_mnt_app],
+    [ltv_ori]               AS [CR_ltv_ori],
+    [ltv_act]               AS [CR_ltv_act],
+    [bien_commune]          AS [CR_bien_commune],
+    [cd_postal]             AS [CR_cd_postal],
+    [bien_dpe]              AS [CR_bien_dpe],
+    [cd_incident]           AS [CR_cd_incident],
+    [lib_cd_incident]       AS [CR_lib_cd_incident],
+    [nb_ficp]               AS [CR_nb_ficp],
+    [tx_edt]                AS [CR_tx_edt],
+    [nb_rst]                AS [CR_nb_rst],
+    [Lib_Bucket_Credit]     AS [CR_Lib_Bucket_Credit],
+    [Lib_Marche_Simple]     AS [CR_Lib_Marche_Simple],
+    [annee_mois_part]       AS [CR_annee_mois_part]
+FROM [$(vPath)/CREDIT.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+// ------------------------------------------------------------
+[GARANTIE]:
+// GA_id_cli ≠ id_cli → brise la boucle CLIENT
+// num_cnt reste non préfixé → lien avec CREDIT
+LOAD
+    [id_cli]                AS [GA_id_cli],
+    [num_cnt],
+    [num_cnt_gar]           AS [GA_num_cnt_gar],
+    [stt_cli]               AS [GA_stt_cli],
+    [det_typ_gar]           AS [GA_det_typ_gar],
+    [lib_det_typ_gar]       AS [GA_lib_det_typ_gar],
+    [stt_gar]               AS [GA_stt_gar],
+    [lib_stt_gar]           AS [GA_lib_stt_gar],
+    [stt_cnt]               AS [GA_stt_cnt],
+    [cd_rang]               AS [GA_cd_rang],
+    [dt_eff_gar]            AS [GA_dt_eff_gar],
+    [dt_ech_gar]            AS [GA_dt_ech_gar],
+    [dur_gar]               AS [GA_dur_gar],
+    [mnt_gar]               AS [GA_mnt_gar],
+    [mnt_gar_cpta]          AS [GA_mnt_gar_cpta],
+    [mnt_bien_gar_ori]      AS [GA_mnt_bien_gar_ori],
+    [mnt_reval]             AS [GA_mnt_reval],
+    [vlr_reval_act]         AS [GA_vlr_reval_act],
+    [dt_reval]              AS [GA_dt_reval],
+    [num_cnt_ass]           AS [GA_num_cnt_ass],
+    [lib_cnt_ass]           AS [GA_lib_cnt_ass],
+    [nom_cie_ass]           AS [GA_nom_cie_ass],
+    [lib_ville]             AS [GA_lib_ville],
+    [cd_postal]             AS [GA_cd_postal],
+    [tx_rwa]                AS [GA_tx_rwa],
+    [mnt_rwa]               AS [GA_mnt_rwa],
+    [annee_mois_part]       AS [GA_annee_mois_part]
+FROM [$(vPath)/GARANTIE.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+// ------------------------------------------------------------
+[GSM]:
+// isin_fds reste non préfixé → lien avec EPARGNE
+LOAD
+    [isin_fds],
+    [id_contrat]            AS [GS_id_contrat],
+    [dt_fonc]               AS [GS_dt_fonc],
+    [cd_ges]                AS [GS_cd_ges],
+    [mod_gest]              AS [GS_mod_gest],
+    [reseau]                AS [GS_reseau],
+    [qte_fds]               AS [GS_qte_fds],
+    [cours_cot]             AS [GS_cours_cot],
+    [dt_cot]                AS [GS_dt_cot],
+    [avg_mnt_achat]         AS [GS_avg_mnt_achat],
+    [enc_fds_m]             AS [GS_enc_fds_m],
+    [enc_cnt_n_1]           AS [GS_enc_cnt_n_1],
+    [sum_enc_fds_cnt]       AS [GS_sum_enc_fds_cnt],
+    [poids_isin_cnt]        AS [GS_poids_isin_cnt],
+    [sum_enc_fds_profil]    AS [GS_sum_enc_fds_profil],
+    [poids_isin_profil]     AS [GS_poids_isin_profil],
+    [sum_enc_fds_gsm]       AS [GS_sum_enc_fds_gsm],
+    [poids_isin_total_gsm]  AS [GS_poids_isin_total_gsm],
+    [apport_cli]            AS [GS_apport_cli],
+    [performance_cli]       AS [GS_performance_cli],
+    [mnt_pmvl]              AS [GS_mnt_pmvl],
+    [ind_sfdr_30000]        AS [GS_ind_sfdr_30000],
+    [ind_sfdr_10000]        AS [GS_ind_sfdr_10000],
+    [ind_sfdr_20150]        AS [GS_ind_sfdr_20150],
+    [ind_sfdr_30010]        AS [GS_ind_sfdr_30010],
+    [ind_sfdr_30020]        AS [GS_ind_sfdr_30020],
+    [ind_sfdr_30060]        AS [GS_ind_sfdr_30060],
+    [ind_sfdr_30100]        AS [GS_ind_sfdr_30100],
+    [ind_sfdr_30140]        AS [GS_ind_sfdr_30140],
+    [ind_sfdr_10040]        AS [GS_ind_sfdr_10040],
+    [ind_sfdr_00050]        AS [GS_ind_sfdr_00050],
+    [ind_taxo_20660]        AS [GS_ind_taxo_20660],
+    [ind_taxo_20670]        AS [GS_ind_taxo_20670],
+    [ind_taxo_20680]        AS [GS_ind_taxo_20680],
+    [ind_taxo_20690]        AS [GS_ind_taxo_20690],
+    [ind_taxo_20700]        AS [GS_ind_taxo_20700],
+    [ind_taxo_20710]        AS [GS_ind_taxo_20710],
+    [Classification_SFDR]   AS [GS_Classification_SFDR]
+FROM [$(vPath)/GSM.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+// ────────────────────────────────────────────────────────────
+// SECTION 5 — CALENDRIER (axe temps dérivé des transactions)
+// ────────────────────────────────────────────────────────────
+[CALENDRIER]:
+LOAD DISTINCT
+    Date(Floor([TR_dt_realisation]))                  AS [Date],
+    Year([TR_dt_realisation])                         AS [Annee],
+    Num(Month([TR_dt_realisation]),'00')              AS [MoisNum],
+    Date(MonthStart([TR_dt_realisation]),'YYYY-MM')   AS [AnneeMois]
+RESIDENT [TRANSACTION]
+WHERE Len(Trim([TR_dt_realisation])) > 0;
+
+// ────────────────────────────────────────────────────────────
+// FIN DU SCRIPT
+// Après chargement, toutes les mesures sont disponibles
+// sous forme de variables : $(vNB_CLI), $(vAUM), etc.
+//
+// 7 feuilles à créer (ou via build_qlik_cloud.py --key TOKEN) :
+//   1. Synthèse Exécutive
+//   2. Digital & Adoption
+//   3. Risque & Conformité
+//   4. Commercial & Relation Client
+//   5. Patrimoine — Épargne & Crédit
+//   6. Crédit & Engagements
+//   7. Analyse Avancée 360°
+// ────────────────────────────────────────────────────────────
